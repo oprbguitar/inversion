@@ -122,14 +122,25 @@ body.bloqueado > .pie { filter: blur(14px); pointer-events: none; user-select: n
 
 /* ── Cinta de cotizaciones ────────────────────────────── */
 .cinta {
-  overflow: hidden; white-space: nowrap;
+  position: relative; overflow: hidden; white-space: nowrap;
   background: var(--azul); color: #fff;
   font-size: .82rem; padding: .35rem 0;
   border-bottom: 1px solid var(--borde);
 }
+.cinta-control {
+  position: absolute; right: .3rem; top: 50%; transform: translateY(-50%);
+  z-index: 2; width: 26px; height: 26px; padding: 0; cursor: pointer;
+  font-size: .7rem; line-height: 1; color: inherit;
+  background: rgba(0, 0, 0, .35); border: 0; border-radius: 50%;
+}
+.cinta-control:hover { background: rgba(0, 0, 0, .55); }
 :root[data-tema="oscuro"] .cinta { background: #0a1420; color: var(--texto); }
-.cinta-interior { display: inline-block; animation: desplazar 60s linear infinite; }
+/* 180s para una lectura comoda: con 8 instrumentos duplicados, un ciclo
+   completo tarda unos 3 minutos. Al pasar el raton se detiene. */
+.cinta-interior { display: inline-block; animation: desplazar 180s linear infinite; }
 .cinta:hover .cinta-interior { animation-play-state: paused; }
+/* Pausa explicita del usuario: gana sobre cualquier otra regla. */
+.cinta.detenida .cinta-interior { animation-play-state: paused !important; }
 @keyframes desplazar { from { transform: translateX(0); } to { transform: translateX(-50%); } }
 .cinta-item { margin-right: 2.2rem; font-variant-numeric: tabular-nums; }
 .cinta-simbolo { font-weight: 700; opacity: .85; margin-right: .35rem; }
@@ -526,6 +537,11 @@ body.bloqueado > .pie { filter: blur(14px); pointer-events: none; user-select: n
 
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation-duration: .01ms !important; transition-duration: .01ms !important; }
+  /* La regla anterior dejaria la cinta girando a velocidad absurda. Se le
+     devuelve su duracion real y arranca detenida: quien quiera verla moverse
+     usa el boton de la propia cinta. */
+  .cinta-interior { animation-duration: 180s !important; animation-play-state: paused; }
+  .cinta.en-marcha .cinta-interior { animation-play-state: running; }
 }
 @media print {
   .cabecera, .pestanas, .filtros, .cabecera-acciones { display: none !important; }

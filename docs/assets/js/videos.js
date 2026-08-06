@@ -75,13 +75,33 @@ const Videos = (() => {
 
       if (!r.ok) {
         const motivo = (((j.error || {}).errors || [])[0] || {}).reason || '';
+        const mensaje = (j.error && j.error.message) || '';
+        const local = /^(localhost|127\.0\.0\.1|\[::1\])$/.test(location.hostname);
+
+        // La clave esta restringida por referrer al dominio publicado. En local
+        // el bloqueo es la prueba de que la restriccion funciona, no un fallo.
+        if (motivo === 'ipRefererBlocked' || /referer/i.test(mensaje)) {
+          estado(local
+            ? `<strong>Los videos solo funcionan en el sitio publicado.</strong> La clave de YouTube está
+               restringida al dominio <code>oprbguitar.github.io</code>, así que Google bloquea las
+               peticiones desde <code>${Fmt.esc(location.origin)}</code>. Eso es exactamente lo que debe
+               pasar: significa que la restricción está bien puesta y que nadie puede usar tu clave desde
+               otro sitio. Abre
+               <a href="https://oprbguitar.github.io/inversion/#videos" target="_blank" rel="noopener">el portal publicado</a>
+               para ver los videos.`
+            : `<strong>La clave está restringida a otro dominio.</strong> Añade
+               <code>${Fmt.esc(location.origin)}/*</code> en Google Cloud Console →
+               Credenciales → Restricciones de aplicación → Sitios web.`,
+            local ? 'info' : 'error');
+          return;
+        }
+
         const mensajes = {
           quotaExceeded: 'Se agotó la cuota diaria de la API de YouTube. Vuelve a intentarlo mañana o usa otra clave.',
           keyInvalid: 'La clave de la API de YouTube no es válida.',
-          ipRefererBlocked: 'La clave está restringida a otro dominio. Añade el dominio de este sitio en Google Cloud Console.',
           accessNotConfigured: 'La YouTube Data API v3 no está habilitada en el proyecto de Google Cloud.',
         };
-        estado(`<strong>No se pudo buscar.</strong> ${Fmt.esc(mensajes[motivo] || (j.error && j.error.message) || `Error HTTP ${r.status}`)}`, 'error');
+        estado(`<strong>No se pudo buscar.</strong> ${Fmt.esc(mensajes[motivo] || mensaje || `Error HTTP ${r.status}`)}`, 'error');
         return;
       }
 

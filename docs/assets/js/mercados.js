@@ -233,9 +233,42 @@ const Mercados = (() => {
     }
   }
 
+  /* Control de la cinta. Si el sistema pide movimiento reducido, arranca
+     detenida; el boton permite ponerla en marcha de todos modos. */
+  function iniciarCinta() {
+    const cinta = el('cinta');
+    const boton = el('cinta-control');
+    if (!cinta || !boton) return;
+
+    const reducido = matchMedia('(prefers-reduced-motion: reduce)').matches;
+    let enMarcha = !reducido;
+    try {
+      const guardado = localStorage.getItem('cinta_en_marcha');
+      if (guardado !== null) enMarcha = guardado === '1';
+    } catch { /* modo privado */ }
+
+    const aplicar = () => {
+      cinta.classList.toggle('en-marcha', enMarcha);
+      cinta.classList.toggle('detenida', !enMarcha);
+      boton.textContent = enMarcha ? '⏸' : '▶';
+      boton.setAttribute('aria-pressed', String(!enMarcha));
+      boton.setAttribute('aria-label', enMarcha
+        ? 'Pausar el desplazamiento de cotizaciones'
+        : 'Reanudar el desplazamiento de cotizaciones');
+    };
+
+    boton.addEventListener('click', () => {
+      enMarcha = !enMarcha;
+      try { localStorage.setItem('cinta_en_marcha', enMarcha ? '1' : '0'); } catch { /* modo privado */ }
+      aplicar();
+    });
+    aplicar();
+  }
+
   function iniciar() {
     pintarRelojes();
     setInterval(pintarRelojes, 1000);
+    iniciarCinta();
 
     const guardar = el('td-guardar');
     if (guardar) guardar.addEventListener('click', guardarDesdeFormulario);
