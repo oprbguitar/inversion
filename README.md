@@ -18,6 +18,8 @@ videos de finanzas en YouTube y descarga del Excel corregido.
 | Pestaña | Qué hace |
 |---|---|
 | **Ranking** | 16 entidades ordenadas por TREA, con filtros por tasa, modo de apertura y monto mínimo. **Dos vistas**: cuadrícula (tarjetas compactas) o lista detallada (los 14 campos desplegados, con el enlace a la entidad visible). La preferencia se recuerda. |
+| **Tarjetas de crédito** | 17 tarjetas comparadas por **TCEA** (tasa + comisiones + seguros), donde gana la **más baja**. Simulador de compra en cuotas con sistema francés y escenario de pago mínimo. |
+| **Entidades SBS** | Relación completa de las **41 entidades autorizadas** a captar depósitos (bancos, financieras, cajas municipales y rurales), extraída automáticamente. |
 | **Simulador** | Ingresas monto, aporte mensual y plazo. Aplica la **escala real de tasas por saldo** de cada entidad y sus **topes de saldo remunerado**. Compara el mismo monto en las 16 entidades. |
 | **Tasas BCRP** | Serie mensual de la tasa de referencia (PD04722MM), con gráfico y el *spread* que paga cada cuenta sobre la tasa de política monetaria. |
 | **Seguridad / FSD** | Cobertura del Fondo de Seguro de Depósitos, simulador de cuánto de tu saldo queda cubierto y enlaces a los reguladores para verificar por tu cuenta. |
@@ -26,8 +28,9 @@ videos de finanzas en YouTube y descarga del Excel corregido.
 | **Videos** | Búsqueda en vivo en YouTube, acotada a finanzas en Perú o internacional. |
 | **Descargas** | Excel mejorado (con la fecha de descarga en el nombre), CSV generado en el navegador y los datasets JSON. |
 
-Además, en todas las pestañas: **cinta de cotizaciones** superior y **relojes en vivo de Perú y
-Nueva York**, con indicador de si el mercado estadounidense está abierto.
+Además, en todas las pestañas: **cinta de cotizaciones** superior (con botón de pausa),
+**relojes en vivo de Perú y Nueva York** con estado del mercado estadounidense, y el
+**tipo de cambio del dólar** en vivo junto al oficial de SUNAT.
 
 ---
 
@@ -42,7 +45,32 @@ Y las fuentes se comportan distinto frente al navegador:
 | **Twelve Data** | **Sí.** `Access-Control-Allow-Origin: *`. | Cotizaciones **en vivo** desde el navegador, con la clave que tú introduces. |
 | **API del BCRP** | **No.** Devuelve JSON pero **sin** `Access-Control-Allow-Origin`, así que el navegador bloquea la respuesta. | GitHub Actions la consulta del lado del servidor y publica `docs/data/live.json`. El portal igual **intenta** la llamada directa en cada carga: si el BCRP habilita CORS algún día, pasa a usar el dato del minuto sin tocar el código. |
 | **comparabien.com.pe** | **No.** Sin API ni CORS. | Se extrae del lado del servidor en el mismo workflow. Ver la limitación del formulario más abajo. |
-| **SBS / FSD** | No publican una API abierta de tasas pasivas. | Se enlaza a los buscadores oficiales para verificación manual. |
+| **open.er-api.com** | **Sí.** CORS abierto y sin clave. | Tipo de cambio USD/PEN de mercado, en vivo para todos los visitantes. |
+| **apis.net.pe (SUNAT)** | **No.** Sin CORS. | Tipo de cambio oficial (compra/venta) por GitHub Actions. |
+| **FSD (fsd.org.pe)** | **No.** Sin CORS. | Relación de entidades autorizadas, extraída del lado del servidor. |
+| **SBS** | **No.** Su portal está tras protección anti-bot (Incapsula). | **No se scrapea.** Se usa la lista del FSD (organismo administrado por la SBS) y se enlaza al registro oficial para verificación manual. |
+
+### Entidades autorizadas: por qué la lista viene del FSD y no de la SBS
+
+La web de la SBS responde con un reto de Incapsula a cualquier petición automatizada. No se intenta
+sortearlo. En su lugar se extrae la **relación de miembros del Fondo de Seguro de Depósitos**
+(`fsd.org.pe/miembros/`), organismo administrado por la propia SBS: por ley, toda empresa autorizada a
+captar depósitos del público es miembro del FSD, así que la lista es equivalente para este fin.
+
+Son **41 entidades**: 20 bancos, 5 financieras, 11 cajas municipales y 5 cajas rurales.
+
+**Las cooperativas de ahorro y crédito (COOPAC) no están en esa lista.** Están en el registro de la
+SBS pero cuentan con un fondo de seguro propio y distinto del FSD. El portal lo advierte de forma
+explícita para no dar a entender que tienen la misma cobertura.
+
+### Tarjetas de crédito: dataset curado, no automatizado
+
+Ninguna entidad peruana publica una API de tasas de tarjeta, y el comparador oficial (Retasas de la
+SBS) está tras la misma protección anti-bot. El dataset (`docs/data/tarjetas.json`) es **curado** y
+cada tarjeta declara su nivel de verificación y enlaza a la página oficial del producto. Solo las
+cifras de Interbank pudieron leerse directamente de su web; el resto son **referenciales** y están
+marcadas como tales en la interfaz. Sirven para comparar órdenes de magnitud y alimentar el
+simulador, no para asumir la tasa que te van a aplicar.
 
 ### Qué se extrae de comparabien y qué no
 

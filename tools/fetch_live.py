@@ -158,6 +158,87 @@ def fetch_comparabien():
     }
 
 
+FSD_MIEMBROS = "https://fsd.org.pe/miembros/"
+TC_SUNAT = "https://api.apis.net.pe/v1/tipo-cambio-sunat"
+
+# Encabezados que separan los grupos de entidades en la pagina del FSD.
+GRUPOS_FSD = [
+    ("Bancos", "bancos"),
+    ("Financieras", "financieras"),
+    ("Cajas municipales de ahorro y crédito", "cajas_municipales"),
+    ("Cajas rurales de ahorro y crédito", "cajas_rurales"),
+]
+
+
+def fetch_fsd_miembros():
+    """Relacion oficial de entidades miembros del Fondo de Seguro de Depositos.
+
+    El FSD lo administra la SBS (su contacto es fsd@sbs.gob.pe), asi que esta
+    lista equivale a las empresas del sistema financiero autorizadas por la SBS
+    a captar depositos del publico. Se usa porque la web de la SBS esta detras
+    de proteccion anti-bot (Incapsula) y no admite consulta automatizada.
+
+    Las cooperativas (COOPAC) no aparecen: no son miembros del FSD, tienen su
+    propio fondo de seguro. Se advierte en el portal.
+    """
+    html = get(FSD_MIEMBROS)
+    texto = re.sub(r"<script.*?</script>", " ", html, flags=re.S)
+    texto = re.sub(r"<[^>]+>", "|", texto)
+    texto = re.sub(r"(\|\s*)+", "|", unescape(texto))
+
+    grupos = {}
+    for i, (titulo, clave) in enumerate(GRUPOS_FSD):
+        inicio = texto.find(f"|{titulo}|")
+        if inicio < 0:
+            continue
+        inicio += len(titulo) + 2
+        # El grupo termina donde empieza el siguiente encabezado conocido.
+        fin = len(texto)
+        for otro, _ in GRUPOS_FSD[i + 1:]:
+            j = texto.find(f"|{otro}|", inicio)
+            if j > 0:
+                fin = min(fin, j)
+        corte = texto.find("Nuestra misión", inicio)
+        if corte > 0:
+            fin = min(fin, corte)
+
+        nombres = []
+        for bruto in texto[inicio:fin].split("|"):
+            n = re.sub(r"\s+", " ", bruto).replace("\xa0", " ").strip()
+            # Descarta fragmentos de prosa y restos de maquetacion.
+            if 2 < len(n) < 60 and not n.endswith(".") and n.lower() != "&nbsp;":
+                nombres.append(n)
+        if nombres:
+            grupos[clave] = {"titulo": titulo, "entidades": nombres}
+
+    total = sum(len(g["entidades"]) for g in grupos.values())
+    if not total:
+        raise RuntimeError("No se pudo leer la relacion de miembros del FSD")
+
+    return {
+        "fuente": FSD_MIEMBROS,
+        "grupos": grupos,
+        "total": total,
+        "nota": "Miembros del Fondo de Seguro de Depositos, administrado por la SBS. "
+                "Equivale a las empresas autorizadas a captar depositos del publico. "
+                "Las cooperativas (COOPAC) no son miembros del FSD: cuentan con un fondo propio.",
+    }
+
+
+def fetch_tipo_cambio():
+    """Tipo de cambio oficial publicado por SUNAT (compra y venta)."""
+    d = json.loads(get(TC_SUNAT, timeout=30))
+    compra, venta = float(d["compra"]), float(d["venta"])
+    return {
+        "compra": compra,
+        "venta": venta,
+        "promedio": round((compra + venta) / 2, 4),
+        "fecha": d.get("fecha"),
+        "origen": d.get("origen", "SUNAT"),
+        "fuente": TC_SUNAT,
+    }
+
+
 def main():
     ahora = datetime.now(timezone.utc)
     salida = {
@@ -167,7 +248,13 @@ def main():
     }
     fallos = 0
 
-    for nombre, fn in (("bcrp", fetch_bcrp), ("comparabien", fetch_comparabien)):
+    tareas = (
+        ("bcrp", fetch_bcrp),
+        ("comparabien", fetch_comparabien),
+        ("fsd_miembros", fetch_fsd_miembros),
+        ("tipo_cambio", fetch_tipo_cambio),
+    )
+    for nombre, fn in tareas:
         try:
             salida[nombre] = fn()
             salida["fuentes"][nombre] = {"estado": "ok", "error": None}
@@ -179,7 +266,7 @@ def main():
             print(f"[error] {nombre}: {e}", file=sys.stderr)
 
     # Si todo falla, conservar el snapshot anterior antes que publicar un archivo vacio.
-    if fallos == 2 and OUT.exists():
+    if fallos == len(tareas) and OUT.exists():
         print("Ambas fuentes fallaron: se conserva live.json anterior", file=sys.stderr)
         return 1
 

@@ -338,6 +338,78 @@ def hoja_fichas(wb):
                 "G": 22, "H": 24, "I": 28, "J": 30, "K": 30, "L": 40})
 
 
+def hoja_tarjetas(wb):
+    ruta = ROOT / "docs" / "data" / "tarjetas.json"
+    if not ruta.exists():
+        return
+    d = json.loads(ruta.read_text(encoding="utf-8"))
+
+    ws = wb.create_sheet("TARJETAS DE CREDITO")
+    encabezado(ws, "TARJETAS DE CREDITO — COSTO COMPARADO",
+               "Ordenadas por TCEA ascendente: aqui gana la tasa MAS BAJA. Cifras referenciales.", 10)
+
+    escribir_cabecera(ws, 4, ["#", "Entidad", "Tarjeta", "Marca", "TCEA", "TEA min", "TEA max",
+                              "Membresia", "Linea minima", "Estado del dato"])
+
+    filas = sorted(d["tarjetas"], key=lambda t: t["tcea_ref"])
+    for i, t in enumerate(filas, start=1):
+        f = 4 + i
+        vals = [i, t["entidad"], t["tarjeta"], t["marca"], t["tcea_ref"], t["tea_min"],
+                t["tea_max"], t.get("membresia", 0), t.get("linea_min", 0), t["verificacion"]]
+        for c, v in enumerate(vals, start=1):
+            cel = ws.cell(row=f, column=c, value=v)
+            cel.border = BORDE
+            cel.alignment = Alignment(vertical="top", wrap_text=c == 10)
+        for c in (5, 6, 7):
+            ws.cell(row=f, column=c).number_format = PCT
+        ws.cell(row=f, column=8).number_format = MONEDA0
+        ws.cell(row=f, column=9).number_format = MONEDA0
+        ws.row_dimensions[f].height = 32
+
+    ultima = 4 + len(filas)
+    ws.auto_filter.ref = f"A4:J{ultima}"
+    ws.freeze_panes = "C5"
+    # En credito la escala se invierte: verde = barato, rojo = caro.
+    ws.conditional_formatting.add(f"E5:E{ultima}", ColorScaleRule(
+        start_type="min", start_color="DFF3E7", end_type="max", end_color="F5B7BE"))
+
+    ws.cell(row=ultima + 2, column=1, value=d["aviso"]).font = F_SUB
+    ws.cell(row=ultima + 3, column=1, value=f"Comparador oficial SBS: {d['fuente_oficial']}").font = F_SUB
+    anchos(ws, {"A": 4, "B": 26, "C": 38, "D": 24, "E": 10, "F": 10, "G": 10,
+                "H": 12, "I": 14, "J": 46})
+
+
+def hoja_entidades(wb):
+    if not LIVE_PATH.exists():
+        return
+    live = json.loads(LIVE_PATH.read_text(encoding="utf-8"))
+    fsd = live.get("fsd_miembros")
+    if not fsd or not fsd.get("grupos"):
+        return
+
+    ws = wb.create_sheet("ENTIDADES AUTORIZADAS")
+    encabezado(ws, "ENTIDADES AUTORIZADAS A CAPTAR DEPOSITOS",
+               f"Miembros del Fondo de Seguro de Depositos (administrado por la SBS). "
+               f"Total: {fsd['total']}. Fuente: {fsd['fuente']}", 3)
+    escribir_cabecera(ws, 4, ["Tipo de entidad", "Entidad", "Analizada en el portal"])
+
+    analizadas = {e["entidad"] for e in DATA["ranking"]}
+    f = 5
+    for g in fsd["grupos"].values():
+        for nombre in g["entidades"]:
+            marca = "Si" if any(nombre.lower()[:8] in a.lower() for a in analizadas) else ""
+            for c, v in enumerate([g["titulo"], nombre, marca], start=1):
+                cel = ws.cell(row=f, column=c, value=v)
+                cel.border = BORDE
+                cel.alignment = Alignment(vertical="top")
+            f += 1
+
+    ws.auto_filter.ref = f"A4:C{f - 1}"
+    ws.freeze_panes = "A5"
+    ws.cell(row=f + 1, column=1, value=fsd["nota"]).font = F_SUB
+    anchos(ws, {"A": 34, "B": 40, "C": 22})
+
+
 def hoja_fuentes(wb):
     ws = wb.create_sheet("FUENTES Y NOTAS")
     encabezado(ws, "FUENTES, ALCANCES Y LIMITACIONES",
@@ -412,6 +484,8 @@ def hoja_portada(wb):
         ("TASA BCRP", "Serie mensual de la tasa de referencia, con grafico."),
         ("FSD Y SEGURIDAD", "Cobertura del Fondo de Seguro de Depositos y simulador de cobertura."),
         ("FICHAS POR ENTIDAD", "Todos los campos de las 16 hojas individuales, en una tabla filtrable."),
+        ("TARJETAS DE CREDITO", "Costo comparado por TCEA: aqui gana la tasa mas baja. Cifras referenciales."),
+        ("ENTIDADES AUTORIZADAS", "Relacion de entidades autorizadas a captar depositos (miembros del FSD)."),
         ("FUENTES Y NOTAS", "Fuentes oficiales y nivel de confianza de cada dato."),
         ("", ""),
         ("Correcciones aplicadas al archivo original", ""),
@@ -449,6 +523,8 @@ def main():
     hoja_bcrp(wb)
     hoja_fsd(wb)
     hoja_fichas(wb)
+    hoja_tarjetas(wb)
+    hoja_entidades(wb)
     hoja_fuentes(wb)
 
     OUT.parent.mkdir(parents=True, exist_ok=True)

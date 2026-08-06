@@ -14,7 +14,7 @@
 <meta property="og:description" content="Comparador de cuentas de ahorro peruanas con TREA verificada, simulador y datos del BCRP.">
 <meta property="og:locale" content="es_PE">
 <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
-<link rel="stylesheet" href="assets/css/estilos.css?v=20260806c">
+<link rel="stylesheet" href="assets/css/estilos.css?v=20260806d">
 </head>
 <body class="bloqueado">
 <a class="saltar" href="#principal">Saltar al contenido</a>
@@ -63,6 +63,8 @@
  <nav class="pestanas contenedor" role="tablist" aria-label="Secciones del portal">
   <button role="tab" class="pestana activa" data-panel="ranking"   aria-selected="true"  aria-controls="p-ranking">Ranking</button>
   <button role="tab" class="pestana"        data-panel="simulador" aria-selected="false" aria-controls="p-simulador">Simulador</button>
+  <button role="tab" class="pestana"        data-panel="tarjetas"  aria-selected="false" aria-controls="p-tarjetas">Tarjetas de crédito</button>
+  <button role="tab" class="pestana"        data-panel="entidades" aria-selected="false" aria-controls="p-entidades">Entidades SBS</button>
   <button role="tab" class="pestana"        data-panel="bcrp"      aria-selected="false" aria-controls="p-bcrp">Tasas BCRP</button>
   <button role="tab" class="pestana"        data-panel="seguridad" aria-selected="false" aria-controls="p-seguridad">Seguridad / FSD</button>
   <button role="tab" class="pestana"        data-panel="mercado"   aria-selected="false" aria-controls="p-mercado">Comparabien</button>
@@ -216,6 +218,117 @@
   <p class="descargo">La simulación es referencial. Usa la TREA como tasa efectiva anual con capitalización mensual
    y año de 360 días. No incluye retenciones, comisiones no informadas, cambios de tasa durante el plazo,
    fechas exactas de abono ni requisitos que no cumplas. Confirma siempre el contrato, la cartilla y el tarifario vigentes.</p>
+ </section>
+
+ <!-- ══════════ TARJETAS DE CRÉDITO ══════════ -->
+ <section id="p-tarjetas" class="panel" role="tabpanel" aria-labelledby="tarjetas" hidden>
+  <div class="intro">
+   <h1>Tarjetas de crédito en Perú</h1>
+   <p>Compara el <strong>costo real</strong> de las tarjetas por <abbr title="Tasa de Costo Efectivo Anual">TCEA</abbr>,
+    que incluye tasa, comisiones, seguros y portes. Es lo contrario del ranking de ahorro: aquí
+    <strong>gana la tasa más baja</strong>, porque es lo que tú pagas.</p>
+  </div>
+
+  <div id="tarjetas-aviso"></div>
+  <div class="tarjetas-resumen" id="tarjetas-kpis"></div>
+
+  <div class="filtros" role="search">
+   <label class="campo campo-buscar">
+    <span>Buscar</span>
+    <input type="search" id="t-buscar" placeholder="Entidad, tarjeta o marca…" autocomplete="off">
+   </label>
+   <label class="campo">
+    <span>Tipo de entidad</span>
+    <select id="t-tipo">
+     <option value="">Todas</option>
+     <option value="banco">Bancos</option>
+     <option value="caja_municipal">Cajas municipales</option>
+     <option value="sin_membresia">Sin membresía</option>
+    </select>
+   </label>
+   <label class="campo">
+    <span>Ordenar por</span>
+    <select id="t-orden">
+     <option value="tcea">TCEA (más barata primero)</option>
+     <option value="tcea_desc">TCEA (más cara primero)</option>
+     <option value="linea">Línea mínima</option>
+     <option value="entidad">Entidad (A-Z)</option>
+    </select>
+   </label>
+  </div>
+
+  <div class="barra-vista">
+   <p class="conteo" id="t-conteo" role="status" aria-live="polite"></p>
+   <div class="selector-vista" role="group" aria-label="Cambiar la forma de ver las tarjetas">
+    <button type="button" class="btn-vista activa" data-vista-t="cuadricula" aria-pressed="true">
+     <span aria-hidden="true">▦</span> Cuadrícula
+    </button>
+    <button type="button" class="btn-vista" data-vista-t="lista" aria-pressed="false">
+     <span aria-hidden="true">☰</span> Lista detallada
+    </button>
+   </div>
+  </div>
+  <div class="rejilla" id="rejilla-tarjetas"></div>
+
+  <div id="sim-tarjetas" class="comparativa-sim">
+   <h2>Simulador de compra en cuotas</h2>
+   <p class="sutil">Calcula la cuota con el sistema francés sobre la TCEA, que ya incluye comisiones y seguros.</p>
+   <div class="sim-disposicion">
+    <form class="sim-controles" id="form-tarjetas" novalidate>
+     <label class="campo">
+      <span>Monto a financiar (S/)</span>
+      <input type="number" id="t-monto" value="3000" min="0" step="100" inputmode="decimal">
+     </label>
+     <label class="campo">
+      <span>Plazo: <output id="t-cuotas-txt">12 cuotas</output></span>
+      <input type="range" id="t-cuotas" value="12" min="1" max="48" step="1">
+     </label>
+     <label class="campo">
+      <span>Tarjeta</span>
+      <select id="t-sim-tarjeta"></select>
+     </label>
+    </form>
+    <div class="sim-resultado">
+     <div class="sim-kpis" id="t-sim-kpis"></div>
+     <div id="t-sim-aviso"></div>
+     <div class="grafico-envoltura">
+      <svg id="t-grafico" viewBox="0 0 720 240" preserveAspectRatio="xMidYMid meet" role="img"
+       aria-labelledby="t-grafico-titulo"><title id="t-grafico-titulo">Pago acumulado por mes</title></svg>
+     </div>
+    </div>
+   </div>
+
+   <h2>El mismo consumo en todas las tarjetas</h2>
+   <div class="tabla-envoltura">
+    <table class="tabla" id="t-tabla-comparativa">
+     <thead><tr><th scope="col">#</th><th scope="col">Tarjeta</th><th scope="col">TCEA</th>
+      <th scope="col">Cuota mensual</th><th scope="col">Intereses</th><th scope="col">Total a pagar</th></tr></thead>
+     <tbody></tbody>
+    </table>
+   </div>
+  </div>
+
+  <details class="metodologia">
+   <summary>De dónde salen estas cifras y cómo verificarlas</summary>
+   <div id="tarjetas-metodologia"></div>
+  </details>
+
+  <p class="descargo"><strong>Sobre el pago mínimo.</strong> Pagar solo el mínimo de la tarjeta es la
+   forma más cara de financiarse: el saldo se recalcula cada mes sobre los intereses del anterior, y una
+   deuda modesta puede tardar años en cancelarse. El simulador muestra ese escenario para que compares.</p>
+ </section>
+
+ <!-- ══════════ ENTIDADES SBS ══════════ -->
+ <section id="p-entidades" class="panel" role="tabpanel" aria-labelledby="entidades" hidden>
+  <div class="intro">
+   <h1>Entidades autorizadas a captar depósitos</h1>
+   <p>Relación completa de bancos, financieras, cajas municipales y cajas rurales autorizadas
+    en el Perú, extraída automáticamente de la lista de miembros del Fondo de Seguro de Depósitos,
+    organismo administrado por la SBS.</p>
+  </div>
+  <div class="tarjetas-resumen" id="entidades-kpis"></div>
+  <div id="entidades-nota"></div>
+  <div id="entidades-contenido"></div>
  </section>
 
  <!-- ══════════ BCRP ══════════ -->
@@ -477,18 +590,20 @@
  </div>
 </footer>
 
-<script src="assets/js/acceso.js?v=20260806c"></script>
-<script src="assets/js/datos.js?v=20260806c"></script>
-<script src="assets/js/formato.js?v=20260806c"></script>
-<script src="assets/js/graficos.js?v=20260806c"></script>
-<script src="assets/js/ranking.js?v=20260806c"></script>
-<script src="assets/js/simulador.js?v=20260806c"></script>
-<script src="assets/js/bcrp.js?v=20260806c"></script>
-<script src="assets/js/seguridad.js?v=20260806c"></script>
-<script src="assets/js/mercado.js?v=20260806c"></script>
-<script src="assets/js/mercados.js?v=20260806c"></script>
-<script src="assets/js/videos.js?v=20260806c"></script>
-<script src="assets/js/descargas.js?v=20260806c"></script>
-<script src="assets/js/app.js?v=20260806c"></script>
+<script src="assets/js/acceso.js?v=20260806d"></script>
+<script src="assets/js/datos.js?v=20260806d"></script>
+<script src="assets/js/formato.js?v=20260806d"></script>
+<script src="assets/js/graficos.js?v=20260806d"></script>
+<script src="assets/js/ranking.js?v=20260806d"></script>
+<script src="assets/js/simulador.js?v=20260806d"></script>
+<script src="assets/js/bcrp.js?v=20260806d"></script>
+<script src="assets/js/seguridad.js?v=20260806d"></script>
+<script src="assets/js/mercado.js?v=20260806d"></script>
+<script src="assets/js/mercados.js?v=20260806d"></script>
+<script src="assets/js/tarjetas.js?v=20260806d"></script>
+<script src="assets/js/entidades.js?v=20260806d"></script>
+<script src="assets/js/videos.js?v=20260806d"></script>
+<script src="assets/js/descargas.js?v=20260806d"></script>
+<script src="assets/js/app.js?v=20260806d"></script>
 </body>
 </html>

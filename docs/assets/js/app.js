@@ -1,6 +1,7 @@
 /* Orquestador: pestañas, tema, carga de datos y refresco. */
 const App = (() => {
-  const paneles = ['ranking', 'simulador', 'bcrp', 'seguridad', 'mercado', 'mercados', 'videos', 'descargas'];
+  const paneles = ['ranking', 'simulador', 'tarjetas', 'entidades', 'bcrp',
+                   'seguridad', 'mercado', 'mercados', 'videos', 'descargas'];
 
   function irA(nombre) {
     if (!paneles.includes(nombre)) nombre = 'ranking';
@@ -44,6 +45,8 @@ const App = (() => {
     Seguridad.render();
     Mercado.render();
     Mercados.render();
+    Tarjetas.render();
+    Entidades.render();
     Descargas.render();
 
     const e = Datos.estado;
@@ -97,6 +100,7 @@ const App = (() => {
     Simulador.iniciar();
     Seguridad.iniciar();
     Mercados.iniciar();
+    Tarjetas.iniciar();
     Videos.iniciar();
     Descargas.iniciar();
 

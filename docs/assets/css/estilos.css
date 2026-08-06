@@ -137,7 +137,7 @@ body.bloqueado > .pie { filter: blur(14px); pointer-events: none; user-select: n
 :root[data-tema="oscuro"] .cinta { background: #0a1420; color: var(--texto); }
 /* 180s para una lectura comoda: con 8 instrumentos duplicados, un ciclo
    completo tarda unos 3 minutos. Al pasar el raton se detiene. */
-.cinta-interior { display: inline-block; animation: desplazar 180s linear infinite; }
+.cinta-interior { display: inline-block; animation: desplazar 240s linear infinite; }
 .cinta:hover .cinta-interior { animation-play-state: paused; }
 /* Pausa explicita del usuario: gana sobre cualquier otra regla. */
 .cinta.detenida .cinta-interior { animation-play-state: paused !important; }
@@ -491,6 +491,52 @@ body.bloqueado > .pie { filter: blur(14px); pointer-events: none; user-select: n
 
 .nubes-entidades { display: flex; flex-wrap: wrap; gap: .35rem; margin-top: .7rem; }
 
+/* ── Tipo de cambio en la barra de relojes ────────────── */
+.tc {
+  display: flex; align-items: baseline; gap: .45rem; font-size: .78rem;
+  padding-left: .9rem; border-left: 1px solid var(--borde);
+}
+.tc-par { font-weight: 600; color: var(--texto-sutil); }
+.tc-valor {
+  font-variant-numeric: tabular-nums; font-weight: 700;
+  color: var(--verde); font-size: .92rem;
+}
+.tc-fuente {
+  font-size: .66rem; text-transform: uppercase; letter-spacing: .04em;
+  color: var(--texto-sutil); background: var(--superficie-2);
+  padding: .05rem .35rem; border-radius: 999px;
+}
+.tc-oficial { color: var(--texto-sutil); font-variant-numeric: tabular-nums; }
+@media (max-width: 720px) { .tc-oficial { display: none; } }
+@media (max-width: 560px) { .tc { padding-left: 0; border-left: 0; } }
+
+/* ── Tarjetas de crédito ──────────────────────────────── */
+/* En credito la tasa alta es mala: se pinta en rojo, al reves que en ahorro. */
+.tasa-costo { color: var(--rojo); }
+.kpi-costo { border-left-color: var(--rojo); }
+.alerta-tasa { color: var(--rojo); font-weight: 700; }
+
+/* ── Entidades autorizadas (SBS / FSD) ────────────────── */
+.rejilla-entidades-sbs {
+  display: grid; gap: .4rem; margin-top: .8rem;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+}
+.entidad-sbs {
+  display: flex; align-items: center; gap: .5rem;
+  background: var(--superficie-2); border: 1px solid var(--borde);
+  border-radius: 8px; padding: .45rem .6rem; font-size: .86rem;
+}
+.entidad-sbs .visto { color: var(--texto-sutil); opacity: .35; flex: none; font-size: .8rem; }
+.entidad-sbs.analizada { border-color: color-mix(in srgb, var(--verde) 45%, var(--borde)); }
+.entidad-sbs.analizada .visto { color: var(--verde); opacity: 1; }
+.entidad-sbs .nombre { flex: 1; min-width: 0; }
+.chip-trea {
+  flex: none; font: inherit; font-size: .74rem; font-weight: 700; cursor: pointer;
+  background: color-mix(in srgb, var(--verde) 14%, transparent);
+  color: var(--verde); border: 0; border-radius: 999px; padding: .1rem .5rem;
+}
+.chip-trea:hover { background: color-mix(in srgb, var(--verde) 26%, transparent); }
+
 /* ── Videos ───────────────────────────────────────────── */
 .rejilla-videos { grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); }
 .video {
@@ -506,15 +552,22 @@ body.bloqueado > .pie { filter: blur(14px); pointer-events: none; user-select: n
 .video-meta { font-size: .8rem; color: var(--texto-sutil); margin-top: auto; }
 
 /* ── Descargas ────────────────────────────────────────── */
-.rejilla-descargas { grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); }
-.descarga { display: flex; flex-direction: column; gap: .5rem; margin: 0; }
+.rejilla-descargas { grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); }
+.descarga { display: flex; flex-direction: column; gap: .45rem; margin: 0; }
 .descarga.destacada { border-color: var(--azul-claro); border-width: 2px; }
 .descarga-icono {
-  width: 54px; height: 54px; display: grid; place-items: center; border-radius: 11px;
-  background: var(--azul); color: #fff; font-weight: 800; font-size: .78rem; letter-spacing: .02em;
+  width: 42px; height: 42px; display: grid; place-items: center; border-radius: 10px;
+  background: var(--azul); color: #fff; font-weight: 800; font-size: .68rem; letter-spacing: .02em;
 }
 :root[data-tema="oscuro"] .descarga-icono { color: #0e151f; }
-.descarga p { flex: 1; font-size: .89rem; color: var(--texto-sutil); }
+.descarga h2 { font-size: 1rem; }
+.descarga p { flex: 1; font-size: .86rem; color: var(--texto-sutil); }
+/* Botones de descarga: tamano uniforme, ni diminutos ni desbordados. */
+.descarga .btn-primario,
+.descarga .btn-secundario {
+  align-self: flex-start; width: auto; max-width: 100%;
+  font-size: .86rem; padding: .5rem .9rem;
+}
 .descarga-meta { list-style: none; margin: 0; padding: 0; font-size: .8rem; color: var(--texto-sutil); display: grid; gap: .15rem; }
 .lista-cambios { margin: 0; padding-left: 1.1rem; display: grid; gap: .5rem; font-size: .9rem; }
 
@@ -540,8 +593,8 @@ body.bloqueado > .pie { filter: blur(14px); pointer-events: none; user-select: n
   /* La regla anterior dejaria la cinta girando a velocidad absurda. Se le
      devuelve su duracion real y arranca detenida: quien quiera verla moverse
      usa el boton de la propia cinta. */
-  .cinta-interior { animation-duration: 180s !important; animation-play-state: paused; }
-  .cinta.en-marcha .cinta-interior { animation-play-state: running; }
+  .cinta-interior { animation-duration: 240s !important; }
+  .cinta.detenida .cinta-interior { animation-play-state: paused; }
 }
 @media print {
   .cabecera, .pestanas, .filtros, .cabecera-acciones { display: none !important; }

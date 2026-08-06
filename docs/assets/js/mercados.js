@@ -47,6 +47,44 @@ const Mercados = (() => {
 
   /* ── Relojes Perú / EE. UU. ─────────────────────────────── */
 
+  /* Tipo de cambio. Dos fuentes complementarias:
+     - SUNAT (compra/venta oficial) llega en el snapshot: no tiene CORS.
+     - open.er-api.com si responde con CORS abierto y sin clave, asi que da el
+       valor de mercado en vivo aunque el usuario no haya puesto clave alguna. */
+  let tcVivo = null;
+
+  async function cargarTipoCambio() {
+    try {
+      const r = await fetch('https://open.er-api.com/v6/latest/USD');
+      const j = await r.json();
+      if (j.result === 'success' && j.rates && j.rates.PEN) {
+        tcVivo = { valor: j.rates.PEN, actualizado: j.time_last_update_utc };
+      }
+    } catch { /* sin conexion: se usa el dato de SUNAT del snapshot */ }
+    pintarRelojes();
+  }
+
+  function htmlTipoCambio() {
+    const oficial = (Datos.estado.live || {}).tipo_cambio;
+    // Twelve Data manda si hay clave: es el dato mas fresco de los tres.
+    const td = cotizaciones['USD/PEN'];
+    const mercado = td ? parseFloat(td.close) : (tcVivo ? tcVivo.valor : null);
+
+    if (!mercado && !oficial) return '';
+
+    const partes = [];
+    if (mercado) {
+      partes.push(`<span class="tc-par">USD/PEN</span>
+        <span class="tc-valor">${mercado.toFixed(4)}</span>
+        <span class="tc-fuente">${td ? 'en vivo' : 'mercado'}</span>`);
+    }
+    if (oficial) {
+      partes.push(`<span class="tc-oficial" title="Tipo de cambio oficial SUNAT del ${Fmt.esc(oficial.fecha)}">
+        SUNAT ${oficial.compra.toFixed(3)} / ${oficial.venta.toFixed(3)}</span>`);
+    }
+    return `<div class="tc" title="Tipo de cambio del dólar">${partes.join('')}</div>`;
+  }
+
   function pintarRelojes() {
     const ahora = new Date();
     const fmt = (tz) => ({
@@ -57,6 +95,7 @@ const Mercados = (() => {
     });
     const pe = fmt('America/Lima');
     const us = fmt('America/New_York');
+    const abierto = mercadoAbierto();
 
     const destino = el('relojes');
     if (destino) {
@@ -65,8 +104,9 @@ const Mercados = (() => {
         <span class="reloj-hora">${pe.hora}</span><span class="reloj-fecha">${pe.fecha}</span></div>
        <div class="reloj"><span class="reloj-lugar">EE. UU. (Nueva York)</span>
         <span class="reloj-hora">${us.hora}</span><span class="reloj-fecha">${us.fecha}</span>
-        <span class="reloj-mercado ${mercadoAbierto() ? 'abierto' : 'cerrado'}">
-         ${mercadoAbierto() ? 'Mercado abierto' : 'Mercado cerrado'}</span></div>`;
+        <span class="reloj-mercado ${abierto ? 'abierto' : 'cerrado'}">
+         ${abierto ? 'Mercado abierto' : 'Mercado cerrado'}</span></div>
+       ${htmlTipoCambio()}`;
     }
   }
 
@@ -240,8 +280,9 @@ const Mercados = (() => {
     const boton = el('cinta-control');
     if (!cinta || !boton) return;
 
-    const reducido = matchMedia('(prefers-reduced-motion: reduce)').matches;
-    let enMarcha = !reducido;
+    // La cinta arranca siempre en marcha, a 240s por vuelta (muy lenta). Quien
+    // prefiera detenerla usa el boton y la eleccion queda guardada.
+    let enMarcha = true;
     try {
       const guardado = localStorage.getItem('cinta_en_marcha');
       if (guardado !== null) enMarcha = guardado === '1';
@@ -269,6 +310,8 @@ const Mercados = (() => {
     pintarRelojes();
     setInterval(pintarRelojes, 1000);
     iniciarCinta();
+    cargarTipoCambio();
+    setInterval(cargarTipoCambio, 600000); // el tipo de cambio no cambia por segundo
 
     const guardar = el('td-guardar');
     if (guardar) guardar.addEventListener('click', guardarDesdeFormulario);
