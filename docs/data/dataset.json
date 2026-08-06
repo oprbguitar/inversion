@@ -1,0 +1,1837 @@
+{
+ "corte": "2026-08-06",
+ "ranking": [
+  {
+   "entidad": "Scotiabank Perú",
+   "producto": "Cuenta Digital",
+   "apertura": "Digital / web",
+   "trea": 0.097,
+   "trea_video": 0.097,
+   "vigencia": "Aperturas del 01/08/2026 al 31/08/2026; pago promocional según campaña",
+   "verificacion": "Verificado en web oficial",
+   "calificacion": "A+ (mostrada en video)",
+   "grupo": "The Bank of Nova Scotia (BNS)",
+   "fsd": "Sí",
+   "monto_minimo": 0.0,
+   "saldo_tasa_max": 500.0,
+   "condicion": "Nuevo cliente; primera Cuenta Digital; mantener ≥ S/500. La tasa aplica solo hasta S/3,000.",
+   "abono": "Mensual; cronograma promocional indicado por el banco",
+   "capitalizacion": "Mensual (aproximación del simulador con TREA)",
+   "transferencias": "Transferencias digitales/interbancarias inmediatas: sin costo, según condiciones del producto",
+   "mantenimiento": "S/0.00",
+   "retiros": "Cajeros Scotiabank: sin costo; 1 retiro en ventanilla al mes sin costo",
+   "alertas": "La TREA promocional no se aplica a todo el saldo: máximo remunerado S/3,000; el exceso recibe la tasa regular indicada por el banco.",
+   "url": "https://www.scotiabank.com.pe/Personas/Ahorros/Cuentas-Bancarias/cuenta-digital",
+   "video": "https://www.youtube.com/watch?v=rFvo7DurR8M"
+  },
+  {
+   "entidad": "Financiera SURGIR",
+   "producto": "Cuenta de Ahorro Gold Select",
+   "apertura": "Presencial",
+   "trea": 0.056,
+   "trea_video": 0.0525,
+   "vigencia": "Vigente en la página oficial consultada; confirmar tarifario el día de apertura",
+   "verificacion": "Actualizado frente al video",
+   "calificacion": "A- (mostrada en video)",
+   "grupo": "Grupo Santander",
+   "fsd": "Sí",
+   "monto_minimo": 20000.0,
+   "saldo_tasa_max": 20000.0,
+   "condicion": "Saldo/apertura de referencia S/20,000; la web oficial consultada publica hasta 5.60% TREA.",
+   "abono": "Mensual",
+   "capitalizacion": "Mensual",
+   "transferencias": "El video muestra 2 operaciones gratuitas y luego comisión; validar tarifario vigente",
+   "mantenimiento": "S/0.00, según cuadro del video; validar tarifario",
+   "retiros": "El video muestra 2 retiros sin costo y luego comisión; validar tarifario vigente",
+   "alertas": "Diferencia relevante: el video muestra 5.25%, mientras la página oficial consultada publica hasta 5.60%.",
+   "url": "https://www.surgir.com.pe/cuenta-gold-select",
+   "video": "https://www.youtube.com/watch?v=rFvo7DurR8M"
+  },
+  {
+   "entidad": "Financiera QAPAQ",
+   "producto": "Cuenta Insuperable",
+   "apertura": "Presencial y variante digital",
+   "trea": 0.05,
+   "trea_video": 0.05,
+   "vigencia": "Tarifario oficial consultado; verificar versión vigente al contratar",
+   "verificacion": "Verificado en tarifario oficial",
+   "calificacion": "C+ (mostrada en video)",
+   "grupo": "Orca Credit Holding LLC",
+   "fsd": "Sí",
+   "monto_minimo": 8000.0,
+   "saldo_tasa_max": 8000.0,
+   "condicion": "Tasa escalonada: 3.00%, 4.00%, 5.00% y 4.00% según saldo.",
+   "abono": "Mensual",
+   "capitalizacion": "Mensual",
+   "transferencias": "Comisiones CCE según tipo de transferencia y plaza; consultar tarifario",
+   "mantenimiento": "S/5 si el saldo es ≤ S/1,499.99; sin costo desde S/1,500",
+   "retiros": "Hasta 4 retiros gratuitos al mes; luego comisión según canal",
+   "alertas": "La versión digital puede no exigir monto mínimo de apertura. La tasa depende del saldo; no basta con abrir la cuenta.",
+   "url": "https://www.qapaq.pe/",
+   "video": "https://www.youtube.com/watch?v=rFvo7DurR8M"
+  },
+  {
+   "entidad": "Financiera Confianza",
+   "producto": "Cuenta Ahorro Común – canal digital",
+   "apertura": "Digital",
+   "trea": 0.05,
+   "trea_video": 0.05,
+   "vigencia": "Campaña del 01/08/2026 al 31/08/2026",
+   "verificacion": "Verificado en tarifario de campaña",
+   "calificacion": "A- (mostrada en video)",
+   "grupo": "Fundación Microfinanzas BBVA",
+   "fsd": "Sí",
+   "monto_minimo": 0.0,
+   "saldo_tasa_max": 10000.0,
+   "condicion": "Apertura por canal digital; saldo de referencia para la tasa máxima: S/10,000.",
+   "abono": "Mensual",
+   "capitalizacion": "Mensual",
+   "transferencias": "Comisiones CCE según modalidad y entidad destino; revisar tarifario",
+   "mantenimiento": "S/0.00, según cuadro comparativo del video",
+   "retiros": "Cajeros de otras redes: comisión indicada en tarifario",
+   "alertas": "La tasa promocional depende del canal digital y del rango de saldo establecido en el tarifario.",
+   "url": "https://confianza.pe/",
+   "video": "https://www.youtube.com/watch?v=rFvo7DurR8M"
+  },
+  {
+   "entidad": "Banco Falabella",
+   "producto": "Cuenta Ahorro Clásico",
+   "apertura": "Presencial y digital",
+   "trea": 0.05,
+   "trea_video": 0.05,
+   "vigencia": "Promoción Cuenta Sueldo del 01/07/2026 al 31/08/2026",
+   "verificacion": "Verificado en web oficial",
+   "calificacion": "A- (mostrada en video)",
+   "grupo": "Grupo Falabella",
+   "fsd": "Sí",
+   "monto_minimo": 0.0,
+   "saldo_tasa_max": 1500.0,
+   "condicion": "Recibir remuneración ≥ S/500 en la cuenta indicada por el banco. 5% hasta S/100,000; exceso a tasa regular.",
+   "abono": "Mensual",
+   "capitalizacion": "Mensual",
+   "transferencias": "Transferencias digitales sin costo, según condiciones del banco",
+   "mantenimiento": "S/10 si no se cumple el saldo promedio requerido; revisar tarifario",
+   "retiros": "Cajeros Banco Falabella: sin costo, sujeto a condiciones",
+   "alertas": "La tasa regular publicada para la Cuenta Ahorro Clásico es menor; el 5% exige abono de sueldo y tiene tope de saldo.",
+   "url": "https://www.bancofalabella.pe/cuentas/cuenta-ahorro-clasico",
+   "video": "https://www.youtube.com/watch?v=rFvo7DurR8M"
+  },
+  {
+   "entidad": "Santander Consumer Bank",
+   "producto": "Cuenta Imparable",
+   "apertura": "Digital",
+   "trea": 0.0485,
+   "trea_video": 0.0485,
+   "vigencia": "Tasa publicada en la web oficial; el video muestra vigencia hasta 31/03/2027",
+   "verificacion": "Tasa verificada; fecha final por confirmar",
+   "calificacion": "A- (mostrada en video)",
+   "grupo": "Grupo Santander",
+   "fsd": "Sí",
+   "monto_minimo": 500.0,
+   "saldo_tasa_max": 500.0,
+   "condicion": "Apertura 100% online y saldo desde S/500.",
+   "abono": "Mensual",
+   "capitalizacion": "Mensual",
+   "transferencias": "Envío y recepción de transferencias sin costo, según página del producto",
+   "mantenimiento": "S/0.00",
+   "retiros": "Consultar tarifario y red habilitada",
+   "alertas": "El documento enlazado corresponde a una campaña complementaria; revisar también cartilla y tarifario antes de contratar.",
+   "url": "https://www.santanderconsumer.com.pe/personas/ahorros/cuenta-imparable-santander",
+   "video": "https://www.youtube.com/watch?v=rFvo7DurR8M"
+  },
+  {
+   "entidad": "Banco Alfin",
+   "producto": "Ahorro Meta",
+   "apertura": "Digital / web",
+   "trea": 0.048,
+   "trea_video": 0.048,
+   "vigencia": "Aperturas web 07/07/2026–15/08/2026; tasa promocional hasta 15/09/2026",
+   "verificacion": "Verificado en web oficial",
+   "calificacion": "A- (mostrada en video)",
+   "grupo": "Grupo Coril (mostrado en video)",
+   "fsd": "Sí",
+   "monto_minimo": 100.0,
+   "saldo_tasa_max": 100.0,
+   "condicion": "Apertura web para 4.80%; apertura en agencia: 4.50%. Desde 16/09/2026 se aplica tasa regular publicada.",
+   "abono": "Mensual",
+   "capitalizacion": "Interés calculado diariamente y abonado mensualmente",
+   "transferencias": "Consultar tarifas por tipo de transferencia",
+   "mantenimiento": "Sin costo si mantiene al menos S/100",
+   "retiros": "3 retiros en ventanilla sin costo; luego S/3. Cajero local: S/5",
+   "alertas": "La tasa depende del canal de apertura. El simulador usa 4.80% como escenario web.",
+   "url": "https://www.alfinbanco.pe/ahorros/ahorrometa",
+   "video": "https://www.youtube.com/watch?v=rFvo7DurR8M"
+  },
+  {
+   "entidad": "Caja Cusco",
+   "producto": "Cuenta digital Wayki / campaña Ahorra y Gana",
+   "apertura": "Digital",
+   "trea": 0.0475,
+   "trea_video": 0.0475,
+   "vigencia": "La tasa aparece en el video; no se localizó un TyC oficial de agosto 2026 durante la verificación",
+   "verificacion": "Con reserva: verificar vigencia",
+   "calificacion": "No visible en las capturas",
+   "grupo": "Caja Municipal de Ahorro y Crédito Cusco",
+   "fsd": "Sí",
+   "monto_minimo": null,
+   "saldo_tasa_max": null,
+   "condicion": "Tasa máxima reconstruida del video; condiciones exactas deben confirmarse en la campaña vigente.",
+   "abono": "Consultar cartilla vigente",
+   "capitalizacion": "Consultar cartilla vigente",
+   "transferencias": "Consultar tarifario",
+   "mantenimiento": "Consultar tarifario",
+   "retiros": "Consultar tarifario",
+   "alertas": "El PDF enlazado es una campaña oficial anterior localizada como referencia. No debe asumirse que sus condiciones siguen vigentes en agosto.",
+   "url": "https://www.cmac-cusco.com.pe/",
+   "video": "https://www.youtube.com/watch?v=rFvo7DurR8M"
+  },
+  {
+   "entidad": "Compartamos Financiera",
+   "producto": "Cuenta WOW",
+   "apertura": "Digital o agencia",
+   "trea": 0.046,
+   "trea_video": 0.046,
+   "vigencia": "Campaña del 01/07/2026 al 31/08/2026",
+   "verificacion": "Verificado en campaña oficial",
+   "calificacion": "No visible en las capturas",
+   "grupo": "Gentera",
+   "fsd": "Sí",
+   "monto_minimo": 300.0,
+   "saldo_tasa_max": 300.0,
+   "condicion": "Cuenta nueva; saldo medio de referencia S/300 para evitar mantenimiento.",
+   "abono": "Último día hábil del mes",
+   "capitalizacion": "Mensual",
+   "transferencias": "Consultar tarifario vigente",
+   "mantenimiento": "S/6 si el saldo promedio mensual es menor a S/300",
+   "retiros": "Consultar tarifario vigente",
+   "alertas": "El ITF aplicable es 0.005%, conforme a la regulación y condiciones informadas por la entidad.",
+   "url": "https://productos.compartamos.com.pe/",
+   "video": "https://www.youtube.com/watch?v=rFvo7DurR8M"
+  },
+  {
+   "entidad": "Banco de Comercio",
+   "producto": "Cuenta de Ahorros Soles – promoción digital",
+   "apertura": "Digital",
+   "trea": 0.045,
+   "trea_video": 0.045,
+   "vigencia": "Tasas de campaña 3.50% y 4.50% hasta el 31/12/2026",
+   "verificacion": "Tasa y vigencia verificadas; rango por confirmar",
+   "calificacion": "No visible en las capturas",
+   "grupo": "Banco de Comercio",
+   "fsd": "Sí",
+   "monto_minimo": null,
+   "saldo_tasa_max": null,
+   "condicion": "La tasa depende del rango/condición definida en la campaña; revisar TyC antes de depositar.",
+   "abono": "Mensual",
+   "capitalizacion": "Mensual",
+   "transferencias": "Consultar tarifario",
+   "mantenimiento": "Consultar tarifario",
+   "retiros": "Consultar tarifario",
+   "alertas": "Esta entidad se incorporó como mejor reconstrucción de una de las columnas ocultas I–K del video.",
+   "url": "https://www.bancom.pe/personas/promociones/cuenta-ahorro",
+   "video": "https://www.youtube.com/watch?v=rFvo7DurR8M"
+  },
+  {
+   "entidad": "Banco Ripley",
+   "producto": "Cuenta Ahorro Plus",
+   "apertura": "Presencial y digital",
+   "trea": 0.045,
+   "trea_video": 0.045,
+   "vigencia": "La campaña indicada terminó el 31/07/2026; desde 01/08 rige el tarifario vigente",
+   "verificacion": "Verificar antes de abrir",
+   "calificacion": "B+ (mostrada en video)",
+   "grupo": "Banco Ripley",
+   "fsd": "Sí",
+   "monto_minimo": 0.0,
+   "saldo_tasa_max": 500.0,
+   "condicion": "La página conserva un ejemplo a 4.50%, pero advierte que desde agosto aplica el tarifario vigente.",
+   "abono": "Mensual",
+   "capitalizacion": "Mensual",
+   "transferencias": "CCE misma plaza y otras plazas con comisión; revisar tarifario",
+   "mantenimiento": "Sin costo si el saldo promedio es ≥ S/500",
+   "retiros": "2 retiros gratuitos al mes en red Mastercard; luego comisión",
+   "alertas": "Se mantiene en el comparativo porque aparece en el video, pero la tasa debe confirmarse en el tarifario vigente de agosto.",
+   "url": "https://www.bancoripley.com.pe/ahorros/cuenta-ahorros.html",
+   "video": "https://www.youtube.com/watch?v=rFvo7DurR8M"
+  },
+  {
+   "entidad": "Financiera Efectiva (Efectibank)",
+   "producto": "Cuenta de Ahorro Digital",
+   "apertura": "Digital",
+   "trea": 0.045,
+   "trea_video": 0.045,
+   "vigencia": "Vigente según página oficial consultada",
+   "verificacion": "Verificado en web oficial",
+   "calificacion": "A- (mostrada en video)",
+   "grupo": "Grupo EFE",
+   "fsd": "Sí",
+   "monto_minimo": 0.0,
+   "saldo_tasa_max": 0.0,
+   "condicion": "Interés desde el primer sol; sin monto mínimo de apertura.",
+   "abono": "Fin de mes",
+   "capitalizacion": "Interés calculado diariamente y abonado al cierre del mes",
+   "transferencias": "Transferencias inmediatas y entre cuentas informadas como gratuitas; Yape/Plin sin costo",
+   "mantenimiento": "S/0.00",
+   "retiros": "1 retiro gratuito al mes en KasNet; luego tarifa vigente",
+   "alertas": "La web del producto enlaza contrato multiproducto, cartilla, tarifario y fórmulas.",
+   "url": "https://www.efectiva.com.pe/ahorros/cuenta-de-ahorros/",
+   "video": "https://www.youtube.com/watch?v=rFvo7DurR8M"
+  },
+  {
+   "entidad": "Banco GNB Perú",
+   "producto": "Cuenta Ahorro Rolando",
+   "apertura": "Presencial y digital",
+   "trea": 0.045,
+   "trea_video": 0.045,
+   "vigencia": "Vigente según página oficial consultada",
+   "verificacion": "Verificado en web oficial",
+   "calificacion": "A (mostrada en video)",
+   "grupo": "Grupo Financiero GNB",
+   "fsd": "Sí",
+   "monto_minimo": 0.0,
+   "saldo_tasa_max": 0.0,
+   "condicion": "Sin monto mínimo de apertura; tasa en soles publicada para el producto.",
+   "abono": "Diario",
+   "capitalizacion": "Diaria",
+   "transferencias": "Transferencias con comisión según tarifario y plaza",
+   "mantenimiento": "S/0.00",
+   "retiros": "Retiros libres según red; revisar tarifario vigente",
+   "alertas": "La capitalización diaria es una característica diferenciadora; el simulador anualiza mediante TREA.",
+   "url": "https://www.bancognb.com.pe/inicio/banca-personas/cuentas/cuenta-rolando",
+   "video": "https://www.youtube.com/watch?v=rFvo7DurR8M"
+  },
+  {
+   "entidad": "Caja Arequipa",
+   "producto": "Campaña Caja Digital",
+   "apertura": "Digital",
+   "trea": 0.045,
+   "trea_video": 0.045,
+   "vigencia": "Aperturas 24/07/2026–03/09/2026; tasa promocional hasta 31/12/2026",
+   "verificacion": "Verificado en reglamento oficial",
+   "calificacion": "A- (mostrada en video)",
+   "grupo": "Municipalidad Provincial de Arequipa",
+   "fsd": "Sí",
+   "monto_minimo": 0.0,
+   "saldo_tasa_max": 50000.0,
+   "condicion": "Tasa escalonada; 4.50% solo para saldos desde S/50,000.",
+   "abono": "Mensual",
+   "capitalizacion": "Mensual",
+   "transferencias": "Vía CCE con comisiones según modalidad; revisar tarifario",
+   "mantenimiento": "S/0.00, según cuadro del video",
+   "retiros": "Cajeros de otros bancos: comisión por retiro",
+   "alertas": "La apertura debe realizarse por los canales digitales autorizados; no aplica a aperturas en agencia.",
+   "url": "https://www.cajaarequipa.pe/",
+   "video": "https://www.youtube.com/watch?v=rFvo7DurR8M"
+  },
+  {
+   "entidad": "Caja Piura",
+   "producto": "Cuenta Light – Ahorra y gana más",
+   "apertura": "Presencial y digital",
+   "trea": 0.045,
+   "trea_video": 0.045,
+   "vigencia": "Campaña del 01/08/2026 al 31/12/2026",
+   "verificacion": "Tasa máxima verificada; umbral reconstruido",
+   "calificacion": "B (mostrada en video)",
+   "grupo": "Municipalidad Provincial de Piura",
+   "fsd": "Sí",
+   "monto_minimo": 100.0,
+   "saldo_tasa_max": 50001.0,
+   "condicion": "Hasta 4.50% TREA; el video muestra el umbral máximo alrededor de S/50,001. Confirmar escala oficial.",
+   "abono": "Mensual",
+   "capitalizacion": "Mensual",
+   "transferencias": "S/1.50 por operación, según cuadro del video; validar tarifario",
+   "mantenimiento": "S/0.00",
+   "retiros": "Piura Cash: retiros sin costo, según condiciones de la entidad",
+   "alertas": "La web oficial publica 'hasta 4.5%' y apertura desde S/100; el rango exacto de la tasa máxima debe revisarse en TyC.",
+   "url": "https://www.cajapiura.pe/campaigns-sweepstakes/details/gana-mas-con-cuenta-light",
+   "video": "https://www.youtube.com/watch?v=rFvo7DurR8M"
+  },
+  {
+   "entidad": "Financiera Oh! / SIP",
+   "producto": "AhorraMás Soles",
+   "apertura": "Digital (app SIP)",
+   "trea": 0.04,
+   "trea_video": 0.04,
+   "vigencia": "Vigente según cartilla y página oficial consultadas",
+   "verificacion": "Verificado en fuente oficial",
+   "calificacion": "A- (mostrada en video)",
+   "grupo": "Grupo Intercorp",
+   "fsd": "Sí",
+   "monto_minimo": 0.0,
+   "saldo_tasa_max": 0.0,
+   "condicion": "Sin monto mínimo de apertura; cuenta digital.",
+   "abono": "Mensual",
+   "capitalizacion": "Interés calculado diariamente y pagado mensualmente",
+   "transferencias": "Operaciones y transferencias informadas sin comisión; revisar límites",
+   "mantenimiento": "S/0.00",
+   "retiros": "Consultar canales y tarifario vigente",
+   "alertas": "El contrato contempla cierre automático en determinadas circunstancias de inactividad; revisar cláusulas completas.",
+   "url": "https://sip.pe/productos/ahorramas-soles",
+   "video": "https://www.youtube.com/watch?v=rFvo7DurR8M"
+  }
+ ],
+ "bcrp": {
+  "vigente": 0.0425,
+  "ultimo_mes": "Julio 2026",
+  "fuente": "https://estadisticas.bcrp.gob.pe/estadisticas/series/mensuales/resultados/PD04722MM/html",
+  "serie": [
+   {
+    "mes": "2024-01-31",
+    "tasa": 0.065
+   },
+   {
+    "mes": "2024-02-29",
+    "tasa": 0.0625
+   },
+   {
+    "mes": "2024-03-31",
+    "tasa": 0.0625
+   },
+   {
+    "mes": "2024-04-30",
+    "tasa": 0.06
+   },
+   {
+    "mes": "2024-05-31",
+    "tasa": 0.0575
+   },
+   {
+    "mes": "2024-06-30",
+    "tasa": 0.0575
+   },
+   {
+    "mes": "2024-07-31",
+    "tasa": 0.0575
+   },
+   {
+    "mes": "2024-08-31",
+    "tasa": 0.055
+   },
+   {
+    "mes": "2024-09-30",
+    "tasa": 0.0525
+   },
+   {
+    "mes": "2024-10-31",
+    "tasa": 0.0525
+   },
+   {
+    "mes": "2024-11-30",
+    "tasa": 0.05
+   },
+   {
+    "mes": "2024-12-31",
+    "tasa": 0.05
+   },
+   {
+    "mes": "2025-01-31",
+    "tasa": 0.0475
+   },
+   {
+    "mes": "2025-02-28",
+    "tasa": 0.0475
+   },
+   {
+    "mes": "2025-03-31",
+    "tasa": 0.0475
+   },
+   {
+    "mes": "2025-04-30",
+    "tasa": 0.0475
+   },
+   {
+    "mes": "2025-05-31",
+    "tasa": 0.045
+   },
+   {
+    "mes": "2025-06-30",
+    "tasa": 0.045
+   },
+   {
+    "mes": "2025-07-31",
+    "tasa": 0.045
+   },
+   {
+    "mes": "2025-08-31",
+    "tasa": 0.045
+   },
+   {
+    "mes": "2025-09-30",
+    "tasa": 0.0425
+   },
+   {
+    "mes": "2025-10-31",
+    "tasa": 0.0425
+   },
+   {
+    "mes": "2025-11-30",
+    "tasa": 0.0425
+   },
+   {
+    "mes": "2025-12-31",
+    "tasa": 0.0425
+   },
+   {
+    "mes": "2026-01-31",
+    "tasa": 0.0425
+   },
+   {
+    "mes": "2026-02-28",
+    "tasa": 0.0425
+   },
+   {
+    "mes": "2026-03-31",
+    "tasa": 0.0425
+   },
+   {
+    "mes": "2026-04-30",
+    "tasa": 0.0425
+   },
+   {
+    "mes": "2026-05-31",
+    "tasa": 0.0425
+   },
+   {
+    "mes": "2026-06-30",
+    "tasa": 0.0425
+   },
+   {
+    "mes": "2026-07-31",
+    "tasa": 0.0425
+   }
+  ]
+ },
+ "fsd": {
+  "cobertura": 122000,
+  "nota": "Cobertura máxima vigente: S/122,000 por depositante y por institución miembro, sujeto a las reglas oficiales del FSD.",
+  "fuente": "https://fsd.org.pe/",
+  "fuente_sbs": "https://www.sbs.gob.pe/usuarios/aprende-con-la-sbs/compara-y-elige",
+  "advertencia": "Importante: la cobertura no equivale a una garantía de rentabilidad. Antes de contratar, confirme que la entidad y el producto están cubiertos, lea el contrato/cartilla y verifique si el monto depositado supera el límite por institución."
+ },
+ "fichas": [
+  {
+   "sheet": "SCOTIABANK",
+   "entidad": "Scotiabank Perú",
+   "producto": "Cuenta Digital",
+   "tramos": [
+    {
+     "desde": 0.0,
+     "trea": 0.0,
+     "desc": "Saldo menor a S/500: no cumple la campaña"
+    },
+    {
+     "desde": 500.0,
+     "trea": 0.097,
+     "desc": "Desde S/500; tasa promocional solo hasta S/3,000"
+    }
+   ],
+   "campos": {
+    "Entidad": "Scotiabank Perú",
+    "Producto": "Cuenta Digital",
+    "Modo de apertura": "Digital / web",
+    "TREA verificada": "0.097",
+    "TREA del video": "0.097",
+    "Vigencia / campaña": "Aperturas del 01/08/2026 al 31/08/2026; pago promocional según campaña",
+    "Estado de verificación": "Verificado en web oficial",
+    "Calificación mostrada": "A+ (mostrada en video)",
+    "Grupo / respaldo": "The Bank of Nova Scotia (BNS)",
+    "FSD": "Sí",
+    "Monto mínimo de apertura": "00:00:00",
+    "Saldo/condición para tasa máxima": "1901-05-14 00:00:00",
+    "Condición clave": "Nuevo cliente; primera Cuenta Digital; mantener ≥ S/500. La tasa aplica solo hasta S/3,000.",
+    "Abono de intereses": "Mensual; cronograma promocional indicado por el banco",
+    "Capitalización": "Mensual (aproximación del simulador con TREA)",
+    "Transferencias": "Transferencias digitales/interbancarias inmediatas: sin costo, según condiciones del producto",
+    "Mantenimiento": "S/0.00",
+    "Retiros / cajeros": "Cajeros Scotiabank: sin costo; 1 retiro en ventanilla al mes sin costo",
+    "Notas y alertas": "La TREA promocional no se aplica a todo el saldo: máximo remunerado S/3,000; el exceso recibe la tasa regular indicada por el banco.",
+    "Página del producto": "https://www.scotiabank.com.pe/Personas/Ahorros/Cuentas-Bancarias/cuenta-digital",
+    "Contrato / cartilla / tarifario": "https://www.scotiabank.com.pe/Personas/Ahorros/Cuentas-Bancarias/cuenta-digital"
+   },
+   "fuentes": {
+    "Entidad": "https://www.scotiabank.com.pe/Personas/Ahorros/Cuentas-Bancarias/cuenta-digital",
+    "Producto": "https://www.scotiabank.com.pe/Personas/Ahorros/Cuentas-Bancarias/cuenta-digital",
+    "Modo de apertura": "https://www.scotiabank.com.pe/Personas/Ahorros/Cuentas-Bancarias/cuenta-digital",
+    "TREA verificada": "https://www.scotiabank.com.pe/Personas/Ahorros/Cuentas-Bancarias/cuenta-digital",
+    "TREA del video": "https://www.youtube.com/watch?v=rFvo7DurR8M",
+    "Vigencia / campaña": "https://www.scotiabank.com.pe/Personas/Ahorros/Cuentas-Bancarias/cuenta-digital",
+    "Calificación mostrada": "https://www.youtube.com/watch?v=rFvo7DurR8M",
+    "Grupo / respaldo": "https://www.youtube.com/watch?v=rFvo7DurR8M",
+    "FSD": "https://fsd.org.pe/",
+    "Monto mínimo de apertura": "https://www.scotiabank.com.pe/Personas/Ahorros/Cuentas-Bancarias/cuenta-digital",
+    "Saldo/condición para tasa máxima": "https://www.scotiabank.com.pe/Personas/Ahorros/Cuentas-Bancarias/cuenta-digital",
+    "Condición clave": "https://www.scotiabank.com.pe/Personas/Ahorros/Cuentas-Bancarias/cuenta-digital",
+    "Abono de intereses": "https://www.scotiabank.com.pe/Personas/Ahorros/Cuentas-Bancarias/cuenta-digital",
+    "Capitalización": "https://www.scotiabank.com.pe/Personas/Ahorros/Cuentas-Bancarias/cuenta-digital",
+    "Transferencias": "https://www.scotiabank.com.pe/Personas/Ahorros/Cuentas-Bancarias/cuenta-digital",
+    "Mantenimiento": "https://www.scotiabank.com.pe/Personas/Ahorros/Cuentas-Bancarias/cuenta-digital",
+    "Retiros / cajeros": "https://www.scotiabank.com.pe/Personas/Ahorros/Cuentas-Bancarias/cuenta-digital",
+    "Notas y alertas": "https://www.scotiabank.com.pe/Personas/Ahorros/Cuentas-Bancarias/cuenta-digital",
+    "Página del producto": "https://www.scotiabank.com.pe/Personas/Ahorros/Cuentas-Bancarias/cuenta-digital",
+    "Contrato / cartilla / tarifario": "https://www.scotiabank.com.pe/Personas/Ahorros/Cuentas-Bancarias/cuenta-digital"
+   },
+   "simulador": {
+    "saldo_ejemplo": 3000.0,
+    "trea_max": 0.097,
+    "plazo_dias": 90.0,
+    "tope_remunerado": 3000.0,
+    "umbral_tasa_max": 500.0
+   }
+  },
+  {
+   "sheet": "SURGIR",
+   "entidad": "Financiera SURGIR",
+   "producto": "Cuenta de Ahorro Gold Select",
+   "tramos": [
+    {
+     "desde": 0.0,
+     "trea": 0.0,
+     "desc": "Por debajo del monto de referencia: consultar tasa aplicable"
+    },
+    {
+     "desde": 20000.0,
+     "trea": 0.056,
+     "desc": "TREA máxima publicada en la web oficial"
+    }
+   ],
+   "campos": {
+    "Entidad": "Financiera SURGIR",
+    "Producto": "Cuenta de Ahorro Gold Select",
+    "Modo de apertura": "Presencial",
+    "TREA verificada": "0.056",
+    "TREA del video": "0.0525",
+    "Vigencia / campaña": "Vigente en la página oficial consultada; confirmar tarifario el día de apertura",
+    "Estado de verificación": "Actualizado frente al video",
+    "Calificación mostrada": "A- (mostrada en video)",
+    "Grupo / respaldo": "Grupo Santander",
+    "FSD": "Sí",
+    "Monto mínimo de apertura": "1954-10-03 00:00:00",
+    "Saldo/condición para tasa máxima": "1954-10-03 00:00:00",
+    "Condición clave": "Saldo/apertura de referencia S/20,000; la web oficial consultada publica hasta 5.60% TREA.",
+    "Abono de intereses": "Mensual",
+    "Capitalización": "Mensual",
+    "Transferencias": "El video muestra 2 operaciones gratuitas y luego comisión; validar tarifario vigente",
+    "Mantenimiento": "S/0.00, según cuadro del video; validar tarifario",
+    "Retiros / cajeros": "El video muestra 2 retiros sin costo y luego comisión; validar tarifario vigente",
+    "Notas y alertas": "Diferencia relevante: el video muestra 5.25%, mientras la página oficial consultada publica hasta 5.60%.",
+    "Página del producto": "https://www.surgir.com.pe/cuenta-gold-select",
+    "Contrato / cartilla / tarifario": "https://www.surgir.com.pe/tasas-y-tarifas"
+   },
+   "fuentes": {
+    "Entidad": "https://www.surgir.com.pe/cuenta-gold-select",
+    "Producto": "https://www.surgir.com.pe/cuenta-gold-select",
+    "Modo de apertura": "https://www.surgir.com.pe/cuenta-gold-select",
+    "TREA verificada": "https://www.surgir.com.pe/cuenta-gold-select",
+    "TREA del video": "https://www.youtube.com/watch?v=rFvo7DurR8M",
+    "Vigencia / campaña": "https://www.surgir.com.pe/tasas-y-tarifas",
+    "Calificación mostrada": "https://www.youtube.com/watch?v=rFvo7DurR8M",
+    "Grupo / respaldo": "https://www.youtube.com/watch?v=rFvo7DurR8M",
+    "FSD": "https://fsd.org.pe/",
+    "Monto mínimo de apertura": "https://www.surgir.com.pe/cuenta-gold-select",
+    "Saldo/condición para tasa máxima": "https://www.surgir.com.pe/tasas-y-tarifas",
+    "Condición clave": "https://www.surgir.com.pe/tasas-y-tarifas",
+    "Abono de intereses": "https://www.surgir.com.pe/tasas-y-tarifas",
+    "Capitalización": "https://www.surgir.com.pe/tasas-y-tarifas",
+    "Transferencias": "https://www.surgir.com.pe/tasas-y-tarifas",
+    "Mantenimiento": "https://www.surgir.com.pe/tasas-y-tarifas",
+    "Retiros / cajeros": "https://www.surgir.com.pe/tasas-y-tarifas",
+    "Notas y alertas": "https://www.surgir.com.pe/tasas-y-tarifas",
+    "Página del producto": "https://www.surgir.com.pe/cuenta-gold-select",
+    "Contrato / cartilla / tarifario": "https://www.surgir.com.pe/tasas-y-tarifas"
+   },
+   "simulador": {
+    "saldo_ejemplo": 20000.0,
+    "trea_max": 0.056,
+    "plazo_dias": 90.0,
+    "tope_remunerado": null,
+    "umbral_tasa_max": 20000.0
+   }
+  },
+  {
+   "sheet": "QAPAQ",
+   "entidad": "Financiera QAPAQ",
+   "producto": "Cuenta Insuperable",
+   "tramos": [
+    {
+     "desde": 0.0,
+     "trea": 0.03,
+     "desc": "S/0 a S/3,999.99"
+    },
+    {
+     "desde": 4000.0,
+     "trea": 0.04,
+     "desc": "S/4,000 a S/7,999.99"
+    },
+    {
+     "desde": 8000.0,
+     "trea": 0.05,
+     "desc": "S/8,000 a S/499,999.99"
+    },
+    {
+     "desde": 500000.0,
+     "trea": 0.04,
+     "desc": "Desde S/500,000"
+    }
+   ],
+   "campos": {
+    "Entidad": "Financiera QAPAQ",
+    "Producto": "Cuenta Insuperable",
+    "Modo de apertura": "Presencial y variante digital",
+    "TREA verificada": "0.05",
+    "TREA del video": "0.05",
+    "Vigencia / campaña": "Tarifario oficial consultado; verificar versión vigente al contratar",
+    "Estado de verificación": "Verificado en tarifario oficial",
+    "Calificación mostrada": "C+ (mostrada en video)",
+    "Grupo / respaldo": "Orca Credit Holding LLC",
+    "FSD": "Sí",
+    "Monto mínimo de apertura": "1921-11-25 00:00:00",
+    "Saldo/condición para tasa máxima": "1921-11-25 00:00:00",
+    "Condición clave": "Tasa escalonada: 3.00%, 4.00%, 5.00% y 4.00% según saldo.",
+    "Abono de intereses": "Mensual",
+    "Capitalización": "Mensual",
+    "Transferencias": "Comisiones CCE según tipo de transferencia y plaza; consultar tarifario",
+    "Mantenimiento": "S/5 si el saldo es ≤ S/1,499.99; sin costo desde S/1,500",
+    "Retiros / cajeros": "Hasta 4 retiros gratuitos al mes; luego comisión según canal",
+    "Notas y alertas": "La versión digital puede no exigir monto mínimo de apertura. La tasa depende del saldo; no basta con abrir la cuenta.",
+    "Página del producto": "https://www.qapaq.pe/",
+    "Contrato / cartilla / tarifario": "https://www.qapaq.pe/wp-content/uploads/2025/04/Tarifario-ahorros-Insuperable-Abril-2025.pdf"
+   },
+   "fuentes": {
+    "Entidad": "https://www.qapaq.pe/",
+    "Producto": "https://www.qapaq.pe/",
+    "Modo de apertura": "https://www.qapaq.pe/",
+    "TREA verificada": "https://www.qapaq.pe/",
+    "TREA del video": "https://www.youtube.com/watch?v=rFvo7DurR8M",
+    "Vigencia / campaña": "https://www.qapaq.pe/wp-content/uploads/2025/04/Tarifario-ahorros-Insuperable-Abril-2025.pdf",
+    "Calificación mostrada": "https://www.youtube.com/watch?v=rFvo7DurR8M",
+    "Grupo / respaldo": "https://www.youtube.com/watch?v=rFvo7DurR8M",
+    "FSD": "https://fsd.org.pe/",
+    "Monto mínimo de apertura": "https://www.qapaq.pe/",
+    "Saldo/condición para tasa máxima": "https://www.qapaq.pe/wp-content/uploads/2025/04/Tarifario-ahorros-Insuperable-Abril-2025.pdf",
+    "Condición clave": "https://www.qapaq.pe/wp-content/uploads/2025/04/Tarifario-ahorros-Insuperable-Abril-2025.pdf",
+    "Abono de intereses": "https://www.qapaq.pe/wp-content/uploads/2025/04/Tarifario-ahorros-Insuperable-Abril-2025.pdf",
+    "Capitalización": "https://www.qapaq.pe/wp-content/uploads/2025/04/Tarifario-ahorros-Insuperable-Abril-2025.pdf",
+    "Transferencias": "https://www.qapaq.pe/wp-content/uploads/2025/04/Tarifario-ahorros-Insuperable-Abril-2025.pdf",
+    "Mantenimiento": "https://www.qapaq.pe/wp-content/uploads/2025/04/Tarifario-ahorros-Insuperable-Abril-2025.pdf",
+    "Retiros / cajeros": "https://www.qapaq.pe/wp-content/uploads/2025/04/Tarifario-ahorros-Insuperable-Abril-2025.pdf",
+    "Notas y alertas": "https://www.qapaq.pe/wp-content/uploads/2025/04/Tarifario-ahorros-Insuperable-Abril-2025.pdf",
+    "Página del producto": "https://www.qapaq.pe/",
+    "Contrato / cartilla / tarifario": "https://www.qapaq.pe/wp-content/uploads/2025/04/Tarifario-ahorros-Insuperable-Abril-2025.pdf"
+   },
+   "simulador": {
+    "saldo_ejemplo": 8000.0,
+    "trea_max": 0.05,
+    "plazo_dias": 90.0,
+    "tope_remunerado": null,
+    "umbral_tasa_max": 8000.0
+   }
+  },
+  {
+   "sheet": "FIN. CONFIANZA",
+   "entidad": "Financiera Confianza",
+   "producto": "Cuenta Ahorro Común – canal digital",
+   "tramos": [
+    {
+     "desde": 0.0,
+     "trea": 0.0,
+     "desc": "Consultar tasa del rango inferior"
+    },
+    {
+     "desde": 10000.0,
+     "trea": 0.05,
+     "desc": "Tasa máxima de campaña mostrada en el video/tarifario"
+    }
+   ],
+   "campos": {
+    "Entidad": "Financiera Confianza",
+    "Producto": "Cuenta Ahorro Común – canal digital",
+    "Modo de apertura": "Digital",
+    "TREA verificada": "0.05",
+    "TREA del video": "0.05",
+    "Vigencia / campaña": "Campaña del 01/08/2026 al 31/08/2026",
+    "Estado de verificación": "Verificado en tarifario de campaña",
+    "Calificación mostrada": "A- (mostrada en video)",
+    "Grupo / respaldo": "Fundación Microfinanzas BBVA",
+    "FSD": "Sí",
+    "Monto mínimo de apertura": "00:00:00",
+    "Saldo/condición para tasa máxima": "1927-05-18 00:00:00",
+    "Condición clave": "Apertura por canal digital; saldo de referencia para la tasa máxima: S/10,000.",
+    "Abono de intereses": "Mensual",
+    "Capitalización": "Mensual",
+    "Transferencias": "Comisiones CCE según modalidad y entidad destino; revisar tarifario",
+    "Mantenimiento": "S/0.00, según cuadro comparativo del video",
+    "Retiros / cajeros": "Cajeros de otras redes: comisión indicada en tarifario",
+    "Notas y alertas": "La tasa promocional depende del canal digital y del rango de saldo establecido en el tarifario.",
+    "Página del producto": "https://confianza.pe/",
+    "Contrato / cartilla / tarifario": "https://confianza.pe/docs/2026/07/T008-027%20Tarifario%20Campana%20-%20Ahorro%20Comun%20en%20Canal%20Digital.pdf"
+   },
+   "fuentes": {
+    "Entidad": "https://confianza.pe/",
+    "Producto": "https://confianza.pe/",
+    "Modo de apertura": "https://confianza.pe/",
+    "TREA verificada": "https://confianza.pe/",
+    "TREA del video": "https://www.youtube.com/watch?v=rFvo7DurR8M",
+    "Vigencia / campaña": "https://confianza.pe/docs/2026/07/T008-027%20Tarifario%20Campana%20-%20Ahorro%20Comun%20en%20Canal%20Digital.pdf",
+    "Calificación mostrada": "https://www.youtube.com/watch?v=rFvo7DurR8M",
+    "Grupo / respaldo": "https://www.youtube.com/watch?v=rFvo7DurR8M",
+    "FSD": "https://fsd.org.pe/",
+    "Monto mínimo de apertura": "https://confianza.pe/",
+    "Saldo/condición para tasa máxima": "https://confianza.pe/docs/2026/07/T008-027%20Tarifario%20Campana%20-%20Ahorro%20Comun%20en%20Canal%20Digital.pdf",
+    "Condición clave": "https://confianza.pe/docs/2026/07/T008-027%20Tarifario%20Campana%20-%20Ahorro%20Comun%20en%20Canal%20Digital.pdf",
+    "Abono de intereses": "https://confianza.pe/docs/2026/07/T008-027%20Tarifario%20Campana%20-%20Ahorro%20Comun%20en%20Canal%20Digital.pdf",
+    "Capitalización": "https://confianza.pe/docs/2026/07/T008-027%20Tarifario%20Campana%20-%20Ahorro%20Comun%20en%20Canal%20Digital.pdf",
+    "Transferencias": "https://confianza.pe/docs/2026/07/T008-027%20Tarifario%20Campana%20-%20Ahorro%20Comun%20en%20Canal%20Digital.pdf",
+    "Mantenimiento": "https://confianza.pe/docs/2026/07/T008-027%20Tarifario%20Campana%20-%20Ahorro%20Comun%20en%20Canal%20Digital.pdf",
+    "Retiros / cajeros": "https://confianza.pe/docs/2026/07/T008-027%20Tarifario%20Campana%20-%20Ahorro%20Comun%20en%20Canal%20Digital.pdf",
+    "Notas y alertas": "https://confianza.pe/docs/2026/07/T008-027%20Tarifario%20Campana%20-%20Ahorro%20Comun%20en%20Canal%20Digital.pdf",
+    "Página del producto": "https://confianza.pe/",
+    "Contrato / cartilla / tarifario": "https://confianza.pe/docs/2026/07/T008-027%20Tarifario%20Campana%20-%20Ahorro%20Comun%20en%20Canal%20Digital.pdf"
+   },
+   "simulador": {
+    "saldo_ejemplo": 10000.0,
+    "trea_max": 0.05,
+    "plazo_dias": 90.0,
+    "tope_remunerado": null,
+    "umbral_tasa_max": 10000.0
+   }
+  },
+  {
+   "sheet": "FALABELLA",
+   "entidad": "Banco Falabella",
+   "producto": "Cuenta Ahorro Clásico",
+   "tramos": [
+    {
+     "desde": 0.0,
+     "trea": 0.0375,
+     "desc": "Tasa regular publicada"
+    },
+    {
+     "desde": 0.0,
+     "trea": 0.05,
+     "desc": "Con abono de remuneración ≥ S/500; hasta S/100,000"
+    }
+   ],
+   "campos": {
+    "Entidad": "Banco Falabella",
+    "Producto": "Cuenta Ahorro Clásico",
+    "Modo de apertura": "Presencial y digital",
+    "TREA verificada": "0.05",
+    "TREA del video": "0.05",
+    "Vigencia / campaña": "Promoción Cuenta Sueldo del 01/07/2026 al 31/08/2026",
+    "Estado de verificación": "Verificado en web oficial",
+    "Calificación mostrada": "A- (mostrada en video)",
+    "Grupo / respaldo": "Grupo Falabella",
+    "FSD": "Sí",
+    "Monto mínimo de apertura": "00:00:00",
+    "Saldo/condición para tasa máxima": "1904-02-08 00:00:00",
+    "Condición clave": "Recibir remuneración ≥ S/500 en la cuenta indicada por el banco. 5% hasta S/100,000; exceso a tasa regular.",
+    "Abono de intereses": "Mensual",
+    "Capitalización": "Mensual",
+    "Transferencias": "Transferencias digitales sin costo, según condiciones del banco",
+    "Mantenimiento": "S/10 si no se cumple el saldo promedio requerido; revisar tarifario",
+    "Retiros / cajeros": "Cajeros Banco Falabella: sin costo, sujeto a condiciones",
+    "Notas y alertas": "La tasa regular publicada para la Cuenta Ahorro Clásico es menor; el 5% exige abono de sueldo y tiene tope de saldo.",
+    "Página del producto": "https://www.bancofalabella.pe/cuentas/cuenta-ahorro-clasico",
+    "Contrato / cartilla / tarifario": "https://www.bancofalabella.pe/promociones/detalle/tasa-preferencial-cuenta-sueldo"
+   },
+   "fuentes": {
+    "Entidad": "https://www.bancofalabella.pe/cuentas/cuenta-ahorro-clasico",
+    "Producto": "https://www.bancofalabella.pe/cuentas/cuenta-ahorro-clasico",
+    "Modo de apertura": "https://www.bancofalabella.pe/cuentas/cuenta-ahorro-clasico",
+    "TREA verificada": "https://www.bancofalabella.pe/cuentas/cuenta-ahorro-clasico",
+    "TREA del video": "https://www.youtube.com/watch?v=rFvo7DurR8M",
+    "Vigencia / campaña": "https://www.bancofalabella.pe/promociones/detalle/tasa-preferencial-cuenta-sueldo",
+    "Calificación mostrada": "https://www.youtube.com/watch?v=rFvo7DurR8M",
+    "Grupo / respaldo": "https://www.youtube.com/watch?v=rFvo7DurR8M",
+    "FSD": "https://fsd.org.pe/",
+    "Monto mínimo de apertura": "https://www.bancofalabella.pe/cuentas/cuenta-ahorro-clasico",
+    "Saldo/condición para tasa máxima": "https://www.bancofalabella.pe/promociones/detalle/tasa-preferencial-cuenta-sueldo",
+    "Condición clave": "https://www.bancofalabella.pe/promociones/detalle/tasa-preferencial-cuenta-sueldo",
+    "Abono de intereses": "https://www.bancofalabella.pe/promociones/detalle/tasa-preferencial-cuenta-sueldo",
+    "Capitalización": "https://www.bancofalabella.pe/promociones/detalle/tasa-preferencial-cuenta-sueldo",
+    "Transferencias": "https://www.bancofalabella.pe/promociones/detalle/tasa-preferencial-cuenta-sueldo",
+    "Mantenimiento": "https://www.bancofalabella.pe/promociones/detalle/tasa-preferencial-cuenta-sueldo",
+    "Retiros / cajeros": "https://www.bancofalabella.pe/promociones/detalle/tasa-preferencial-cuenta-sueldo",
+    "Notas y alertas": "https://www.bancofalabella.pe/promociones/detalle/tasa-preferencial-cuenta-sueldo",
+    "Página del producto": "https://www.bancofalabella.pe/cuentas/cuenta-ahorro-clasico",
+    "Contrato / cartilla / tarifario": "https://www.bancofalabella.pe/promociones/detalle/tasa-preferencial-cuenta-sueldo"
+   },
+   "simulador": {
+    "saldo_ejemplo": 3000.0,
+    "trea_max": 0.05,
+    "plazo_dias": 90.0,
+    "tope_remunerado": 100000.0,
+    "umbral_tasa_max": 0.0
+   }
+  },
+  {
+   "sheet": "SANTANDER",
+   "entidad": "Santander Consumer Bank",
+   "producto": "Cuenta Imparable",
+   "tramos": [
+    {
+     "desde": 0.0,
+     "trea": 0.0,
+     "desc": "Por debajo de S/500: no cumple condición publicada"
+    },
+    {
+     "desde": 500.0,
+     "trea": 0.0485,
+     "desc": "Desde S/500"
+    }
+   ],
+   "campos": {
+    "Entidad": "Santander Consumer Bank",
+    "Producto": "Cuenta Imparable",
+    "Modo de apertura": "Digital",
+    "TREA verificada": "0.0485",
+    "TREA del video": "0.0485",
+    "Vigencia / campaña": "Tasa publicada en la web oficial; el video muestra vigencia hasta 31/03/2027",
+    "Estado de verificación": "Tasa verificada; fecha final por confirmar",
+    "Calificación mostrada": "A- (mostrada en video)",
+    "Grupo / respaldo": "Grupo Santander",
+    "FSD": "Sí",
+    "Monto mínimo de apertura": "1901-05-14 00:00:00",
+    "Saldo/condición para tasa máxima": "1901-05-14 00:00:00",
+    "Condición clave": "Apertura 100% online y saldo desde S/500.",
+    "Abono de intereses": "Mensual",
+    "Capitalización": "Mensual",
+    "Transferencias": "Envío y recepción de transferencias sin costo, según página del producto",
+    "Mantenimiento": "S/0.00",
+    "Retiros / cajeros": "Consultar tarifario y red habilitada",
+    "Notas y alertas": "El documento enlazado corresponde a una campaña complementaria; revisar también cartilla y tarifario antes de contratar.",
+    "Página del producto": "https://www.santanderconsumer.com.pe/personas/ahorros/cuenta-imparable-santander",
+    "Contrato / cartilla / tarifario": "https://www.santanderconsumer.com.pe/wp-content/uploads/2026/07/TERMINOS-Y-CONDICIONES-WEB-LA-JUGADA-DEL-AHORRO-1.pdf"
+   },
+   "fuentes": {
+    "Entidad": "https://www.santanderconsumer.com.pe/personas/ahorros/cuenta-imparable-santander",
+    "Producto": "https://www.santanderconsumer.com.pe/personas/ahorros/cuenta-imparable-santander",
+    "Modo de apertura": "https://www.santanderconsumer.com.pe/personas/ahorros/cuenta-imparable-santander",
+    "TREA verificada": "https://www.santanderconsumer.com.pe/personas/ahorros/cuenta-imparable-santander",
+    "TREA del video": "https://www.youtube.com/watch?v=rFvo7DurR8M",
+    "Vigencia / campaña": "https://www.santanderconsumer.com.pe/wp-content/uploads/2026/07/TERMINOS-Y-CONDICIONES-WEB-LA-JUGADA-DEL-AHORRO-1.pdf",
+    "Calificación mostrada": "https://www.youtube.com/watch?v=rFvo7DurR8M",
+    "Grupo / respaldo": "https://www.youtube.com/watch?v=rFvo7DurR8M",
+    "FSD": "https://fsd.org.pe/",
+    "Monto mínimo de apertura": "https://www.santanderconsumer.com.pe/personas/ahorros/cuenta-imparable-santander",
+    "Saldo/condición para tasa máxima": "https://www.santanderconsumer.com.pe/wp-content/uploads/2026/07/TERMINOS-Y-CONDICIONES-WEB-LA-JUGADA-DEL-AHORRO-1.pdf",
+    "Condición clave": "https://www.santanderconsumer.com.pe/wp-content/uploads/2026/07/TERMINOS-Y-CONDICIONES-WEB-LA-JUGADA-DEL-AHORRO-1.pdf",
+    "Abono de intereses": "https://www.santanderconsumer.com.pe/wp-content/uploads/2026/07/TERMINOS-Y-CONDICIONES-WEB-LA-JUGADA-DEL-AHORRO-1.pdf",
+    "Capitalización": "https://www.santanderconsumer.com.pe/wp-content/uploads/2026/07/TERMINOS-Y-CONDICIONES-WEB-LA-JUGADA-DEL-AHORRO-1.pdf",
+    "Transferencias": "https://www.santanderconsumer.com.pe/wp-content/uploads/2026/07/TERMINOS-Y-CONDICIONES-WEB-LA-JUGADA-DEL-AHORRO-1.pdf",
+    "Mantenimiento": "https://www.santanderconsumer.com.pe/wp-content/uploads/2026/07/TERMINOS-Y-CONDICIONES-WEB-LA-JUGADA-DEL-AHORRO-1.pdf",
+    "Retiros / cajeros": "https://www.santanderconsumer.com.pe/wp-content/uploads/2026/07/TERMINOS-Y-CONDICIONES-WEB-LA-JUGADA-DEL-AHORRO-1.pdf",
+    "Notas y alertas": "https://www.santanderconsumer.com.pe/wp-content/uploads/2026/07/TERMINOS-Y-CONDICIONES-WEB-LA-JUGADA-DEL-AHORRO-1.pdf",
+    "Página del producto": "https://www.santanderconsumer.com.pe/personas/ahorros/cuenta-imparable-santander",
+    "Contrato / cartilla / tarifario": "https://www.santanderconsumer.com.pe/wp-content/uploads/2026/07/TERMINOS-Y-CONDICIONES-WEB-LA-JUGADA-DEL-AHORRO-1.pdf"
+   },
+   "simulador": {
+    "saldo_ejemplo": 3000.0,
+    "trea_max": 0.0485,
+    "plazo_dias": 90.0,
+    "tope_remunerado": null,
+    "umbral_tasa_max": 500.0
+   }
+  },
+  {
+   "sheet": "ALFIN",
+   "entidad": "Banco Alfin",
+   "producto": "Ahorro Meta",
+   "tramos": [
+    {
+     "desde": 0.0,
+     "trea": 0.0,
+     "desc": "Saldo menor a S/100"
+    },
+    {
+     "desde": 100.0,
+     "trea": 0.048,
+     "desc": "Apertura web"
+    },
+    {
+     "desde": 100.0,
+     "trea": 0.045,
+     "desc": "Apertura en agencia"
+    }
+   ],
+   "campos": {
+    "Entidad": "Banco Alfin",
+    "Producto": "Ahorro Meta",
+    "Modo de apertura": "Digital / web",
+    "TREA verificada": "0.048",
+    "TREA del video": "0.048",
+    "Vigencia / campaña": "Aperturas web 07/07/2026–15/08/2026; tasa promocional hasta 15/09/2026",
+    "Estado de verificación": "Verificado en web oficial",
+    "Calificación mostrada": "A- (mostrada en video)",
+    "Grupo / respaldo": "Grupo Coril (mostrado en video)",
+    "FSD": "Sí",
+    "Monto mínimo de apertura": "1900-04-09 00:00:00",
+    "Saldo/condición para tasa máxima": "1900-04-09 00:00:00",
+    "Condición clave": "Apertura web para 4.80%; apertura en agencia: 4.50%. Desde 16/09/2026 se aplica tasa regular publicada.",
+    "Abono de intereses": "Mensual",
+    "Capitalización": "Interés calculado diariamente y abonado mensualmente",
+    "Transferencias": "Consultar tarifas por tipo de transferencia",
+    "Mantenimiento": "Sin costo si mantiene al menos S/100",
+    "Retiros / cajeros": "3 retiros en ventanilla sin costo; luego S/3. Cajero local: S/5",
+    "Notas y alertas": "La tasa depende del canal de apertura. El simulador usa 4.80% como escenario web.",
+    "Página del producto": "https://www.alfinbanco.pe/ahorros/ahorrometa",
+    "Contrato / cartilla / tarifario": "https://www.alfinbanco.pe/ahorros/ahorrometa"
+   },
+   "fuentes": {
+    "Entidad": "https://www.alfinbanco.pe/ahorros/ahorrometa",
+    "Producto": "https://www.alfinbanco.pe/ahorros/ahorrometa",
+    "Modo de apertura": "https://www.alfinbanco.pe/ahorros/ahorrometa",
+    "TREA verificada": "https://www.alfinbanco.pe/ahorros/ahorrometa",
+    "TREA del video": "https://www.youtube.com/watch?v=rFvo7DurR8M",
+    "Vigencia / campaña": "https://www.alfinbanco.pe/ahorros/ahorrometa",
+    "Calificación mostrada": "https://www.youtube.com/watch?v=rFvo7DurR8M",
+    "Grupo / respaldo": "https://www.youtube.com/watch?v=rFvo7DurR8M",
+    "FSD": "https://fsd.org.pe/",
+    "Monto mínimo de apertura": "https://www.alfinbanco.pe/ahorros/ahorrometa",
+    "Saldo/condición para tasa máxima": "https://www.alfinbanco.pe/ahorros/ahorrometa",
+    "Condición clave": "https://www.alfinbanco.pe/ahorros/ahorrometa",
+    "Abono de intereses": "https://www.alfinbanco.pe/ahorros/ahorrometa",
+    "Capitalización": "https://www.alfinbanco.pe/ahorros/ahorrometa",
+    "Transferencias": "https://www.alfinbanco.pe/ahorros/ahorrometa",
+    "Mantenimiento": "https://www.alfinbanco.pe/ahorros/ahorrometa",
+    "Retiros / cajeros": "https://www.alfinbanco.pe/ahorros/ahorrometa",
+    "Notas y alertas": "https://www.alfinbanco.pe/ahorros/ahorrometa",
+    "Página del producto": "https://www.alfinbanco.pe/ahorros/ahorrometa",
+    "Contrato / cartilla / tarifario": "https://www.alfinbanco.pe/ahorros/ahorrometa"
+   },
+   "simulador": {
+    "saldo_ejemplo": 3000.0,
+    "trea_max": 0.048,
+    "plazo_dias": 90.0,
+    "tope_remunerado": null,
+    "umbral_tasa_max": 100.0
+   }
+  },
+  {
+   "sheet": "CAJA CUSCO",
+   "entidad": "Caja Cusco",
+   "producto": "Cuenta digital Wayki / campaña Ahorra y Gana",
+   "tramos": [
+    {
+     "desde": 0.0,
+     "trea": 0.0475,
+     "desc": "Escenario de tasa mostrada en el video; confirmar vigencia"
+    }
+   ],
+   "campos": {
+    "Entidad": "Caja Cusco",
+    "Producto": "Cuenta digital Wayki / campaña Ahorra y Gana",
+    "Modo de apertura": "Digital",
+    "TREA verificada": "0.0475",
+    "TREA del video": "0.0475",
+    "Vigencia / campaña": "La tasa aparece en el video; no se localizó un TyC oficial de agosto 2026 durante la verificación",
+    "Estado de verificación": "Con reserva: verificar vigencia",
+    "Calificación mostrada": "No visible en las capturas",
+    "Grupo / respaldo": "Caja Municipal de Ahorro y Crédito Cusco",
+    "FSD": "Sí",
+    "Monto mínimo de apertura": null,
+    "Saldo/condición para tasa máxima": null,
+    "Condición clave": "Tasa máxima reconstruida del video; condiciones exactas deben confirmarse en la campaña vigente.",
+    "Abono de intereses": "Consultar cartilla vigente",
+    "Capitalización": "Consultar cartilla vigente",
+    "Transferencias": "Consultar tarifario",
+    "Mantenimiento": "Consultar tarifario",
+    "Retiros / cajeros": "Consultar tarifario",
+    "Notas y alertas": "El PDF enlazado es una campaña oficial anterior localizada como referencia. No debe asumirse que sus condiciones siguen vigentes en agosto.",
+    "Página del producto": "https://www.cmac-cusco.com.pe/",
+    "Contrato / cartilla / tarifario": "https://www.cmac-cusco.com.pe/api/storage/file/Qo95UD7M0bMGuYblDSEeD8CMd2xkUkBoXlRGADLQ.pdf"
+   },
+   "fuentes": {
+    "Entidad": "https://www.cmac-cusco.com.pe/",
+    "Producto": "https://www.cmac-cusco.com.pe/",
+    "Modo de apertura": "https://www.cmac-cusco.com.pe/",
+    "TREA verificada": "https://www.cmac-cusco.com.pe/",
+    "TREA del video": "https://www.youtube.com/watch?v=rFvo7DurR8M",
+    "Vigencia / campaña": "https://www.cmac-cusco.com.pe/api/storage/file/Qo95UD7M0bMGuYblDSEeD8CMd2xkUkBoXlRGADLQ.pdf",
+    "Calificación mostrada": "https://www.youtube.com/watch?v=rFvo7DurR8M",
+    "Grupo / respaldo": "https://www.youtube.com/watch?v=rFvo7DurR8M",
+    "FSD": "https://fsd.org.pe/",
+    "Monto mínimo de apertura": "https://www.cmac-cusco.com.pe/",
+    "Saldo/condición para tasa máxima": "https://www.cmac-cusco.com.pe/api/storage/file/Qo95UD7M0bMGuYblDSEeD8CMd2xkUkBoXlRGADLQ.pdf",
+    "Condición clave": "https://www.cmac-cusco.com.pe/api/storage/file/Qo95UD7M0bMGuYblDSEeD8CMd2xkUkBoXlRGADLQ.pdf",
+    "Abono de intereses": "https://www.cmac-cusco.com.pe/api/storage/file/Qo95UD7M0bMGuYblDSEeD8CMd2xkUkBoXlRGADLQ.pdf",
+    "Capitalización": "https://www.cmac-cusco.com.pe/api/storage/file/Qo95UD7M0bMGuYblDSEeD8CMd2xkUkBoXlRGADLQ.pdf",
+    "Transferencias": "https://www.cmac-cusco.com.pe/api/storage/file/Qo95UD7M0bMGuYblDSEeD8CMd2xkUkBoXlRGADLQ.pdf",
+    "Mantenimiento": "https://www.cmac-cusco.com.pe/api/storage/file/Qo95UD7M0bMGuYblDSEeD8CMd2xkUkBoXlRGADLQ.pdf",
+    "Retiros / cajeros": "https://www.cmac-cusco.com.pe/api/storage/file/Qo95UD7M0bMGuYblDSEeD8CMd2xkUkBoXlRGADLQ.pdf",
+    "Notas y alertas": "https://www.cmac-cusco.com.pe/api/storage/file/Qo95UD7M0bMGuYblDSEeD8CMd2xkUkBoXlRGADLQ.pdf",
+    "Página del producto": "https://www.cmac-cusco.com.pe/",
+    "Contrato / cartilla / tarifario": "https://www.cmac-cusco.com.pe/api/storage/file/Qo95UD7M0bMGuYblDSEeD8CMd2xkUkBoXlRGADLQ.pdf"
+   },
+   "simulador": {
+    "saldo_ejemplo": 3000.0,
+    "trea_max": 0.0475,
+    "plazo_dias": 90.0,
+    "tope_remunerado": null,
+    "umbral_tasa_max": 0.0
+   }
+  },
+  {
+   "sheet": "COMPARTAMOS",
+   "entidad": "Compartamos Financiera",
+   "producto": "Cuenta WOW",
+   "tramos": [
+    {
+     "desde": 0.0,
+     "trea": 0.0,
+     "desc": "Por debajo de S/300: puede aplicar mantenimiento y/o otra tasa"
+    },
+    {
+     "desde": 300.0,
+     "trea": 0.046,
+     "desc": "Tasa promocional máxima"
+    }
+   ],
+   "campos": {
+    "Entidad": "Compartamos Financiera",
+    "Producto": "Cuenta WOW",
+    "Modo de apertura": "Digital o agencia",
+    "TREA verificada": "0.046",
+    "TREA del video": "0.046",
+    "Vigencia / campaña": "Campaña del 01/07/2026 al 31/08/2026",
+    "Estado de verificación": "Verificado en campaña oficial",
+    "Calificación mostrada": "No visible en las capturas",
+    "Grupo / respaldo": "Gentera",
+    "FSD": "Sí",
+    "Monto mínimo de apertura": "1900-10-26 00:00:00",
+    "Saldo/condición para tasa máxima": "1900-10-26 00:00:00",
+    "Condición clave": "Cuenta nueva; saldo medio de referencia S/300 para evitar mantenimiento.",
+    "Abono de intereses": "Último día hábil del mes",
+    "Capitalización": "Mensual",
+    "Transferencias": "Consultar tarifario vigente",
+    "Mantenimiento": "S/6 si el saldo promedio mensual es menor a S/300",
+    "Retiros / cajeros": "Consultar tarifario vigente",
+    "Notas y alertas": "El ITF aplicable es 0.005%, conforme a la regulación y condiciones informadas por la entidad.",
+    "Página del producto": "https://productos.compartamos.com.pe/",
+    "Contrato / cartilla / tarifario": "https://www.compartamos.com.pe/wcm/connect/a5b7bede-8d6a-4eb1-923f-084d0d3928f7/Camp_Cuenta_Wow.pdf?MOD=AJPERES"
+   },
+   "fuentes": {
+    "Entidad": "https://productos.compartamos.com.pe/",
+    "Producto": "https://productos.compartamos.com.pe/",
+    "Modo de apertura": "https://productos.compartamos.com.pe/",
+    "TREA verificada": "https://productos.compartamos.com.pe/",
+    "TREA del video": "https://www.youtube.com/watch?v=rFvo7DurR8M",
+    "Vigencia / campaña": "https://www.compartamos.com.pe/wcm/connect/a5b7bede-8d6a-4eb1-923f-084d0d3928f7/Camp_Cuenta_Wow.pdf?MOD=AJPERES",
+    "Calificación mostrada": "https://www.youtube.com/watch?v=rFvo7DurR8M",
+    "Grupo / respaldo": "https://www.youtube.com/watch?v=rFvo7DurR8M",
+    "FSD": "https://fsd.org.pe/",
+    "Monto mínimo de apertura": "https://productos.compartamos.com.pe/",
+    "Saldo/condición para tasa máxima": "https://www.compartamos.com.pe/wcm/connect/a5b7bede-8d6a-4eb1-923f-084d0d3928f7/Camp_Cuenta_Wow.pdf?MOD=AJPERES",
+    "Condición clave": "https://www.compartamos.com.pe/wcm/connect/a5b7bede-8d6a-4eb1-923f-084d0d3928f7/Camp_Cuenta_Wow.pdf?MOD=AJPERES",
+    "Abono de intereses": "https://www.compartamos.com.pe/wcm/connect/a5b7bede-8d6a-4eb1-923f-084d0d3928f7/Camp_Cuenta_Wow.pdf?MOD=AJPERES",
+    "Capitalización": "https://www.compartamos.com.pe/wcm/connect/a5b7bede-8d6a-4eb1-923f-084d0d3928f7/Camp_Cuenta_Wow.pdf?MOD=AJPERES",
+    "Transferencias": "https://www.compartamos.com.pe/wcm/connect/a5b7bede-8d6a-4eb1-923f-084d0d3928f7/Camp_Cuenta_Wow.pdf?MOD=AJPERES",
+    "Mantenimiento": "https://www.compartamos.com.pe/wcm/connect/a5b7bede-8d6a-4eb1-923f-084d0d3928f7/Camp_Cuenta_Wow.pdf?MOD=AJPERES",
+    "Retiros / cajeros": "https://www.compartamos.com.pe/wcm/connect/a5b7bede-8d6a-4eb1-923f-084d0d3928f7/Camp_Cuenta_Wow.pdf?MOD=AJPERES",
+    "Notas y alertas": "https://www.compartamos.com.pe/wcm/connect/a5b7bede-8d6a-4eb1-923f-084d0d3928f7/Camp_Cuenta_Wow.pdf?MOD=AJPERES",
+    "Página del producto": "https://productos.compartamos.com.pe/",
+    "Contrato / cartilla / tarifario": "https://www.compartamos.com.pe/wcm/connect/a5b7bede-8d6a-4eb1-923f-084d0d3928f7/Camp_Cuenta_Wow.pdf?MOD=AJPERES"
+   },
+   "simulador": {
+    "saldo_ejemplo": 3000.0,
+    "trea_max": 0.046,
+    "plazo_dias": 90.0,
+    "tope_remunerado": null,
+    "umbral_tasa_max": 300.0
+   }
+  },
+  {
+   "sheet": "BANCO COMERCIO",
+   "entidad": "Banco de Comercio",
+   "producto": "Cuenta de Ahorros Soles – promoción digital",
+   "tramos": [
+    {
+     "desde": 0.0,
+     "trea": 0.045,
+     "desc": "Escenario de tasa máxima de campaña; verificar rango aplicable"
+    }
+   ],
+   "campos": {
+    "Entidad": "Banco de Comercio",
+    "Producto": "Cuenta de Ahorros Soles – promoción digital",
+    "Modo de apertura": "Digital",
+    "TREA verificada": "0.045",
+    "TREA del video": "0.045",
+    "Vigencia / campaña": "Tasas de campaña 3.50% y 4.50% hasta el 31/12/2026",
+    "Estado de verificación": "Tasa y vigencia verificadas; rango por confirmar",
+    "Calificación mostrada": "No visible en las capturas",
+    "Grupo / respaldo": "Banco de Comercio",
+    "FSD": "Sí",
+    "Monto mínimo de apertura": null,
+    "Saldo/condición para tasa máxima": null,
+    "Condición clave": "La tasa depende del rango/condición definida en la campaña; revisar TyC antes de depositar.",
+    "Abono de intereses": "Mensual",
+    "Capitalización": "Mensual",
+    "Transferencias": "Consultar tarifario",
+    "Mantenimiento": "Consultar tarifario",
+    "Retiros / cajeros": "Consultar tarifario",
+    "Notas y alertas": "Esta entidad se incorporó como mejor reconstrucción de una de las columnas ocultas I–K del video.",
+    "Página del producto": "https://www.bancom.pe/personas/promociones/cuenta-ahorro",
+    "Contrato / cartilla / tarifario": "https://www.bancom.pe/personas/promociones/cuenta-ahorro"
+   },
+   "fuentes": {
+    "Entidad": "https://www.bancom.pe/personas/promociones/cuenta-ahorro",
+    "Producto": "https://www.bancom.pe/personas/promociones/cuenta-ahorro",
+    "Modo de apertura": "https://www.bancom.pe/personas/promociones/cuenta-ahorro",
+    "TREA verificada": "https://www.bancom.pe/personas/promociones/cuenta-ahorro",
+    "TREA del video": "https://www.youtube.com/watch?v=rFvo7DurR8M",
+    "Vigencia / campaña": "https://www.bancom.pe/personas/promociones/cuenta-ahorro",
+    "Calificación mostrada": "https://www.youtube.com/watch?v=rFvo7DurR8M",
+    "Grupo / respaldo": "https://www.youtube.com/watch?v=rFvo7DurR8M",
+    "FSD": "https://fsd.org.pe/",
+    "Monto mínimo de apertura": "https://www.bancom.pe/personas/promociones/cuenta-ahorro",
+    "Saldo/condición para tasa máxima": "https://www.bancom.pe/personas/promociones/cuenta-ahorro",
+    "Condición clave": "https://www.bancom.pe/personas/promociones/cuenta-ahorro",
+    "Abono de intereses": "https://www.bancom.pe/personas/promociones/cuenta-ahorro",
+    "Capitalización": "https://www.bancom.pe/personas/promociones/cuenta-ahorro",
+    "Transferencias": "https://www.bancom.pe/personas/promociones/cuenta-ahorro",
+    "Mantenimiento": "https://www.bancom.pe/personas/promociones/cuenta-ahorro",
+    "Retiros / cajeros": "https://www.bancom.pe/personas/promociones/cuenta-ahorro",
+    "Notas y alertas": "https://www.bancom.pe/personas/promociones/cuenta-ahorro",
+    "Página del producto": "https://www.bancom.pe/personas/promociones/cuenta-ahorro",
+    "Contrato / cartilla / tarifario": "https://www.bancom.pe/personas/promociones/cuenta-ahorro"
+   },
+   "simulador": {
+    "saldo_ejemplo": 3000.0,
+    "trea_max": 0.045,
+    "plazo_dias": 90.0,
+    "tope_remunerado": null,
+    "umbral_tasa_max": 0.0
+   }
+  },
+  {
+   "sheet": "BANCO RIPLEY",
+   "entidad": "Banco Ripley",
+   "producto": "Cuenta Ahorro Plus",
+   "tramos": [
+    {
+     "desde": 0.0,
+     "trea": 0.0,
+     "desc": "Por debajo de S/500: puede aplicar mantenimiento"
+    },
+    {
+     "desde": 500.0,
+     "trea": 0.045,
+     "desc": "Ejemplo publicado; confirmar tasa vigente"
+    }
+   ],
+   "campos": {
+    "Entidad": "Banco Ripley",
+    "Producto": "Cuenta Ahorro Plus",
+    "Modo de apertura": "Presencial y digital",
+    "TREA verificada": "0.045",
+    "TREA del video": "0.045",
+    "Vigencia / campaña": "La campaña indicada terminó el 31/07/2026; desde 01/08 rige el tarifario vigente",
+    "Estado de verificación": "Verificar antes de abrir",
+    "Calificación mostrada": "B+ (mostrada en video)",
+    "Grupo / respaldo": "Banco Ripley",
+    "FSD": "Sí",
+    "Monto mínimo de apertura": "00:00:00",
+    "Saldo/condición para tasa máxima": "1901-05-14 00:00:00",
+    "Condición clave": "La página conserva un ejemplo a 4.50%, pero advierte que desde agosto aplica el tarifario vigente.",
+    "Abono de intereses": "Mensual",
+    "Capitalización": "Mensual",
+    "Transferencias": "CCE misma plaza y otras plazas con comisión; revisar tarifario",
+    "Mantenimiento": "Sin costo si el saldo promedio es ≥ S/500",
+    "Retiros / cajeros": "2 retiros gratuitos al mes en red Mastercard; luego comisión",
+    "Notas y alertas": "Se mantiene en el comparativo porque aparece en el video, pero la tasa debe confirmarse en el tarifario vigente de agosto.",
+    "Página del producto": "https://www.bancoripley.com.pe/ahorros/cuenta-ahorros.html",
+    "Contrato / cartilla / tarifario": "https://www.bancoripley.com.pe/ahorros/cuenta-ahorros.html"
+   },
+   "fuentes": {
+    "Entidad": "https://www.bancoripley.com.pe/ahorros/cuenta-ahorros.html",
+    "Producto": "https://www.bancoripley.com.pe/ahorros/cuenta-ahorros.html",
+    "Modo de apertura": "https://www.bancoripley.com.pe/ahorros/cuenta-ahorros.html",
+    "TREA verificada": "https://www.bancoripley.com.pe/ahorros/cuenta-ahorros.html",
+    "TREA del video": "https://www.youtube.com/watch?v=rFvo7DurR8M",
+    "Vigencia / campaña": "https://www.bancoripley.com.pe/ahorros/cuenta-ahorros.html",
+    "Calificación mostrada": "https://www.youtube.com/watch?v=rFvo7DurR8M",
+    "Grupo / respaldo": "https://www.youtube.com/watch?v=rFvo7DurR8M",
+    "FSD": "https://fsd.org.pe/",
+    "Monto mínimo de apertura": "https://www.bancoripley.com.pe/ahorros/cuenta-ahorros.html",
+    "Saldo/condición para tasa máxima": "https://www.bancoripley.com.pe/ahorros/cuenta-ahorros.html",
+    "Condición clave": "https://www.bancoripley.com.pe/ahorros/cuenta-ahorros.html",
+    "Abono de intereses": "https://www.bancoripley.com.pe/ahorros/cuenta-ahorros.html",
+    "Capitalización": "https://www.bancoripley.com.pe/ahorros/cuenta-ahorros.html",
+    "Transferencias": "https://www.bancoripley.com.pe/ahorros/cuenta-ahorros.html",
+    "Mantenimiento": "https://www.bancoripley.com.pe/ahorros/cuenta-ahorros.html",
+    "Retiros / cajeros": "https://www.bancoripley.com.pe/ahorros/cuenta-ahorros.html",
+    "Notas y alertas": "https://www.bancoripley.com.pe/ahorros/cuenta-ahorros.html",
+    "Página del producto": "https://www.bancoripley.com.pe/ahorros/cuenta-ahorros.html",
+    "Contrato / cartilla / tarifario": "https://www.bancoripley.com.pe/ahorros/cuenta-ahorros.html"
+   },
+   "simulador": {
+    "saldo_ejemplo": 3000.0,
+    "trea_max": 0.045,
+    "plazo_dias": 90.0,
+    "tope_remunerado": null,
+    "umbral_tasa_max": 500.0
+   }
+  },
+  {
+   "sheet": "EFECTIVA",
+   "entidad": "Financiera Efectiva (Efectibank)",
+   "producto": "Cuenta de Ahorro Digital",
+   "tramos": [
+    {
+     "desde": 0.0,
+     "trea": 0.045,
+     "desc": "Desde el primer sol"
+    }
+   ],
+   "campos": {
+    "Entidad": "Financiera Efectiva (Efectibank)",
+    "Producto": "Cuenta de Ahorro Digital",
+    "Modo de apertura": "Digital",
+    "TREA verificada": "0.045",
+    "TREA del video": "0.045",
+    "Vigencia / campaña": "Vigente según página oficial consultada",
+    "Estado de verificación": "Verificado en web oficial",
+    "Calificación mostrada": "A- (mostrada en video)",
+    "Grupo / respaldo": "Grupo EFE",
+    "FSD": "Sí",
+    "Monto mínimo de apertura": "00:00:00",
+    "Saldo/condición para tasa máxima": "00:00:00",
+    "Condición clave": "Interés desde el primer sol; sin monto mínimo de apertura.",
+    "Abono de intereses": "Fin de mes",
+    "Capitalización": "Interés calculado diariamente y abonado al cierre del mes",
+    "Transferencias": "Transferencias inmediatas y entre cuentas informadas como gratuitas; Yape/Plin sin costo",
+    "Mantenimiento": "S/0.00",
+    "Retiros / cajeros": "1 retiro gratuito al mes en KasNet; luego tarifa vigente",
+    "Notas y alertas": "La web del producto enlaza contrato multiproducto, cartilla, tarifario y fórmulas.",
+    "Página del producto": "https://www.efectiva.com.pe/ahorros/cuenta-de-ahorros/",
+    "Contrato / cartilla / tarifario": "https://www.efectiva.com.pe/ahorros/cuenta-de-ahorros/"
+   },
+   "fuentes": {
+    "Entidad": "https://www.efectiva.com.pe/ahorros/cuenta-de-ahorros/",
+    "Producto": "https://www.efectiva.com.pe/ahorros/cuenta-de-ahorros/",
+    "Modo de apertura": "https://www.efectiva.com.pe/ahorros/cuenta-de-ahorros/",
+    "TREA verificada": "https://www.efectiva.com.pe/ahorros/cuenta-de-ahorros/",
+    "TREA del video": "https://www.youtube.com/watch?v=rFvo7DurR8M",
+    "Vigencia / campaña": "https://www.efectiva.com.pe/ahorros/cuenta-de-ahorros/",
+    "Calificación mostrada": "https://www.youtube.com/watch?v=rFvo7DurR8M",
+    "Grupo / respaldo": "https://www.youtube.com/watch?v=rFvo7DurR8M",
+    "FSD": "https://fsd.org.pe/",
+    "Monto mínimo de apertura": "https://www.efectiva.com.pe/ahorros/cuenta-de-ahorros/",
+    "Saldo/condición para tasa máxima": "https://www.efectiva.com.pe/ahorros/cuenta-de-ahorros/",
+    "Condición clave": "https://www.efectiva.com.pe/ahorros/cuenta-de-ahorros/",
+    "Abono de intereses": "https://www.efectiva.com.pe/ahorros/cuenta-de-ahorros/",
+    "Capitalización": "https://www.efectiva.com.pe/ahorros/cuenta-de-ahorros/",
+    "Transferencias": "https://www.efectiva.com.pe/ahorros/cuenta-de-ahorros/",
+    "Mantenimiento": "https://www.efectiva.com.pe/ahorros/cuenta-de-ahorros/",
+    "Retiros / cajeros": "https://www.efectiva.com.pe/ahorros/cuenta-de-ahorros/",
+    "Notas y alertas": "https://www.efectiva.com.pe/ahorros/cuenta-de-ahorros/",
+    "Página del producto": "https://www.efectiva.com.pe/ahorros/cuenta-de-ahorros/",
+    "Contrato / cartilla / tarifario": "https://www.efectiva.com.pe/ahorros/cuenta-de-ahorros/"
+   },
+   "simulador": {
+    "saldo_ejemplo": 3000.0,
+    "trea_max": 0.045,
+    "plazo_dias": 90.0,
+    "tope_remunerado": null,
+    "umbral_tasa_max": 0.0
+   }
+  },
+  {
+   "sheet": "BANCO GNB",
+   "entidad": "Banco GNB Perú",
+   "producto": "Cuenta Ahorro Rolando",
+   "tramos": [
+    {
+     "desde": 0.0,
+     "trea": 0.045,
+     "desc": "Tasa publicada en soles"
+    }
+   ],
+   "campos": {
+    "Entidad": "Banco GNB Perú",
+    "Producto": "Cuenta Ahorro Rolando",
+    "Modo de apertura": "Presencial y digital",
+    "TREA verificada": "0.045",
+    "TREA del video": "0.045",
+    "Vigencia / campaña": "Vigente según página oficial consultada",
+    "Estado de verificación": "Verificado en web oficial",
+    "Calificación mostrada": "A (mostrada en video)",
+    "Grupo / respaldo": "Grupo Financiero GNB",
+    "FSD": "Sí",
+    "Monto mínimo de apertura": "00:00:00",
+    "Saldo/condición para tasa máxima": "00:00:00",
+    "Condición clave": "Sin monto mínimo de apertura; tasa en soles publicada para el producto.",
+    "Abono de intereses": "Diario",
+    "Capitalización": "Diaria",
+    "Transferencias": "Transferencias con comisión según tarifario y plaza",
+    "Mantenimiento": "S/0.00",
+    "Retiros / cajeros": "Retiros libres según red; revisar tarifario vigente",
+    "Notas y alertas": "La capitalización diaria es una característica diferenciadora; el simulador anualiza mediante TREA.",
+    "Página del producto": "https://www.bancognb.com.pe/inicio/banca-personas/cuentas/cuenta-rolando",
+    "Contrato / cartilla / tarifario": "https://www.bancognb.com.pe/inicio/banca-personas/cuentas/cuenta-rolando"
+   },
+   "fuentes": {
+    "Entidad": "https://www.bancognb.com.pe/inicio/banca-personas/cuentas/cuenta-rolando",
+    "Producto": "https://www.bancognb.com.pe/inicio/banca-personas/cuentas/cuenta-rolando",
+    "Modo de apertura": "https://www.bancognb.com.pe/inicio/banca-personas/cuentas/cuenta-rolando",
+    "TREA verificada": "https://www.bancognb.com.pe/inicio/banca-personas/cuentas/cuenta-rolando",
+    "TREA del video": "https://www.youtube.com/watch?v=rFvo7DurR8M",
+    "Vigencia / campaña": "https://www.bancognb.com.pe/inicio/banca-personas/cuentas/cuenta-rolando",
+    "Calificación mostrada": "https://www.youtube.com/watch?v=rFvo7DurR8M",
+    "Grupo / respaldo": "https://www.youtube.com/watch?v=rFvo7DurR8M",
+    "FSD": "https://fsd.org.pe/",
+    "Monto mínimo de apertura": "https://www.bancognb.com.pe/inicio/banca-personas/cuentas/cuenta-rolando",
+    "Saldo/condición para tasa máxima": "https://www.bancognb.com.pe/inicio/banca-personas/cuentas/cuenta-rolando",
+    "Condición clave": "https://www.bancognb.com.pe/inicio/banca-personas/cuentas/cuenta-rolando",
+    "Abono de intereses": "https://www.bancognb.com.pe/inicio/banca-personas/cuentas/cuenta-rolando",
+    "Capitalización": "https://www.bancognb.com.pe/inicio/banca-personas/cuentas/cuenta-rolando",
+    "Transferencias": "https://www.bancognb.com.pe/inicio/banca-personas/cuentas/cuenta-rolando",
+    "Mantenimiento": "https://www.bancognb.com.pe/inicio/banca-personas/cuentas/cuenta-rolando",
+    "Retiros / cajeros": "https://www.bancognb.com.pe/inicio/banca-personas/cuentas/cuenta-rolando",
+    "Notas y alertas": "https://www.bancognb.com.pe/inicio/banca-personas/cuentas/cuenta-rolando",
+    "Página del producto": "https://www.bancognb.com.pe/inicio/banca-personas/cuentas/cuenta-rolando",
+    "Contrato / cartilla / tarifario": "https://www.bancognb.com.pe/inicio/banca-personas/cuentas/cuenta-rolando"
+   },
+   "simulador": {
+    "saldo_ejemplo": 3000.0,
+    "trea_max": 0.045,
+    "plazo_dias": 90.0,
+    "tope_remunerado": null,
+    "umbral_tasa_max": 0.0
+   }
+  },
+  {
+   "sheet": "CAJA AREQUIPA",
+   "entidad": "Caja Arequipa",
+   "producto": "Campaña Caja Digital",
+   "tramos": [
+    {
+     "desde": 0.0,
+     "trea": 0.002,
+     "desc": "Hasta S/1,499.99"
+    },
+    {
+     "desde": 1500.0,
+     "trea": 0.025,
+     "desc": "S/1,500 a S/19,999.99"
+    },
+    {
+     "desde": 20000.0,
+     "trea": 0.035,
+     "desc": "S/20,000 a S/49,999.99"
+    },
+    {
+     "desde": 50000.0,
+     "trea": 0.045,
+     "desc": "Desde S/50,000"
+    }
+   ],
+   "campos": {
+    "Entidad": "Caja Arequipa",
+    "Producto": "Campaña Caja Digital",
+    "Modo de apertura": "Digital",
+    "TREA verificada": "0.045",
+    "TREA del video": "0.045",
+    "Vigencia / campaña": "Aperturas 24/07/2026–03/09/2026; tasa promocional hasta 31/12/2026",
+    "Estado de verificación": "Verificado en reglamento oficial",
+    "Calificación mostrada": "A- (mostrada en video)",
+    "Grupo / respaldo": "Municipalidad Provincial de Arequipa",
+    "FSD": "Sí",
+    "Monto mínimo de apertura": "00:00:00",
+    "Saldo/condición para tasa máxima": "2036-11-21 00:00:00",
+    "Condición clave": "Tasa escalonada; 4.50% solo para saldos desde S/50,000.",
+    "Abono de intereses": "Mensual",
+    "Capitalización": "Mensual",
+    "Transferencias": "Vía CCE con comisiones según modalidad; revisar tarifario",
+    "Mantenimiento": "S/0.00, según cuadro del video",
+    "Retiros / cajeros": "Cajeros de otros bancos: comisión por retiro",
+    "Notas y alertas": "La apertura debe realizarse por los canales digitales autorizados; no aplica a aperturas en agencia.",
+    "Página del producto": "https://www.cajaarequipa.pe/",
+    "Contrato / cartilla / tarifario": "https://www.cajaarequipa.pe/wp-content/uploads/2026/07/Reglamento-campana-digital-vigente-desde-24-julio-set.2026-caja-digital.pdf"
+   },
+   "fuentes": {
+    "Entidad": "https://www.cajaarequipa.pe/",
+    "Producto": "https://www.cajaarequipa.pe/",
+    "Modo de apertura": "https://www.cajaarequipa.pe/",
+    "TREA verificada": "https://www.cajaarequipa.pe/",
+    "TREA del video": "https://www.youtube.com/watch?v=rFvo7DurR8M",
+    "Vigencia / campaña": "https://www.cajaarequipa.pe/wp-content/uploads/2026/07/Reglamento-campana-digital-vigente-desde-24-julio-set.2026-caja-digital.pdf",
+    "Calificación mostrada": "https://www.youtube.com/watch?v=rFvo7DurR8M",
+    "Grupo / respaldo": "https://www.youtube.com/watch?v=rFvo7DurR8M",
+    "FSD": "https://fsd.org.pe/",
+    "Monto mínimo de apertura": "https://www.cajaarequipa.pe/",
+    "Saldo/condición para tasa máxima": "https://www.cajaarequipa.pe/wp-content/uploads/2026/07/Reglamento-campana-digital-vigente-desde-24-julio-set.2026-caja-digital.pdf",
+    "Condición clave": "https://www.cajaarequipa.pe/wp-content/uploads/2026/07/Reglamento-campana-digital-vigente-desde-24-julio-set.2026-caja-digital.pdf",
+    "Abono de intereses": "https://www.cajaarequipa.pe/wp-content/uploads/2026/07/Reglamento-campana-digital-vigente-desde-24-julio-set.2026-caja-digital.pdf",
+    "Capitalización": "https://www.cajaarequipa.pe/wp-content/uploads/2026/07/Reglamento-campana-digital-vigente-desde-24-julio-set.2026-caja-digital.pdf",
+    "Transferencias": "https://www.cajaarequipa.pe/wp-content/uploads/2026/07/Reglamento-campana-digital-vigente-desde-24-julio-set.2026-caja-digital.pdf",
+    "Mantenimiento": "https://www.cajaarequipa.pe/wp-content/uploads/2026/07/Reglamento-campana-digital-vigente-desde-24-julio-set.2026-caja-digital.pdf",
+    "Retiros / cajeros": "https://www.cajaarequipa.pe/wp-content/uploads/2026/07/Reglamento-campana-digital-vigente-desde-24-julio-set.2026-caja-digital.pdf",
+    "Notas y alertas": "https://www.cajaarequipa.pe/wp-content/uploads/2026/07/Reglamento-campana-digital-vigente-desde-24-julio-set.2026-caja-digital.pdf",
+    "Página del producto": "https://www.cajaarequipa.pe/",
+    "Contrato / cartilla / tarifario": "https://www.cajaarequipa.pe/wp-content/uploads/2026/07/Reglamento-campana-digital-vigente-desde-24-julio-set.2026-caja-digital.pdf"
+   },
+   "simulador": {
+    "saldo_ejemplo": 50000.0,
+    "trea_max": 0.045,
+    "plazo_dias": 90.0,
+    "tope_remunerado": null,
+    "umbral_tasa_max": 50000.0
+   }
+  },
+  {
+   "sheet": "CAJA PIURA",
+   "entidad": "Caja Piura",
+   "producto": "Cuenta Light – Ahorra y gana más",
+   "tramos": [
+    {
+     "desde": 0.0,
+     "trea": 0.0,
+     "desc": "Tasa del rango inferior: consultar TyC"
+    },
+    {
+     "desde": 50001.0,
+     "trea": 0.045,
+     "desc": "Tasa máxima reconstruida del video"
+    }
+   ],
+   "campos": {
+    "Entidad": "Caja Piura",
+    "Producto": "Cuenta Light – Ahorra y gana más",
+    "Modo de apertura": "Presencial y digital",
+    "TREA verificada": "0.045",
+    "TREA del video": "0.045",
+    "Vigencia / campaña": "Campaña del 01/08/2026 al 31/12/2026",
+    "Estado de verificación": "Tasa máxima verificada; umbral reconstruido",
+    "Calificación mostrada": "B (mostrada en video)",
+    "Grupo / respaldo": "Municipalidad Provincial de Piura",
+    "FSD": "Sí",
+    "Monto mínimo de apertura": "1900-04-09 00:00:00",
+    "Saldo/condición para tasa máxima": "2036-11-22 00:00:00",
+    "Condición clave": "Hasta 4.50% TREA; el video muestra el umbral máximo alrededor de S/50,001. Confirmar escala oficial.",
+    "Abono de intereses": "Mensual",
+    "Capitalización": "Mensual",
+    "Transferencias": "S/1.50 por operación, según cuadro del video; validar tarifario",
+    "Mantenimiento": "S/0.00",
+    "Retiros / cajeros": "Piura Cash: retiros sin costo, según condiciones de la entidad",
+    "Notas y alertas": "La web oficial publica 'hasta 4.5%' y apertura desde S/100; el rango exacto de la tasa máxima debe revisarse en TyC.",
+    "Página del producto": "https://www.cajapiura.pe/campaigns-sweepstakes/details/gana-mas-con-cuenta-light",
+    "Contrato / cartilla / tarifario": "https://www.cajapiura.pe/campaigns-sweepstakes/details/gana-mas-con-cuenta-light"
+   },
+   "fuentes": {
+    "Entidad": "https://www.cajapiura.pe/campaigns-sweepstakes/details/gana-mas-con-cuenta-light",
+    "Producto": "https://www.cajapiura.pe/campaigns-sweepstakes/details/gana-mas-con-cuenta-light",
+    "Modo de apertura": "https://www.cajapiura.pe/campaigns-sweepstakes/details/gana-mas-con-cuenta-light",
+    "TREA verificada": "https://www.cajapiura.pe/campaigns-sweepstakes/details/gana-mas-con-cuenta-light",
+    "TREA del video": "https://www.youtube.com/watch?v=rFvo7DurR8M",
+    "Vigencia / campaña": "https://www.cajapiura.pe/campaigns-sweepstakes/details/gana-mas-con-cuenta-light",
+    "Calificación mostrada": "https://www.youtube.com/watch?v=rFvo7DurR8M",
+    "Grupo / respaldo": "https://www.youtube.com/watch?v=rFvo7DurR8M",
+    "FSD": "https://fsd.org.pe/",
+    "Monto mínimo de apertura": "https://www.cajapiura.pe/campaigns-sweepstakes/details/gana-mas-con-cuenta-light",
+    "Saldo/condición para tasa máxima": "https://www.cajapiura.pe/campaigns-sweepstakes/details/gana-mas-con-cuenta-light",
+    "Condición clave": "https://www.cajapiura.pe/campaigns-sweepstakes/details/gana-mas-con-cuenta-light",
+    "Abono de intereses": "https://www.cajapiura.pe/campaigns-sweepstakes/details/gana-mas-con-cuenta-light",
+    "Capitalización": "https://www.cajapiura.pe/campaigns-sweepstakes/details/gana-mas-con-cuenta-light",
+    "Transferencias": "https://www.cajapiura.pe/campaigns-sweepstakes/details/gana-mas-con-cuenta-light",
+    "Mantenimiento": "https://www.cajapiura.pe/campaigns-sweepstakes/details/gana-mas-con-cuenta-light",
+    "Retiros / cajeros": "https://www.cajapiura.pe/campaigns-sweepstakes/details/gana-mas-con-cuenta-light",
+    "Notas y alertas": "https://www.cajapiura.pe/campaigns-sweepstakes/details/gana-mas-con-cuenta-light",
+    "Página del producto": "https://www.cajapiura.pe/campaigns-sweepstakes/details/gana-mas-con-cuenta-light",
+    "Contrato / cartilla / tarifario": "https://www.cajapiura.pe/campaigns-sweepstakes/details/gana-mas-con-cuenta-light"
+   },
+   "simulador": {
+    "saldo_ejemplo": 50001.0,
+    "trea_max": 0.045,
+    "plazo_dias": 90.0,
+    "tope_remunerado": null,
+    "umbral_tasa_max": 50001.0
+   }
+  },
+  {
+   "sheet": "SIP",
+   "entidad": "Financiera Oh! / SIP",
+   "producto": "AhorraMás Soles",
+   "tramos": [
+    {
+     "desde": 0.0,
+     "trea": 0.04,
+     "desc": "Desde el primer sol"
+    }
+   ],
+   "campos": {
+    "Entidad": "Financiera Oh! / SIP",
+    "Producto": "AhorraMás Soles",
+    "Modo de apertura": "Digital (app SIP)",
+    "TREA verificada": "0.04",
+    "TREA del video": "0.04",
+    "Vigencia / campaña": "Vigente según cartilla y página oficial consultadas",
+    "Estado de verificación": "Verificado en fuente oficial",
+    "Calificación mostrada": "A- (mostrada en video)",
+    "Grupo / respaldo": "Grupo Intercorp",
+    "FSD": "Sí",
+    "Monto mínimo de apertura": "00:00:00",
+    "Saldo/condición para tasa máxima": "00:00:00",
+    "Condición clave": "Sin monto mínimo de apertura; cuenta digital.",
+    "Abono de intereses": "Mensual",
+    "Capitalización": "Interés calculado diariamente y pagado mensualmente",
+    "Transferencias": "Operaciones y transferencias informadas sin comisión; revisar límites",
+    "Mantenimiento": "S/0.00",
+    "Retiros / cajeros": "Consultar canales y tarifario vigente",
+    "Notas y alertas": "El contrato contempla cierre automático en determinadas circunstancias de inactividad; revisar cláusulas completas.",
+    "Página del producto": "https://sip.pe/productos/ahorramas-soles",
+    "Contrato / cartilla / tarifario": "https://cms.sip.pe/wp-content/documentos/ahorra-mas/Cartilla-AhorraMas-Ahorros.pdf",
+    "Contrato adicional": "https://cms.sip.pe/wp-content/documentos/ahorra-mas/Contrato-deposito-ahorros.pdf"
+   },
+   "fuentes": {
+    "Entidad": "https://sip.pe/productos/ahorramas-soles",
+    "Producto": "https://sip.pe/productos/ahorramas-soles",
+    "Modo de apertura": "https://sip.pe/productos/ahorramas-soles",
+    "TREA verificada": "https://sip.pe/productos/ahorramas-soles",
+    "TREA del video": "https://www.youtube.com/watch?v=rFvo7DurR8M",
+    "Vigencia / campaña": "https://cms.sip.pe/wp-content/documentos/ahorra-mas/Cartilla-AhorraMas-Ahorros.pdf",
+    "Calificación mostrada": "https://www.youtube.com/watch?v=rFvo7DurR8M",
+    "Grupo / respaldo": "https://www.youtube.com/watch?v=rFvo7DurR8M",
+    "FSD": "https://fsd.org.pe/",
+    "Monto mínimo de apertura": "https://sip.pe/productos/ahorramas-soles",
+    "Saldo/condición para tasa máxima": "https://cms.sip.pe/wp-content/documentos/ahorra-mas/Cartilla-AhorraMas-Ahorros.pdf",
+    "Condición clave": "https://cms.sip.pe/wp-content/documentos/ahorra-mas/Cartilla-AhorraMas-Ahorros.pdf",
+    "Abono de intereses": "https://cms.sip.pe/wp-content/documentos/ahorra-mas/Cartilla-AhorraMas-Ahorros.pdf",
+    "Capitalización": "https://cms.sip.pe/wp-content/documentos/ahorra-mas/Cartilla-AhorraMas-Ahorros.pdf",
+    "Transferencias": "https://cms.sip.pe/wp-content/documentos/ahorra-mas/Cartilla-AhorraMas-Ahorros.pdf",
+    "Mantenimiento": "https://cms.sip.pe/wp-content/documentos/ahorra-mas/Cartilla-AhorraMas-Ahorros.pdf",
+    "Retiros / cajeros": "https://cms.sip.pe/wp-content/documentos/ahorra-mas/Cartilla-AhorraMas-Ahorros.pdf",
+    "Notas y alertas": "https://cms.sip.pe/wp-content/documentos/ahorra-mas/Cartilla-AhorraMas-Ahorros.pdf",
+    "Página del producto": "https://sip.pe/productos/ahorramas-soles",
+    "Contrato / cartilla / tarifario": "https://cms.sip.pe/wp-content/documentos/ahorra-mas/Cartilla-AhorraMas-Ahorros.pdf",
+    "Contrato adicional": "https://cms.sip.pe/wp-content/documentos/ahorra-mas/Contrato-deposito-ahorros.pdf"
+   },
+   "simulador": {
+    "saldo_ejemplo": 3000.0,
+    "trea_max": 0.04,
+    "plazo_dias": 90.0,
+    "tope_remunerado": null,
+    "umbral_tasa_max": 0.0
+   }
+  }
+ ],
+ "notas": [
+  [
+   "FUENTES, ALCANCES Y LIMITACIONES",
+   null,
+   null,
+   null,
+   null,
+   null
+  ],
+  [
+   "Registro de fuentes oficiales, datos reconstruidos del video y campos que requieren confirmación.",
+   null,
+   null,
+   null,
+   null,
+   null
+  ],
+  [
+   "Entidad/tema",
+   "Tipo de fuente",
+   "URL",
+   "Dato principal",
+   "Nivel de confianza",
+   "Observación"
+  ],
+  [
+   "Video de referencia",
+   "YouTube",
+   "https://www.youtube.com/watch?v=rFvo7DurR8M",
+   "Estructura de pestañas y ranking mostrado",
+   "Alta para diseño; media para vigencia",
+   "Capturas del usuario y video"
+  ],
+  [
+   "FSD",
+   "Oficial",
+   "https://fsd.org.pe/",
+   "Cobertura Jun–Ago 2026: S/122,000",
+   "Alta",
+   "Verificar reglas de cobertura"
+  ],
+  [
+   "BCRP",
+   "Oficial",
+   "https://estadisticas.bcrp.gob.pe/estadisticas/series/mensuales/resultados/PD04722MM/html",
+   "Tasa de referencia 4.25% a julio de 2026",
+   "Alta",
+   "Contexto macroeconómico"
+  ],
+  [
+   "SBS",
+   "Oficial",
+   "https://www.sbs.gob.pe/usuarios/aprende-con-la-sbs/compara-y-elige",
+   "Guía para comparar productos y leer contratos",
+   "Alta",
+   "No es una recomendación de producto"
+  ],
+  [
+   "Scotiabank Perú",
+   "Producto / transparencia oficial",
+   "https://www.scotiabank.com.pe/Personas/Ahorros/Cuentas-Bancarias/cuenta-digital",
+   "Cuenta Digital – 9.70%",
+   "Verificado en web oficial",
+   "La TREA promocional no se aplica a todo el saldo: máximo remunerado S/3,000; el exceso recibe la tasa regular indicada por el banco."
+  ],
+  [
+   "Financiera SURGIR",
+   "Producto / transparencia oficial",
+   "https://www.surgir.com.pe/tasas-y-tarifas",
+   "Cuenta de Ahorro Gold Select – 5.60%",
+   "Actualizado frente al video",
+   "Diferencia relevante: el video muestra 5.25%, mientras la página oficial consultada publica hasta 5.60%."
+  ],
+  [
+   "Financiera QAPAQ",
+   "Producto / transparencia oficial",
+   "https://www.qapaq.pe/wp-content/uploads/2025/04/Tarifario-ahorros-Insuperable-Abril-2025.pdf",
+   "Cuenta Insuperable – 5.00%",
+   "Verificado en tarifario oficial",
+   "La versión digital puede no exigir monto mínimo de apertura. La tasa depende del saldo; no basta con abrir la cuenta."
+  ],
+  [
+   "Financiera Confianza",
+   "Producto / transparencia oficial",
+   "https://confianza.pe/docs/2026/07/T008-027%20Tarifario%20Campana%20-%20Ahorro%20Comun%20en%20Canal%20Digital.pdf",
+   "Cuenta Ahorro Común – canal digital – 5.00%",
+   "Verificado en tarifario de campaña",
+   "La tasa promocional depende del canal digital y del rango de saldo establecido en el tarifario."
+  ],
+  [
+   "Banco Falabella",
+   "Producto / transparencia oficial",
+   "https://www.bancofalabella.pe/promociones/detalle/tasa-preferencial-cuenta-sueldo",
+   "Cuenta Ahorro Clásico – 5.00%",
+   "Verificado en web oficial",
+   "La tasa regular publicada para la Cuenta Ahorro Clásico es menor; el 5% exige abono de sueldo y tiene tope de saldo."
+  ],
+  [
+   "Santander Consumer Bank",
+   "Producto / transparencia oficial",
+   "https://www.santanderconsumer.com.pe/wp-content/uploads/2026/07/TERMINOS-Y-CONDICIONES-WEB-LA-JUGADA-DEL-AHORRO-1.pdf",
+   "Cuenta Imparable – 4.85%",
+   "Tasa verificada; fecha final por confirmar",
+   "El documento enlazado corresponde a una campaña complementaria; revisar también cartilla y tarifario antes de contratar."
+  ],
+  [
+   "Banco Alfin",
+   "Producto / transparencia oficial",
+   "https://www.alfinbanco.pe/ahorros/ahorrometa",
+   "Ahorro Meta – 4.80%",
+   "Verificado en web oficial",
+   "La tasa depende del canal de apertura. El simulador usa 4.80% como escenario web."
+  ],
+  [
+   "Caja Cusco",
+   "Producto / transparencia oficial",
+   "https://www.cmac-cusco.com.pe/api/storage/file/Qo95UD7M0bMGuYblDSEeD8CMd2xkUkBoXlRGADLQ.pdf",
+   "Cuenta digital Wayki / campaña Ahorra y Gana – 4.75%",
+   "Con reserva: verificar vigencia",
+   "El PDF enlazado es una campaña oficial anterior localizada como referencia. No debe asumirse que sus condiciones siguen vigentes en agosto."
+  ],
+  [
+   "Compartamos Financiera",
+   "Producto / transparencia oficial",
+   "https://www.compartamos.com.pe/wcm/connect/a5b7bede-8d6a-4eb1-923f-084d0d3928f7/Camp_Cuenta_Wow.pdf?MOD=AJPERES",
+   "Cuenta WOW – 4.60%",
+   "Verificado en campaña oficial",
+   "El ITF aplicable es 0.005%, conforme a la regulación y condiciones informadas por la entidad."
+  ],
+  [
+   "Banco de Comercio",
+   "Producto / transparencia oficial",
+   "https://www.bancom.pe/personas/promociones/cuenta-ahorro",
+   "Cuenta de Ahorros Soles – promoción digital – 4.50%",
+   "Tasa y vigencia verificadas; rango por confirmar",
+   "Esta entidad se incorporó como mejor reconstrucción de una de las columnas ocultas I–K del video."
+  ],
+  [
+   "Banco Ripley",
+   "Producto / transparencia oficial",
+   "https://www.bancoripley.com.pe/ahorros/cuenta-ahorros.html",
+   "Cuenta Ahorro Plus – 4.50%",
+   "Verificar antes de abrir",
+   "Se mantiene en el comparativo porque aparece en el video, pero la tasa debe confirmarse en el tarifario vigente de agosto."
+  ],
+  [
+   "Financiera Efectiva (Efectibank)",
+   "Producto / transparencia oficial",
+   "https://www.efectiva.com.pe/ahorros/cuenta-de-ahorros/",
+   "Cuenta de Ahorro Digital – 4.50%",
+   "Verificado en web oficial",
+   "La web del producto enlaza contrato multiproducto, cartilla, tarifario y fórmulas."
+  ],
+  [
+   "Banco GNB Perú",
+   "Producto / transparencia oficial",
+   "https://www.bancognb.com.pe/inicio/banca-personas/cuentas/cuenta-rolando",
+   "Cuenta Ahorro Rolando – 4.50%",
+   "Verificado en web oficial",
+   "La capitalización diaria es una característica diferenciadora; el simulador anualiza mediante TREA."
+  ],
+  [
+   "Caja Arequipa",
+   "Producto / transparencia oficial",
+   "https://www.cajaarequipa.pe/wp-content/uploads/2026/07/Reglamento-campana-digital-vigente-desde-24-julio-set.2026-caja-digital.pdf",
+   "Campaña Caja Digital – 4.50%",
+   "Verificado en reglamento oficial",
+   "La apertura debe realizarse por los canales digitales autorizados; no aplica a aperturas en agencia."
+  ],
+  [
+   "Caja Piura",
+   "Producto / transparencia oficial",
+   "https://www.cajapiura.pe/campaigns-sweepstakes/details/gana-mas-con-cuenta-light",
+   "Cuenta Light – Ahorra y gana más – 4.50%",
+   "Tasa máxima verificada; umbral reconstruido",
+   "La web oficial publica 'hasta 4.5%' y apertura desde S/100; el rango exacto de la tasa máxima debe revisarse en TyC."
+  ],
+  [
+   "Financiera Oh! / SIP",
+   "Producto / transparencia oficial",
+   "https://cms.sip.pe/wp-content/documentos/ahorra-mas/Cartilla-AhorraMas-Ahorros.pdf",
+   "AhorraMás Soles – 4.00%",
+   "Verificado en fuente oficial",
+   "El contrato contempla cierre automático en determinadas circunstancias de inactividad; revisar cláusulas completas."
+  ],
+  [
+   "Reconstrucción columnas I–K",
+   "Inferencia documentada",
+   "https://www.youtube.com/watch?v=rFvo7DurR8M",
+   "Caja Cusco, Compartamos y Banco de Comercio",
+   "Media",
+   "Las tres columnas no aparecen en las capturas adjuntas; se eligieron por consistencia con el orden de tasas y campañas."
+  ],
+  [
+   "SURGIR",
+   "Diferencia frente al video",
+   "https://www.surgir.com.pe/cuenta-gold-select",
+   "Web oficial: hasta 5.60%; video: 5.25%",
+   "Alta",
+   "La tasa actualizada se usa en el ranking y simulador."
+  ],
+  [
+   "Banco Ripley",
+   "Vigencia",
+   "https://www.bancoripley.com.pe/ahorros/cuenta-ahorros.html",
+   "La campaña visible venció 31/07/2026",
+   "Media",
+   "Confirmar tarifario desde 01/08/2026."
+  ],
+  [
+   "Caja Cusco",
+   "Limitación",
+   "https://www.cmac-cusco.com.pe/",
+   "No se localizó TyC oficial específico de agosto 2026",
+   "Baja/Media",
+   "La tasa de 4.75% se conserva como reconstrucción del video y se marca con reserva."
+  ]
+ ]
+}

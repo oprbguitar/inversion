@@ -1,0 +1,236 @@
+{
+ "actualizado": "2026-08-06T18:55:52+00:00",
+ "actualizado_pe": "06/08/2026 13:55",
+ "fuentes": {
+  "bcrp": {
+   "estado": "ok",
+   "error": null
+  },
+  "comparabien": {
+   "estado": "ok",
+   "error": null
+  }
+ },
+ "bcrp": {
+  "vigente": 0.0425,
+  "mes_vigente": "2026-07",
+  "etiqueta_vigente": "Jul.2026",
+  "serie": [
+   {
+    "mes": "2023-08",
+    "tasa": 0.0775,
+    "etiqueta": "Ago.2023"
+   },
+   {
+    "mes": "2023-09",
+    "tasa": 0.075,
+    "etiqueta": "Sep.2023"
+   },
+   {
+    "mes": "2023-10",
+    "tasa": 0.0725,
+    "etiqueta": "Oct.2023"
+   },
+   {
+    "mes": "2023-11",
+    "tasa": 0.07,
+    "etiqueta": "Nov.2023"
+   },
+   {
+    "mes": "2023-12",
+    "tasa": 0.0675,
+    "etiqueta": "Dic.2023"
+   },
+   {
+    "mes": "2024-01",
+    "tasa": 0.065,
+    "etiqueta": "Ene.2024"
+   },
+   {
+    "mes": "2024-02",
+    "tasa": 0.0625,
+    "etiqueta": "Feb.2024"
+   },
+   {
+    "mes": "2024-03",
+    "tasa": 0.0625,
+    "etiqueta": "Mar.2024"
+   },
+   {
+    "mes": "2024-04",
+    "tasa": 0.06,
+    "etiqueta": "Abr.2024"
+   },
+   {
+    "mes": "2024-05",
+    "tasa": 0.0575,
+    "etiqueta": "May.2024"
+   },
+   {
+    "mes": "2024-06",
+    "tasa": 0.0575,
+    "etiqueta": "Jun.2024"
+   },
+   {
+    "mes": "2024-07",
+    "tasa": 0.0575,
+    "etiqueta": "Jul.2024"
+   },
+   {
+    "mes": "2024-08",
+    "tasa": 0.055,
+    "etiqueta": "Ago.2024"
+   },
+   {
+    "mes": "2024-09",
+    "tasa": 0.0525,
+    "etiqueta": "Sep.2024"
+   },
+   {
+    "mes": "2024-10",
+    "tasa": 0.0525,
+    "etiqueta": "Oct.2024"
+   },
+   {
+    "mes": "2024-11",
+    "tasa": 0.05,
+    "etiqueta": "Nov.2024"
+   },
+   {
+    "mes": "2024-12",
+    "tasa": 0.05,
+    "etiqueta": "Dic.2024"
+   },
+   {
+    "mes": "2025-01",
+    "tasa": 0.0475,
+    "etiqueta": "Ene.2025"
+   },
+   {
+    "mes": "2025-02",
+    "tasa": 0.0475,
+    "etiqueta": "Feb.2025"
+   },
+   {
+    "mes": "2025-03",
+    "tasa": 0.0475,
+    "etiqueta": "Mar.2025"
+   },
+   {
+    "mes": "2025-04",
+    "tasa": 0.0475,
+    "etiqueta": "Abr.2025"
+   },
+   {
+    "mes": "2025-05",
+    "tasa": 0.045,
+    "etiqueta": "May.2025"
+   },
+   {
+    "mes": "2025-06",
+    "tasa": 0.045,
+    "etiqueta": "Jun.2025"
+   },
+   {
+    "mes": "2025-07",
+    "tasa": 0.045,
+    "etiqueta": "Jul.2025"
+   },
+   {
+    "mes": "2025-08",
+    "tasa": 0.045,
+    "etiqueta": "Ago.2025"
+   },
+   {
+    "mes": "2025-09",
+    "tasa": 0.0425,
+    "etiqueta": "Sep.2025"
+   },
+   {
+    "mes": "2025-10",
+    "tasa": 0.0425,
+    "etiqueta": "Oct.2025"
+   },
+   {
+    "mes": "2025-11",
+    "tasa": 0.0425,
+    "etiqueta": "Nov.2025"
+   },
+   {
+    "mes": "2025-12",
+    "tasa": 0.0425,
+    "etiqueta": "Dic.2025"
+   },
+   {
+    "mes": "2026-01",
+    "tasa": 0.0425,
+    "etiqueta": "Ene.2026"
+   },
+   {
+    "mes": "2026-02",
+    "tasa": 0.0425,
+    "etiqueta": "Feb.2026"
+   },
+   {
+    "mes": "2026-03",
+    "tasa": 0.0425,
+    "etiqueta": "Mar.2026"
+   },
+   {
+    "mes": "2026-04",
+    "tasa": 0.0425,
+    "etiqueta": "Abr.2026"
+   },
+   {
+    "mes": "2026-05",
+    "tasa": 0.0425,
+    "etiqueta": "May.2026"
+   },
+   {
+    "mes": "2026-06",
+    "tasa": 0.0425,
+    "etiqueta": "Jun.2026"
+   },
+   {
+    "mes": "2026-07",
+    "tasa": 0.0425,
+    "etiqueta": "Jul.2026"
+   }
+  ],
+  "serie_id": "PD04722MM",
+  "fuente": "https://estadisticas.bcrp.gob.pe/estadisticas/series/mensuales/resultados/PD04722MM/html",
+  "api": "https://estadisticas.bcrp.gob.pe/estadisticas/series/api/PD04722MM/json/2023-08/2026-08/esp"
+ },
+ "comparabien": {
+  "fuente": "https://comparabien.com.pe/ahorros",
+  "productos": [
+   {
+    "entidad": "Compartamos Banco",
+    "producto": "Campaña Cuenta WOW Digital Soles",
+    "tasa_texto": "4.60% TEA",
+    "tasa": 0.046,
+    "hasta": false,
+    "detalle": "Gana intereses por cualquier monto de ahorro, sin monto mínimo de apertura.",
+    "logo": "https://cdn-pe.comparabien.com/chat/logos/compartamos.png"
+   },
+   {
+    "entidad": "Financiera Confianza",
+    "producto": "Cuenta Ahorro Confianza Soles",
+    "tasa_texto": "hasta 5.00% TEA",
+    "tasa": 0.05,
+    "hasta": true,
+    "detalle": "¡GANA HASTA S/100! Ábrela 100% digital desde nuestra App. Sin monto mínimo de apertura y SIN COSTO de mantenimiento sin importar tu saldo.",
+    "logo": "https://cdn-pe.comparabien.com/chat/logos/confianza.png"
+   },
+   {
+    "entidad": "Banco de Credito del Peru BCP",
+    "producto": "Cuenta Premio Soles",
+    "tasa_texto": "hasta 1.00% TEA",
+    "tasa": 0.01,
+    "hasta": true,
+    "detalle": "Sin costo de mantenimiento.",
+    "logo": "https://cdn-pe.comparabien.com/chat/logos/logo_bcp.png"
+   }
+  ]
+ }
+}

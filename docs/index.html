@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="es-PE">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Portal de Ahorros Perú — Comparador de cuentas de ahorro verificadas</title>
+<meta name="description" content="Compara las cuentas de ahorro en soles de bancos, financieras y cajas peruanas supervisadas por la SBS y cubiertas por el Fondo de Seguro de Depósitos. TREA verificada, simulador de intereses, tasa de referencia del BCRP y fuentes oficiales.">
+<meta name="theme-color" content="#0b3d6b">
+<meta name="author" content="Portal de Ahorros Perú">
+<link rel="canonical" href="https://example.github.io/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Portal de Ahorros Perú">
+<meta property="og:description" content="Comparador de cuentas de ahorro peruanas con TREA verificada, simulador y datos del BCRP.">
+<meta property="og:locale" content="es_PE">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="assets/css/estilos.css">
+</head>
+<body>
+<a class="saltar" href="#principal">Saltar al contenido</a>
+
+<header class="cabecera">
+ <div class="contenedor cabecera-fila">
+  <div class="marca">
+   <span class="marca-icono" aria-hidden="true">S/</span>
+   <div>
+    <strong>Portal de Ahorros Perú</strong>
+    <span class="marca-sub">Cuentas de ahorro supervisadas por la SBS</span>
+   </div>
+  </div>
+  <div class="cabecera-acciones">
+   <div class="estado" id="estado-datos" role="status" aria-live="polite">
+    <span class="punto" data-estado="cargando"></span>
+    <span id="estado-texto">Cargando datos…</span>
+   </div>
+   <button type="button" id="btn-refrescar" class="btn-icono" title="Actualizar datos ahora" aria-label="Actualizar datos ahora">⟳</button>
+   <button type="button" id="btn-tema" class="btn-icono" title="Cambiar tema" aria-label="Cambiar entre tema claro y oscuro">◐</button>
+  </div>
+ </div>
+ <nav class="pestanas contenedor" role="tablist" aria-label="Secciones del portal">
+  <button role="tab" class="pestana activa" data-panel="ranking"   aria-selected="true"  aria-controls="p-ranking">Ranking</button>
+  <button role="tab" class="pestana"        data-panel="simulador" aria-selected="false" aria-controls="p-simulador">Simulador</button>
+  <button role="tab" class="pestana"        data-panel="bcrp"      aria-selected="false" aria-controls="p-bcrp">Tasas BCRP</button>
+  <button role="tab" class="pestana"        data-panel="seguridad" aria-selected="false" aria-controls="p-seguridad">Seguridad / FSD</button>
+  <button role="tab" class="pestana"        data-panel="mercado"   aria-selected="false" aria-controls="p-mercado">Mercado</button>
+  <button role="tab" class="pestana"        data-panel="videos"    aria-selected="false" aria-controls="p-videos">Videos</button>
+  <button role="tab" class="pestana"        data-panel="descargas" aria-selected="false" aria-controls="p-descargas">Descargas</button>
+ </nav>
+</header>
+
+<main id="principal" class="contenedor">
+
+ <!-- ══════════ RANKING ══════════ -->
+ <section id="p-ranking" class="panel activo" role="tabpanel" aria-labelledby="ranking">
+  <div class="intro">
+   <h1>Ranking de cuentas de ahorro en soles</h1>
+   <p>Entidades supervisadas por la <abbr title="Superintendencia de Banca, Seguros y AFP">SBS</abbr> y cubiertas por el
+    <abbr title="Fondo de Seguro de Depósitos">FSD</abbr>. Las tasas mostradas son <strong>TREA</strong>
+    (Tasa de Rendimiento Efectivo Anual), la única cifra comparable entre entidades porque ya descuenta
+    comisiones y gastos del producto.</p>
+  </div>
+
+  <div class="tarjetas-resumen" id="resumen-kpis"></div>
+
+  <div class="filtros" role="search">
+   <label class="campo campo-buscar">
+    <span>Buscar</span>
+    <input type="search" id="f-texto" placeholder="Entidad, producto o grupo económico…" autocomplete="off">
+   </label>
+   <label class="campo">
+    <span>TREA mínima</span>
+    <select id="f-trea">
+     <option value="0">Todas</option>
+     <option value="0.04">Desde 4.00%</option>
+     <option value="0.045">Desde 4.50%</option>
+     <option value="0.05">Desde 5.00%</option>
+     <option value="0.055">Desde 5.50%</option>
+    </select>
+   </label>
+   <label class="campo">
+    <span>Apertura</span>
+    <select id="f-apertura">
+     <option value="">Cualquiera</option>
+     <option value="digital">Digital</option>
+     <option value="presencial">Presencial</option>
+    </select>
+   </label>
+   <label class="campo">
+    <span>Monto mínimo</span>
+    <select id="f-minimo">
+     <option value="">Cualquiera</option>
+     <option value="0">Sin monto mínimo</option>
+     <option value="500">Hasta S/500</option>
+     <option value="10000">Hasta S/10,000</option>
+    </select>
+   </label>
+   <label class="campo">
+    <span>Ordenar por</span>
+    <select id="f-orden">
+     <option value="trea">TREA (mayor primero)</option>
+     <option value="minimo">Monto mínimo (menor primero)</option>
+     <option value="entidad">Entidad (A-Z)</option>
+    </select>
+   </label>
+   <button type="button" id="f-limpiar" class="btn-secundario">Limpiar</button>
+  </div>
+
+  <p class="conteo" id="conteo-resultados" role="status" aria-live="polite"></p>
+  <div class="rejilla" id="rejilla-entidades"></div>
+
+  <details class="metodologia">
+   <summary>Cómo leer este ranking y qué verificar antes de abrir una cuenta</summary>
+   <div id="notas-metodologia"></div>
+  </details>
+ </section>
+
+ <!-- ══════════ SIMULADOR ══════════ -->
+ <section id="p-simulador" class="panel" role="tabpanel" aria-labelledby="simulador" hidden>
+  <div class="intro">
+   <h1>Simulador de intereses por entidad</h1>
+   <p>Ingresa un monto y un plazo. El simulador aplica la escala de tasas real de cada entidad
+    (tramos por saldo y topes de saldo remunerado) y muestra el rendimiento mes a mes.</p>
+  </div>
+
+  <div class="sim-disposicion">
+   <form class="sim-controles" id="form-simulador" novalidate>
+    <label class="campo">
+     <span>Monto a depositar (S/)</span>
+     <input type="number" id="s-monto" value="10000" min="0" step="100" inputmode="decimal">
+    </label>
+    <label class="campo">
+     <span>Aporte mensual adicional (S/)</span>
+     <input type="number" id="s-aporte" value="0" min="0" step="50" inputmode="decimal">
+    </label>
+    <label class="campo">
+     <span>Plazo: <output id="s-plazo-txt">12 meses</output></span>
+     <input type="range" id="s-plazo" value="12" min="1" max="60" step="1">
+    </label>
+    <fieldset class="campo">
+     <legend>Entidad</legend>
+     <select id="s-entidad"></select>
+    </fieldset>
+    <label class="campo-check">
+     <input type="checkbox" id="s-condicion" checked>
+     <span>Cumplo la condición especial de la campaña (sueldo, apertura digital, cliente nuevo, etc.)</span>
+    </label>
+    <label class="campo-check">
+     <input type="checkbox" id="s-itf">
+     <span>Descontar ITF (0.005%) sobre el depósito inicial</span>
+    </label>
+   </form>
+
+   <div class="sim-resultado">
+    <div id="sim-cabecera"></div>
+    <div class="sim-kpis" id="sim-kpis"></div>
+    <div id="sim-avisos"></div>
+    <div class="grafico-envoltura">
+     <svg id="sim-grafico" viewBox="0 0 720 260" preserveAspectRatio="xMidYMid meet" role="img"
+      aria-labelledby="sim-grafico-titulo"><title id="sim-grafico-titulo">Evolución del saldo estimado</title></svg>
+    </div>
+    <div class="tabla-envoltura">
+     <table class="tabla" id="sim-tabla">
+      <caption>Detalle mes a mes (referencial)</caption>
+      <thead><tr><th scope="col">Mes</th><th scope="col">Aportado</th><th scope="col">Interés del mes</th><th scope="col">Interés acumulado</th><th scope="col">Saldo</th></tr></thead>
+      <tbody></tbody>
+     </table>
+    </div>
+   </div>
+  </div>
+
+  <div class="comparativa-sim">
+   <h2>El mismo monto en todas las entidades</h2>
+   <p class="sutil">Rendimiento estimado con los mismos parámetros, aplicando la escala de tasas de cada entidad.</p>
+   <div class="tabla-envoltura">
+    <table class="tabla" id="tabla-comparativa">
+     <thead><tr><th scope="col">#</th><th scope="col">Entidad</th><th scope="col">TREA aplicada</th><th scope="col">Saldo remunerado</th><th scope="col">Interés del periodo</th><th scope="col">Saldo final</th></tr></thead>
+     <tbody></tbody>
+    </table>
+   </div>
+  </div>
+
+  <p class="descargo">La simulación es referencial. Usa la TREA como tasa efectiva anual con capitalización mensual
+   y año de 360 días. No incluye retenciones, comisiones no informadas, cambios de tasa durante el plazo,
+   fechas exactas de abono ni requisitos que no cumplas. Confirma siempre el contrato, la cartilla y el tarifario vigentes.</p>
+ </section>
+
+ <!-- ══════════ BCRP ══════════ -->
+ <section id="p-bcrp" class="panel" role="tabpanel" aria-labelledby="bcrp" hidden>
+  <div class="intro">
+   <h1>Tasa de referencia del BCRP</h1>
+   <p>Tasa de política monetaria del Banco Central de Reserva del Perú (serie <code>PD04722MM</code>).
+    Es el contexto macroeconómico del ahorro: cuando baja, las tasas pasivas tienden a bajar después.
+    No determina por sí sola la TREA que paga cada entidad.</p>
+  </div>
+  <div class="tarjetas-resumen" id="bcrp-kpis"></div>
+  <div class="tarjeta">
+   <h2>Evolución mensual</h2>
+   <div class="grafico-envoltura">
+    <svg id="bcrp-grafico" viewBox="0 0 720 300" preserveAspectRatio="xMidYMid meet" role="img"
+     aria-labelledby="bcrp-grafico-titulo"><title id="bcrp-grafico-titulo">Serie mensual de la tasa de referencia del BCRP</title></svg>
+   </div>
+  </div>
+  <div class="tarjeta">
+   <h2>Tasa de referencia frente a la TREA de las entidades</h2>
+   <p class="sutil">Cuántos puntos porcentuales por encima (o debajo) de la tasa del BCRP paga cada cuenta.</p>
+   <div id="bcrp-spread"></div>
+  </div>
+  <div class="tabla-envoltura">
+   <table class="tabla" id="bcrp-tabla">
+    <caption>Serie histórica mensual</caption>
+    <thead><tr><th scope="col">Mes</th><th scope="col">Tasa de referencia</th><th scope="col">Variación</th></tr></thead>
+    <tbody></tbody>
+   </table>
+  </div>
+ </section>
+
+ <!-- ══════════ SEGURIDAD / FSD ══════════ -->
+ <section id="p-seguridad" class="panel" role="tabpanel" aria-labelledby="seguridad" hidden>
+  <div class="intro">
+   <h1>Seguridad del depósito y Fondo de Seguro de Depósitos</h1>
+   <p>Todas las entidades de este portal son empresas del sistema financiero supervisadas por la SBS y
+    miembros del FSD. Eso protege tu depósito hasta el límite vigente por depositante y por institución.</p>
+  </div>
+  <div class="tarjetas-resumen" id="fsd-kpis"></div>
+
+  <div class="tarjeta">
+   <h2>Simulador de cobertura del FSD</h2>
+   <div class="fsd-sim">
+    <label class="campo">
+     <span>Monto depositado en una sola entidad (S/)</span>
+     <input type="number" id="fsd-monto" value="150000" min="0" step="1000" inputmode="decimal">
+    </label>
+    <div class="fsd-salida" id="fsd-salida"></div>
+   </div>
+   <div class="barra-cobertura" id="fsd-barra" role="img" aria-label="Proporción cubierta por el FSD"></div>
+   <p class="sutil">Si tu ahorro supera el límite, distribuirlo entre varias entidades miembro mantiene
+    la totalidad bajo cobertura. La cobertura protege ante la intervención de la entidad; no garantiza rentabilidad.</p>
+  </div>
+
+  <div class="tarjeta">
+   <h2>Verificación por entidad</h2>
+   <div class="tabla-envoltura">
+    <table class="tabla" id="tabla-fsd">
+     <thead><tr><th scope="col">Entidad</th><th scope="col">Producto</th><th scope="col">FSD</th><th scope="col">Estado de verificación</th><th scope="col">Fuente oficial</th></tr></thead>
+     <tbody></tbody>
+    </table>
+   </div>
+  </div>
+
+  <div class="tarjeta enlaces-reguladores">
+   <h2>Verifica tú mismo en los organismos oficiales</h2>
+   <ul>
+    <li><a href="https://www.sbs.gob.pe/usuarios/aprende-con-la-sbs/compara-y-elige" target="_blank" rel="noopener">SBS — Compara y elige</a> — comparador oficial de productos financieros.</li>
+    <li><a href="https://www.sbs.gob.pe/supervisados-y-registros/entidades-supervisadas" target="_blank" rel="noopener">SBS — Entidades supervisadas</a> — confirma que la entidad esté autorizada.</li>
+    <li><a href="https://fsd.org.pe/" target="_blank" rel="noopener">Fondo de Seguro de Depósitos</a> — miembros y cobertura vigente del trimestre.</li>
+    <li><a href="https://www.bcrp.gob.pe/" target="_blank" rel="noopener">BCRP</a> — política monetaria y estadísticas.</li>
+    <li><a href="https://www.gob.pe/indecopi" target="_blank" rel="noopener">Indecopi</a> — reclamos sobre publicidad y condiciones contractuales.</li>
+   </ul>
+  </div>
+ </section>
+
+ <!-- ══════════ MERCADO ══════════ -->
+ <section id="p-mercado" class="panel" role="tabpanel" aria-labelledby="mercado" hidden>
+  <div class="intro">
+   <h1>Mercado en vivo — comparabien.com.pe</h1>
+   <p>Productos de ahorro destacados que publica el comparador comparabien.com.pe, extraídos
+    automáticamente y contrastados contra el ranking verificado de este portal.</p>
+  </div>
+  <div id="mercado-estado"></div>
+  <div class="rejilla" id="rejilla-mercado"></div>
+  <div class="tarjeta">
+   <h2>Contraste con el ranking verificado</h2>
+   <div id="mercado-contraste"></div>
+  </div>
+ </section>
+
+ <!-- ══════════ VIDEOS ══════════ -->
+ <section id="p-videos" class="panel" role="tabpanel" aria-labelledby="videos" hidden>
+  <div class="intro">
+   <h1>Videos de finanzas</h1>
+   <p>Búsqueda en vivo sobre YouTube, restringida a contenido de finanzas personales.
+    Los resultados se consultan en el momento; no hay una lista guardada.</p>
+  </div>
+  <div class="filtros">
+   <label class="campo campo-buscar">
+    <span>Tema</span>
+    <input type="search" id="yt-consulta" value="cuentas de ahorro Perú TREA" placeholder="ahorro, tasas, inversión…">
+   </label>
+   <label class="campo">
+    <span>Enfoque</span>
+    <select id="yt-ambito">
+     <option value="peru">Finanzas en Perú</option>
+     <option value="internacional">Finanzas internacional</option>
+    </select>
+   </label>
+   <label class="campo">
+    <span>Publicado</span>
+    <select id="yt-fecha">
+     <option value="">Cualquier fecha</option>
+     <option value="30">Últimos 30 días</option>
+     <option value="90">Últimos 3 meses</option>
+     <option value="365">Último año</option>
+    </select>
+   </label>
+   <label class="campo">
+    <span>Ordenar por</span>
+    <select id="yt-orden">
+     <option value="relevance">Relevancia</option>
+     <option value="date">Más recientes</option>
+     <option value="viewCount">Más vistos</option>
+    </select>
+   </label>
+   <button type="button" id="yt-buscar" class="btn-primario">Buscar</button>
+  </div>
+  <div id="yt-estado" role="status" aria-live="polite"></div>
+  <div class="rejilla rejilla-videos" id="rejilla-videos"></div>
+ </section>
+
+ <!-- ══════════ DESCARGAS ══════════ -->
+ <section id="p-descargas" class="panel" role="tabpanel" aria-labelledby="descargas" hidden>
+  <div class="intro">
+   <h1>Descargas</h1>
+   <p>El Excel original fue reconstruido: se corrigieron las celdas numéricas que estaban guardadas
+    con formato de fecha, se ordenó el ranking por TREA y se añadieron formato condicional,
+    filtros y hojas de simulación funcionales.</p>
+  </div>
+
+  <div class="rejilla rejilla-descargas">
+   <article class="tarjeta descarga destacada">
+    <div class="descarga-icono" aria-hidden="true">XLSX</div>
+    <h2>Ranking de cuentas de ahorro — versión mejorada</h2>
+    <p>Libro completo: ranking ordenado, ficha por entidad, escalas de tasas, serie del BCRP,
+     cobertura del FSD y fuentes. Con filtros, formato condicional y celdas numéricas corregidas.</p>
+    <ul class="descarga-meta" id="meta-xlsx"></ul>
+    <a class="btn-primario" id="dl-xlsx" href="descargas/Ranking_Cuentas_Ahorro_Peru_Agosto_2026_MEJORADO.xlsx" download>Descargar Excel mejorado</a>
+   </article>
+
+   <article class="tarjeta descarga">
+    <div class="descarga-icono" aria-hidden="true">CSV</div>
+    <h2>Ranking en CSV</h2>
+    <p>Tabla plana del ranking, lista para Excel, Google Sheets, Python o Power BI.</p>
+    <button type="button" class="btn-secundario" id="dl-csv">Descargar CSV</button>
+   </article>
+
+   <article class="tarjeta descarga">
+    <div class="descarga-icono" aria-hidden="true">JSON</div>
+    <h2>Dataset completo (JSON)</h2>
+    <p>Todo el conjunto de datos del portal: ranking, fichas, tramos de tasa, BCRP y FSD.</p>
+    <a class="btn-secundario" href="data/dataset.json" download>Descargar JSON</a>
+   </article>
+
+   <article class="tarjeta descarga">
+    <div class="descarga-icono" aria-hidden="true">LIVE</div>
+    <h2>Snapshot en vivo (JSON)</h2>
+    <p>Último resultado de la actualización automática: serie del BCRP y productos de comparabien.</p>
+    <a class="btn-secundario" href="data/live.json" download>Descargar snapshot</a>
+   </article>
+  </div>
+
+  <div class="tarjeta">
+   <h2>Qué se corrigió respecto del archivo original</h2>
+   <ul class="lista-cambios">
+    <li><strong>Celdas numéricas guardadas como fechas.</strong> Montos como S/20,000 aparecían como
+     <code>1954-10-03</code>. Se restauraron a número con formato de moneda.</li>
+    <li><strong>Fórmulas rotas.</strong> Varias celdas mostraban <code>#VALUE!</code> por operar sobre esas fechas.</li>
+    <li><strong>Ranking sin ordenar.</strong> Ahora está ordenado por TREA descendente y numerado.</li>
+    <li><strong>Tabla transpuesta.</strong> El ranking estaba en horizontal (una columna por entidad);
+     se convirtió a una fila por entidad, que es lo que permite filtrar y ordenar.</li>
+    <li><strong>Sin formato condicional.</strong> Se añadieron escalas de color en TREA y semáforo en el estado de verificación.</li>
+    <li><strong>Escalas de tasa dispersas.</strong> Se consolidaron los tramos por saldo de las 16 entidades en una sola hoja.</li>
+   </ul>
+  </div>
+ </section>
+</main>
+
+<footer class="pie">
+ <div class="contenedor">
+  <p class="descargo destacado"><strong>Aviso importante.</strong> Este portal es una herramienta informativa y
+   educativa. No es asesoría financiera ni una recomendación para contratar ningún producto. Las tasas y
+   condiciones cambian sin previo aviso: antes de abrir una cuenta o transferir fondos, verifica el contrato,
+   la cartilla de información y el tarifario vigentes en la página oficial de la entidad.</p>
+  <p class="sutil" id="pie-actualizacion"></p>
+  <p class="sutil">Datos con corte al <span id="pie-corte"></span> · Fuentes oficiales: SBS, BCRP y FSD ·
+   Los nombres y marcas de las entidades pertenecen a sus respectivos titulares.</p>
+ </div>
+</footer>
+
+<script src="assets/js/datos.js"></script>
+<script src="assets/js/formato.js"></script>
+<script src="assets/js/graficos.js"></script>
+<script src="assets/js/ranking.js"></script>
+<script src="assets/js/simulador.js"></script>
+<script src="assets/js/bcrp.js"></script>
+<script src="assets/js/seguridad.js"></script>
+<script src="assets/js/mercado.js"></script>
+<script src="assets/js/videos.js"></script>
+<script src="assets/js/descargas.js"></script>
+<script src="assets/js/app.js"></script>
+</body>
+</html>

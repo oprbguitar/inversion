@@ -1,0 +1,82 @@
+{
+ "Scotiabank Perú": {
+  "slug": "scotiabank-peru",
+  "color": "#EC111A",
+  "monograma": "S"
+ },
+ "Financiera SURGIR": {
+  "slug": "financiera-surgir",
+  "color": "#EC0000",
+  "monograma": "SG"
+ },
+ "Financiera QAPAQ": {
+  "slug": "financiera-qapaq",
+  "color": "#00953B",
+  "monograma": "Q"
+ },
+ "Financiera Confianza": {
+  "slug": "financiera-confianza",
+  "color": "#004481",
+  "monograma": "FC"
+ },
+ "Banco Falabella": {
+  "slug": "banco-falabella",
+  "color": "#009A44",
+  "monograma": "F"
+ },
+ "Santander Consumer Bank": {
+  "slug": "santander-consumer-bank",
+  "color": "#EC0000",
+  "monograma": "SC"
+ },
+ "Banco Alfin": {
+  "slug": "banco-alfin",
+  "color": "#00B2A9",
+  "monograma": "A"
+ },
+ "Caja Cusco": {
+  "slug": "caja-cusco",
+  "color": "#C8102E",
+  "monograma": "CC"
+ },
+ "Compartamos Financiera": {
+  "slug": "compartamos-financiera",
+  "color": "#00A0DF",
+  "monograma": "CF"
+ },
+ "Banco de Comercio": {
+  "slug": "banco-de-comercio",
+  "color": "#003DA5",
+  "monograma": "BC"
+ },
+ "Banco Ripley": {
+  "slug": "banco-ripley",
+  "color": "#5C2D91",
+  "monograma": "R"
+ },
+ "Financiera Efectiva (Efectibank)": {
+  "slug": "financiera-efectiva-efectibank",
+  "color": "#E4002B",
+  "monograma": "EF"
+ },
+ "Banco GNB Perú": {
+  "slug": "banco-gnb-peru",
+  "color": "#F5A800",
+  "monograma": "GNB"
+ },
+ "Caja Arequipa": {
+  "slug": "caja-arequipa",
+  "color": "#E4002B",
+  "monograma": "CA"
+ },
+ "Caja Piura": {
+  "slug": "caja-piura",
+  "color": "#0033A0",
+  "monograma": "CP"
+ },
+ "Financiera Oh! / SIP": {
+  "slug": "financiera-oh-sip",
+  "color": "#FF6900",
+  "monograma": "OH"
+ }
+}
