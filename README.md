@@ -85,13 +85,14 @@ la contrastes antes de decidir. Ese enlace, y no la cifra en pantalla, es la fue
 
 ### 1. Publicar en GitHub Pages
 
-En el repositorio: **Settings → Pages → Source: GitHub Actions**.
-El workflow `.github/workflows/actualizar-datos.yml` despliega la carpeta `docs/` en cada push
-y dos veces al día. También puedes lanzarlo a mano desde la pestaña **Actions → Actualizar datos
-y publicar → Run workflow**.
+Ya está configurado: **Settings → Pages → Source: Deploy from a branch → `main` / `/docs`**.
+El sitio se republica solo con cada commit a `main`, sin depender de GitHub Actions.
 
-Si prefieres el modo clásico sin workflow: **Settings → Pages → Source: Deploy from a branch →
-`main` / carpeta `/docs`**.
+El workflow `.github/workflows/actualizar-datos.yml` se encarga únicamente de **refrescar los
+datos** (BCRP + comparabien) dos veces al día y regenerar el Excel; al hacer commit, Pages se
+reconstruye solo. Puedes lanzarlo a mano desde **Actions → Actualizar datos y publicar →
+Run workflow**. Si esa acción falla o se retrasa, el sitio sigue en línea con los últimos datos
+publicados.
 
 ### 2. Restringir la clave de YouTube ⚠️
 

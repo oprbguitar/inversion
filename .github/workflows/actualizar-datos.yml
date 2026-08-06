@@ -10,13 +10,14 @@ on:
   push:
     branches: [main]
 
+# GitHub Pages publica directamente desde main:/docs, asi que el sitio sigue
+# en linea aunque esta accion falle o se retrase. Aqui solo se refrescan los
+# datos: al hacer commit, Pages se reconstruye solo.
 permissions:
   contents: write
-  pages: write
-  id-token: write
 
 concurrency:
-  group: pages
+  group: datos
   cancel-in-progress: false
 
 jobs:
@@ -51,20 +52,3 @@ jobs:
             git commit -m "datos: actualizacion automatica $(date -u '+%Y-%m-%d %H:%M UTC')"
             git push
           fi
-
-  desplegar:
-    needs: actualizar
-    runs-on: ubuntu-latest
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-    steps:
-      - uses: actions/checkout@v4
-        with:
-          ref: main            # toma el commit que acaba de publicar el job anterior
-      - uses: actions/configure-pages@v5
-      - uses: actions/upload-pages-artifact@v3
-        with:
-          path: docs
-      - id: deployment
-        uses: actions/deploy-pages@v4
