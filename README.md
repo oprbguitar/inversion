@@ -102,8 +102,19 @@ navegador y puede recuperarse leyendo ese archivo — es una limitación de los 
 no de la ofuscación elegida. La protección real es del lado de Google:
 
 1. [Google Cloud Console](https://console.cloud.google.com/apis/credentials) → tu clave.
-2. **Restricciones de aplicación → Sitios web (referrers HTTP)** → añade `https://oprbguitar.github.io/inversion/*`.
+2. **Restricciones de aplicación → Sitios web (referrers HTTP)** → añade exactamente:
+   ```
+   https://oprbguitar.github.io/*
+   ```
+   ⚠️ **Sin la ruta `/inversion/`.** Los navegadores solo envían el **origen** en el referrer de
+   peticiones entre dominios (política `strict-origin-when-cross-origin`), así que Google recibe
+   `https://oprbguitar.github.io/` sin la ruta. Un patrón como
+   `https://oprbguitar.github.io/inversion/*` **nunca llega a coincidir** y todas las peticiones
+   se rechazan con `Requests from referer ... are blocked`.
 3. **Restricciones de API** → deja habilitada **solo** *YouTube Data API v3*.
+
+Como `oprbguitar.github.io` es tu subdominio personal de GitHub Pages, ese patrón limita la clave
+a tus propios sitios.
 
 Con esas dos restricciones, aunque alguien extraiga la clave, no puede usarla desde otro dominio
 ni contra otras APIs de Google. **Hazlo antes de publicar el repositorio.**

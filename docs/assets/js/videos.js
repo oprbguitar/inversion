@@ -89,9 +89,12 @@ const Videos = (() => {
                otro sitio. Abre
                <a href="https://oprbguitar.github.io/inversion/#videos" target="_blank" rel="noopener">el portal publicado</a>
                para ver los videos.`
-            : `<strong>La clave está restringida a otro dominio.</strong> Añade
-               <code>${Fmt.esc(location.origin)}/*</code> en Google Cloud Console →
-               Credenciales → Restricciones de aplicación → Sitios web.`,
+            : `<strong>La restricción de la clave no coincide con este dominio.</strong>
+               En Google Cloud Console → Credenciales → tu clave → Restricciones de aplicación →
+               Sitios web, añade exactamente <code>${Fmt.esc(location.origin)}/*</code>.
+               <br><strong>Sin la ruta</strong> (<code>${Fmt.esc(location.pathname)}</code>): los navegadores
+               solo envían el origen en el referrer entre dominios, así que Google recibe
+               <code>${Fmt.esc(location.origin)}/</code> y un patrón con ruta nunca coincide.`,
             local ? 'info' : 'error');
           return;
         }
