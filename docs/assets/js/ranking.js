@@ -1,6 +1,8 @@
-/* Pestaña Ranking: KPIs, filtros y tarjetas por entidad. */
+/* Pestaña Ranking: KPIs, filtros y dos vistas (cuadrícula o lista detallada). */
 const Ranking = (() => {
   let filtrados = [];
+  let vista = 'cuadricula';
+  try { vista = localStorage.getItem('vista_ranking') || 'cuadricula'; } catch { /* modo privado */ }
 
   const $ = (s) => document.querySelector(s);
 
@@ -130,6 +132,72 @@ const Ranking = (() => {
     </article>`;
   }
 
+  /** Fila de la vista lista: muestra todo el detalle desplegado, sin abrir nada. */
+  function fila(e) {
+    const ficha = Datos.fichaDe(e.entidad);
+    const url = Fmt.urlSegura(e.url);
+    const puesto = Datos.ranking().findIndex((x) => x.entidad === e.entidad) + 1;
+
+    const campos = [
+      ['Modo de apertura', e.apertura],
+      ['Monto mínimo de apertura', e.monto_minimo ? Fmt.moneyCorto(e.monto_minimo) : 'S/0 — sin mínimo'],
+      ['Saldo para la tasa máxima', e.saldo_tasa_max ? Fmt.moneyCorto(e.saldo_tasa_max) : 'Sin condición de saldo'],
+      ['Condición clave', e.condicion],
+      ['Vigencia de la campaña', e.vigencia],
+      ['Abono de intereses', e.abono],
+      ['Capitalización', e.capitalizacion],
+      ['Mantenimiento', e.mantenimiento],
+      ['Retiros y cajeros', e.retiros],
+      ['Transferencias', e.transferencias],
+      ['Grupo económico', e.grupo],
+      ['Calificación SBS', e.calificacion],
+      ['Fondo de Seguro de Depósitos', e.fsd],
+      ['Estado de verificación', e.verificacion],
+    ].filter(([, v]) => v);
+
+    const tramos = (ficha && ficha.tramos || []).length > 1
+      ? `<div class="lista-tramos"><h4>Escala de tasas por saldo</h4>
+         <ul class="tramos">${ficha.tramos.map((t) =>
+           `<li><span>${Fmt.esc(t.desc || `Desde ${Fmt.moneyCorto(t.desde)}`)}</span><b>${Fmt.pct(t.trea)}</b></li>`).join('')}
+         </ul></div>` : '';
+
+    return `
+    <article class="fila-entidad">
+     <div class="fila-cabecera">
+      <div class="entidad-puesto" data-top="${puesto === 1 ? 1 : 0}">${puesto}</div>
+      <img class="entidad-logo" src="${Datos.logoDe(e.entidad)}" alt="Logotipo de ${Fmt.esc(e.entidad)}" width="46" height="46" loading="lazy">
+      <div class="entidad-id">
+       <div class="entidad-nombre">${Fmt.esc(e.entidad)}</div>
+       <div class="entidad-producto">${Fmt.esc(e.producto)}</div>
+      </div>
+      <div class="fila-tasa">
+       <span class="tasa-valor">${Fmt.pct(e.trea)}</span>
+       <span class="tasa-etiqueta">TREA</span>
+      </div>
+     </div>
+
+     <div class="etiquetas">
+      ${e.fsd === 'Sí' ? '<span class="etiqueta verde">Cubierto por FSD</span>' : ''}
+      ${esDigital(e) ? '<span class="etiqueta azul">Apertura digital</span>' : ''}
+      ${!e.monto_minimo ? '<span class="etiqueta verde">Sin monto mínimo</span>' : ''}
+      <span class="etiqueta ${claseVerificacion(e.verificacion)}">${Fmt.esc(e.verificacion || '')}</span>
+     </div>
+
+     ${e.alertas ? `<p class="entidad-alerta">${Fmt.esc(e.alertas)}</p>` : ''}
+
+     <dl class="fila-detalle">
+      ${campos.map(([k, v]) => `<div><dt>${k}</dt><dd>${Fmt.esc(v)}</dd></div>`).join('')}
+     </dl>
+     ${tramos}
+
+     <div class="fila-acciones">
+      ${url ? `<a class="btn-primario" href="${url}" target="_blank" rel="noopener">Ir a la página oficial de ${Fmt.esc(e.entidad)}</a>` : ''}
+      <button type="button" class="btn-secundario" data-simular="${Fmt.esc(e.entidad)}">Simular con esta entidad</button>
+      ${url ? `<a class="enlace-crudo" href="${url}" target="_blank" rel="noopener">${Fmt.esc(url)}</a>` : ''}
+     </div>
+    </article>`;
+  }
+
   function pintarTarjetas() {
     const cont = document.getElementById('rejilla-entidades');
     const total = Datos.ranking().length;
@@ -139,8 +207,9 @@ const Ranking = (() => {
         ? `Mostrando las ${total} entidades del ranking.`
         : `${filtrados.length} de ${total} entidades coinciden con los filtros.`;
 
+    cont.className = vista === 'lista' ? 'lista-entidades' : 'rejilla';
     cont.innerHTML = filtrados.length
-      ? filtrados.map(tarjeta).join('')
+      ? filtrados.map(vista === 'lista' ? fila : tarjeta).join('')
       : '<p class="vacio">Ninguna entidad coincide con esos filtros. Prueba a limpiarlos.</p>';
 
     cont.querySelectorAll('[data-simular]').forEach((b) => {
@@ -149,6 +218,19 @@ const Ranking = (() => {
         Simulador.seleccionar(b.dataset.simular);
       });
     });
+  }
+
+  function cambiarVista(nueva) {
+    vista = nueva;
+    try { localStorage.setItem('vista_ranking', nueva); } catch { /* modo privado */ }
+    document.querySelectorAll('[data-vista]').forEach((b) => {
+      const activo = b.dataset.vista === nueva;
+      b.classList.toggle('activa', activo);
+      b.setAttribute('aria-pressed', String(activo));
+    });
+    // Recalcula la seleccion antes de pintar: al cargar la pagina `filtrados`
+    // aun esta vacio y pintar directamente dejaria el listado en blanco.
+    aplicarFiltros();
   }
 
   function pintarMetodologia() {
@@ -191,9 +273,12 @@ const Ranking = (() => {
       $('#f-apertura').value = ''; $('#f-minimo').value = ''; $('#f-orden').value = 'trea';
       aplicarFiltros();
     });
+    document.querySelectorAll('[data-vista]').forEach((b) => {
+      b.addEventListener('click', () => cambiarVista(b.dataset.vista));
+    });
   }
 
-  const render = () => { pintarKpis(); aplicarFiltros(); pintarMetodologia(); };
+  const render = () => { pintarKpis(); cambiarVista(vista); pintarMetodologia(); };
 
-  return { iniciar, render, get filtrados() { return filtrados; } };
+  return { iniciar, render, cambiarVista, get filtrados() { return filtrados; } };
 })();

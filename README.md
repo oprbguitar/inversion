@@ -17,13 +17,17 @@ videos de finanzas en YouTube y descarga del Excel corregido.
 
 | Pestaña | Qué hace |
 |---|---|
-| **Ranking** | 16 entidades ordenadas por TREA, con filtros por tasa, modo de apertura y monto mínimo. Cada tarjeta muestra condiciones, vigencia de campaña, alertas y enlace a la fuente oficial. |
+| **Ranking** | 16 entidades ordenadas por TREA, con filtros por tasa, modo de apertura y monto mínimo. **Dos vistas**: cuadrícula (tarjetas compactas) o lista detallada (los 14 campos desplegados, con el enlace a la entidad visible). La preferencia se recuerda. |
 | **Simulador** | Ingresas monto, aporte mensual y plazo. Aplica la **escala real de tasas por saldo** de cada entidad y sus **topes de saldo remunerado**. Compara el mismo monto en las 16 entidades. |
 | **Tasas BCRP** | Serie mensual de la tasa de referencia (PD04722MM), con gráfico y el *spread* que paga cada cuenta sobre la tasa de política monetaria. |
 | **Seguridad / FSD** | Cobertura del Fondo de Seguro de Depósitos, simulador de cuánto de tu saldo queda cubierto y enlaces a los reguladores para verificar por tu cuenta. |
-| **Mercado** | Productos publicados por comparabien.com.pe, extraídos automáticamente y contrastados con el ranking verificado. |
+| **Comparabien** | Todo lo que publica comparabien.com.pe sin pedir datos personales: productos con tasa, las **30 entidades** que declara comparar y sus criterios de comparación, contrastado con el ranking verificado. |
+| **Mercados** | Dashboard de cotizaciones en vivo (Twelve Data): divisas, índices, empresas peruanas en NYSE y materias primas. Incluye el directorio de entidades financieras y enlace al proyecto BolsaVL. |
 | **Videos** | Búsqueda en vivo en YouTube, acotada a finanzas en Perú o internacional. |
-| **Descargas** | Excel mejorado, CSV generado en el navegador y los datasets JSON. |
+| **Descargas** | Excel mejorado (con la fecha de descarga en el nombre), CSV generado en el navegador y los datasets JSON. |
+
+Además, en todas las pestañas: **cinta de cotizaciones** superior y **relojes en vivo de Perú y
+Nueva York**, con indicador de si el mercado estadounidense está abierto.
 
 ---
 
@@ -35,9 +39,20 @@ Y las fuentes se comportan distinto frente al navegador:
 | Fuente | ¿Se puede llamar desde el navegador? | Cómo se resuelve aquí |
 |---|---|---|
 | **YouTube Data API v3** | **Sí.** Responde con CORS abierto. | Consulta **en vivo**, desde el navegador, cada vez que buscas. |
+| **Twelve Data** | **Sí.** `Access-Control-Allow-Origin: *`. | Cotizaciones **en vivo** desde el navegador, con la clave que tú introduces. |
 | **API del BCRP** | **No.** Devuelve JSON pero **sin** `Access-Control-Allow-Origin`, así que el navegador bloquea la respuesta. | GitHub Actions la consulta del lado del servidor y publica `docs/data/live.json`. El portal igual **intenta** la llamada directa en cada carga: si el BCRP habilita CORS algún día, pasa a usar el dato del minuto sin tocar el código. |
-| **comparabien.com.pe** | **No.** Sin API ni CORS. | Se extrae del lado del servidor en el mismo workflow. |
+| **comparabien.com.pe** | **No.** Sin API ni CORS. | Se extrae del lado del servidor en el mismo workflow. Ver la limitación del formulario más abajo. |
 | **SBS / FSD** | No publican una API abierta de tasas pasivas. | Se enlaza a los buscadores oficiales para verificación manual. |
+
+### Qué se extrae de comparabien y qué no
+
+Se extrae automáticamente todo lo que publican **sin pedir datos personales**: los productos
+destacados con su tasa, las **30 entidades** que declaran comparar y los criterios de su tabla.
+
+La **tabla completa de resultados no se extrae**, y es una decisión deliberada: su formulario exige
+un **correo electrónico obligatorio** (campo `email`, `required`) con casilla de suscripción. Rellenarlo
+automáticamente dos veces al día inyectaría contactos falsos en su sistema de captación de forma
+indefinida. El portal enlaza a su formulario para que lo consultes tú con tu propio correo.
 
 El flujo es este:
 
@@ -95,7 +110,39 @@ ni contra otras APIs de Google. **Hazlo antes de publicar el repositorio.**
 La cuota gratuita es de 10,000 unidades/día y cada búsqueda cuesta 100, así que son ~100
 búsquedas diarias. Por eso la pestaña Videos solo consulta al abrirse, no en cada visita.
 
-### 3. Desarrollo local
+### 3. Clave de Twelve Data (cotizaciones)
+
+**No está en el repositorio**, por decisión expresa. Cada usuario la introduce una vez en la pestaña
+**Mercados** y queda guardada solo en su navegador (`localStorage`); nunca se envía a otro sitio que
+no sea la propia API de Twelve Data.
+
+Límites del plan gratuito: **8 créditos por minuto y 800 al día**, y **cada instrumento cuesta 1
+crédito** (no cada petición). Por eso el dashboard consulta 8 instrumentos y refresca cada 5 minutos.
+Si superas la cuota, la interfaz lo explica y basta con esperar un minuto.
+
+### 4. Clave de acceso al portal ⚠️
+
+El portal se abre con una puerta de acceso. **Esto es una barrera de conveniencia, no seguridad
+real**, y conviene tenerlo claro antes de confiar nada a esa clave:
+
+- En GitHub Pages **todos los archivos son públicos**. Cualquiera puede abrir
+  `docs/data/dataset.json` directamente, sin pasar por la puerta.
+- El JavaScript de la puerta es visible; se puede desactivar el overlay desde las herramientas de
+  desarrollo del navegador.
+- Se guarda el **hash SHA-256** de la clave, no la clave en claro, para que no aparezca literal en el
+  repositorio. Pero un hash sin sal de una clave corta se rompe por fuerza bruta en segundos.
+
+Sirve para que el portal no quede abierto a quien llegue por casualidad. **No sirve para proteger
+información confidencial.** Si hiciera falta control de acceso real: repositorio privado con GitHub
+Pages de pago, o un backend que valide la sesión antes de servir los datos.
+
+Para cambiar la clave, sustituye el hash en `docs/assets/js/acceso.js`:
+
+```bash
+python -c "import hashlib; print(hashlib.sha256('TU-NUEVA-CLAVE'.encode()).hexdigest())"
+```
+
+### 5. Desarrollo local
 
 ```bash
 pip install openpyxl
@@ -120,11 +167,15 @@ docs/                        # raíz de GitHub Pages
 ├─ assets/
 │  ├─ css/estilos.css        # tema claro/oscuro, responsive
 │  ├─ js/
-│  │  ├─ datos.js            # carga y unifica las 3 fuentes
+│  │  ├─ acceso.js           # puerta de acceso (barrera de conveniencia)
+│  │  ├─ datos.js            # carga y unifica las fuentes
 │  │  ├─ formato.js          # formato + motor financiero (TREA, tramos, topes)
 │  │  ├─ graficos.js         # gráficos SVG sin librerías
-│  │  ├─ ranking.js  simulador.js  bcrp.js
-│  │  ├─ seguridad.js  mercado.js  videos.js  descargas.js
+│  │  ├─ ranking.js          # vistas cuadrícula y lista
+│  │  ├─ simulador.js  bcrp.js  seguridad.js
+│  │  ├─ mercado.js          # comparabien
+│  │  ├─ mercados.js         # cotizaciones, cinta y relojes (Twelve Data)
+│  │  ├─ videos.js  descargas.js
 │  │  └─ app.js              # pestañas, tema, orquestación
 │  └─ logos/*.svg            # un logotipo por entidad
 ├─ data/

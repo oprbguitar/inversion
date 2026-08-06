@@ -90,9 +90,22 @@ def limpiar(s):
     return unescape(re.sub(r"\s+", " ", re.sub(r"<[^>]+>", " ", s))).strip()
 
 
+LOGO_COMP = re.compile(r'<img[^>]*?src="([^"]*?/logos/[^"]*?)"[^>]*?alt="([^"]*?)"[^>]*?class="logo-comp"', re.S)
+
+
 def fetch_comparabien():
-    """Productos de ahorro destacados publicados en comparabien.com.pe."""
+    """Todo lo que comparabien.com.pe publica sin exigir datos personales.
+
+    La tabla completa de resultados esta detras de un formulario que exige un
+    correo obligatorio (captura de leads). No se rellena: automatizar eso
+    inyectaria contactos falsos en su sistema dos veces al dia. Se extrae en
+    cambio todo lo accesible sin el formulario:
+      * productos destacados con su tasa,
+      * el listado completo de entidades que comparan,
+      * el esquema de columnas de la comparacion.
+    """
     html = get(COMPARABIEN)
+
     productos = []
     for bloque in BLOQUE.split(html)[1:]:
         m = CARD.search(bloque)
@@ -109,14 +122,40 @@ def fetch_comparabien():
             "detalle": limpiar(m.group("desc")),
             "logo": m.group("logo"),
         })
-    # De-duplicar conservando el orden de aparicion.
     vistos, unicos = set(), []
     for p in productos:
         clave = (p["entidad"], p["producto"])
         if clave not in vistos:
             vistos.add(clave)
             unicos.append(p)
-    return {"fuente": COMPARABIEN, "productos": unicos}
+
+    # Roster completo de entidades que comparabien declara comparar.
+    entidades, vistas = [], set()
+    for logo, alt in LOGO_COMP.findall(html):
+        nombre = limpiar(alt)
+        if nombre and nombre.lower() not in vistas:
+            vistas.add(nombre.lower())
+            entidades.append({"entidad": nombre, "logo": logo})
+
+    # Criterios que comparabien contrasta en su tabla. Un GET a /ahorros/result
+    # sin el POST del formulario redirige, asi que no se pide: el esquema se
+    # documenta aqui a partir de los encabezados publicados en esa tabla.
+    columnas = ["Producto", "Tasa de interés (TEA)", "Costo de mantenimiento",
+                "Operaciones libres en ventanilla", "Operaciones libres en cajero",
+                "Monto mínimo de apertura"]
+
+    return {
+        "fuente": COMPARABIEN,
+        "productos": unicos,
+        "entidades": entidades,
+        "columnas": columnas,
+        "tabla_completa": {
+            "disponible": False,
+            "motivo": "comparabien exige un correo electronico obligatorio para mostrar la tabla "
+                      "completa de resultados. No se automatiza el envio de datos personales.",
+            "url": COMPARABIEN,
+        },
+    }
 
 
 def main():

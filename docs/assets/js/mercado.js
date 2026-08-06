@@ -28,6 +28,34 @@ const Mercado = (() => {
          Las tasas que publica ese comparador son <strong>TEA</strong>, no TREA, así que no son
          directamente comparables con el ranking verificado de este portal.</div>`;
 
+    // KPIs de lo extraído.
+    const roster = cb.entidades || [];
+    const conTasa = productos.filter((p) => isFinite(p.tasa));
+    document.getElementById('mercado-kpis').innerHTML = [
+      ['Productos con tasa', productos.length, 'Extraídos de la portada'],
+      ['Entidades que compara', roster.length, 'Bancos, cajas y financieras'],
+      ['Tasa más alta publicada', conTasa.length ? Fmt.pct(Math.max(...conTasa.map((p) => p.tasa))) : '—', 'En TEA, no TREA'],
+      ['Criterios comparados', (cb.columnas || []).length, 'Columnas de su tabla'],
+    ].map(([et, val, nota]) => `
+      <div class="kpi"><div class="kpi-etiqueta">${et}</div>
+       <div class="kpi-valor">${val}</div><div class="kpi-nota">${nota}</div></div>`).join('');
+
+    // Roster completo de entidades.
+    document.getElementById('mercado-roster').innerHTML = roster.length
+      ? roster.map((e) => `<span class="etiqueta">${Fmt.esc(e.entidad)}</span>`).join('')
+      : '<p class="sutil">Sin datos de entidades en la última extracción.</p>';
+
+    // Criterios comparados.
+    document.getElementById('mercado-columnas').innerHTML =
+      (cb.columnas || []).map((c) => `<li>${Fmt.esc(c)}</li>`).join('');
+
+    const lim = cb.tabla_completa;
+    document.getElementById('mercado-limite').innerHTML = lim && !lim.disponible
+      ? `<div class="aviso"><strong>Por qué no se extrae la tabla completa.</strong>
+         ${Fmt.esc(lim.motivo)} Puedes consultarla tú mismo introduciendo tu correo en
+         <a href="${fuente}" target="_blank" rel="noopener">su formulario</a>.</div>`
+      : '';
+
     document.getElementById('rejilla-mercado').innerHTML = productos.length ? productos.map((p) => {
       const logo = Fmt.urlSegura(p.logo);
       return `<article class="entidad">

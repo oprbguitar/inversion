@@ -16,10 +16,31 @@
 <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
 <link rel="stylesheet" href="assets/css/estilos.css">
 </head>
-<body>
+<body class="bloqueado">
 <a class="saltar" href="#principal">Saltar al contenido</a>
 
+<!-- Puerta de acceso. Barrera de conveniencia, no seguridad real: ver acceso.js -->
+<div id="puerta" class="puerta">
+ <div class="puerta-caja">
+  <span class="marca-icono" aria-hidden="true">S/</span>
+  <h1>Portal de Ahorros Perú</h1>
+  <p>Introduce la clave de acceso para continuar.</p>
+  <label class="sr-solo" for="puerta-clave">Clave de acceso</label>
+  <input type="password" id="puerta-clave" autocomplete="current-password" placeholder="Clave de acceso" spellcheck="false">
+  <p class="puerta-error" id="puerta-error" role="alert"></p>
+  <button type="button" class="btn-primario" id="puerta-entrar">Entrar</button>
+ </div>
+</div>
+
+<!-- Cinta de cotizaciones en vivo (Twelve Data) -->
+<div id="cinta" class="cinta" aria-label="Cotizaciones de mercado en vivo">
+ <div class="cinta-interior" id="cinta-interior"></div>
+</div>
+
 <header class="cabecera">
+ <div class="contenedor barra-relojes">
+  <div class="relojes" id="relojes" role="status" aria-live="off"></div>
+ </div>
  <div class="contenedor cabecera-fila">
   <div class="marca">
    <span class="marca-icono" aria-hidden="true">S/</span>
@@ -42,7 +63,8 @@
   <button role="tab" class="pestana"        data-panel="simulador" aria-selected="false" aria-controls="p-simulador">Simulador</button>
   <button role="tab" class="pestana"        data-panel="bcrp"      aria-selected="false" aria-controls="p-bcrp">Tasas BCRP</button>
   <button role="tab" class="pestana"        data-panel="seguridad" aria-selected="false" aria-controls="p-seguridad">Seguridad / FSD</button>
-  <button role="tab" class="pestana"        data-panel="mercado"   aria-selected="false" aria-controls="p-mercado">Mercado</button>
+  <button role="tab" class="pestana"        data-panel="mercado"   aria-selected="false" aria-controls="p-mercado">Comparabien</button>
+  <button role="tab" class="pestana"        data-panel="mercados"  aria-selected="false" aria-controls="p-mercados">Mercados</button>
   <button role="tab" class="pestana"        data-panel="videos"    aria-selected="false" aria-controls="p-videos">Videos</button>
   <button role="tab" class="pestana"        data-panel="descargas" aria-selected="false" aria-controls="p-descargas">Descargas</button>
  </nav>
@@ -105,7 +127,17 @@
    <button type="button" id="f-limpiar" class="btn-secundario">Limpiar</button>
   </div>
 
-  <p class="conteo" id="conteo-resultados" role="status" aria-live="polite"></p>
+  <div class="barra-vista">
+   <p class="conteo" id="conteo-resultados" role="status" aria-live="polite"></p>
+   <div class="selector-vista" role="group" aria-label="Cambiar la forma de ver el ranking">
+    <button type="button" class="btn-vista activa" data-vista="cuadricula" aria-pressed="true" title="Ver en cuadrícula">
+     <span aria-hidden="true">▦</span> Cuadrícula
+    </button>
+    <button type="button" class="btn-vista" data-vista="lista" aria-pressed="false" title="Ver en lista detallada">
+     <span aria-hidden="true">☰</span> Lista detallada
+    </button>
+   </div>
+  </div>
   <div class="rejilla" id="rejilla-entidades"></div>
 
   <details class="metodologia">
@@ -267,11 +299,68 @@
     automáticamente y contrastados contra el ranking verificado de este portal.</p>
   </div>
   <div id="mercado-estado"></div>
+  <div class="tarjetas-resumen" id="mercado-kpis"></div>
   <div class="rejilla" id="rejilla-mercado"></div>
   <div class="tarjeta">
    <h2>Contraste con el ranking verificado</h2>
    <div id="mercado-contraste"></div>
   </div>
+  <div class="tarjeta">
+   <h2>Entidades que compara comparabien.com.pe</h2>
+   <p class="sutil">Listado completo extraído automáticamente de su portada.</p>
+   <div class="nubes-entidades" id="mercado-roster"></div>
+  </div>
+  <div class="tarjeta">
+   <h2>Criterios que compara</h2>
+   <p class="sutil">Columnas de su tabla de resultados.</p>
+   <ul class="lista-cambios" id="mercado-columnas"></ul>
+   <div id="mercado-limite"></div>
+  </div>
+ </section>
+
+ <!-- ══════════ MERCADOS ══════════ -->
+ <section id="p-mercados" class="panel" role="tabpanel" aria-labelledby="mercados" hidden>
+  <div class="intro">
+   <h1>Dashboard de mercados</h1>
+   <p>Cotizaciones en vivo de divisas, índices, empresas peruanas listadas en Nueva York y
+    materias primas. Contexto para decidir dónde poner tu ahorro: si un índice rinde más que
+    una cuenta, también asume un riesgo que la cuenta de ahorro no tiene.</p>
+  </div>
+
+  <div class="tarjeta tarjeta-clave">
+   <h2>Clave de Twelve Data</h2>
+   <p class="sutil">Esta clave <strong>no está en el repositorio</strong>. La introduces una vez y
+    queda guardada solo en tu navegador; nunca se envía a otro sitio que no sea la propia API.</p>
+   <div class="clave-fila">
+    <label class="campo">
+     <span>Clave de API</span>
+     <input type="password" id="td-clave" placeholder="Pega aquí tu clave de Twelve Data" autocomplete="off" spellcheck="false">
+    </label>
+    <button type="button" class="btn-primario" id="td-guardar">Guardar</button>
+    <button type="button" class="btn-secundario" id="td-refrescar">Actualizar ahora</button>
+   </div>
+   <div class="clave-estado" id="td-estado"></div>
+   <p class="sutil">El plan gratuito permite 8 créditos por minuto y 800 al día, y cada instrumento
+    cuesta 1 crédito. Por eso se consultan 8 instrumentos y se refrescan cada 5 minutos.</p>
+  </div>
+
+  <div id="mercados-estado"></div>
+  <div id="paneles-mercado"></div>
+  <div id="mercados-entidades"></div>
+
+  <div class="tarjeta">
+   <h2>Proyecto relacionado</h2>
+   <p>Este dashboard reutiliza el modelo de cinta de cotizaciones y puerta de acceso del
+    proyecto <strong>BolsaVL</strong>, sobre la Bolsa de Valores de Lima y la inversión informada.</p>
+   <div class="entidad-acciones">
+    <a class="btn-primario" href="https://oprbguitar.github.io/bvl22072026/" target="_blank" rel="noopener">Abrir BolsaVL</a>
+    <a class="btn-secundario" href="https://github.com/oprbguitar/bvl22072026" target="_blank" rel="noopener">Ver repositorio</a>
+   </div>
+  </div>
+
+  <p class="descargo">Las cotizaciones son informativas y pueden estar diferidas según el plan de
+   Twelve Data. Nada de esto es recomendación de inversión. Invertir en bolsa implica riesgo de
+   pérdida del capital; una cuenta de ahorro cubierta por el FSD, no.</p>
  </section>
 
  <!-- ══════════ VIDEOS ══════════ -->
@@ -333,6 +422,7 @@
      cobertura del FSD y fuentes. Con filtros, formato condicional y celdas numéricas corregidas.</p>
     <ul class="descarga-meta" id="meta-xlsx"></ul>
     <a class="btn-primario" id="dl-xlsx" href="descargas/Ranking_Cuentas_Ahorro_Peru_Agosto_2026_MEJORADO.xlsx" download>Descargar Excel mejorado</a>
+    <p class="sutil" id="dl-sello">El archivo se descarga con la fecha de hoy en su nombre.</p>
    </article>
 
    <article class="tarjeta descarga">
@@ -385,6 +475,7 @@
  </div>
 </footer>
 
+<script src="assets/js/acceso.js"></script>
 <script src="assets/js/datos.js"></script>
 <script src="assets/js/formato.js"></script>
 <script src="assets/js/graficos.js"></script>
@@ -393,6 +484,7 @@
 <script src="assets/js/bcrp.js"></script>
 <script src="assets/js/seguridad.js"></script>
 <script src="assets/js/mercado.js"></script>
+<script src="assets/js/mercados.js"></script>
 <script src="assets/js/videos.js"></script>
 <script src="assets/js/descargas.js"></script>
 <script src="assets/js/app.js"></script>

@@ -7,14 +7,15 @@ Correcciones frente al original:
   * Sin orden, sin formato condicional y sin autofiltro.
 """
 import json
+from datetime import datetime
 from pathlib import Path
 
 from openpyxl import Workbook
-from openpyxl.chart import LineChart, Reference
-from openpyxl.formatting.rule import CellIsRule, ColorScaleRule
+from openpyxl.chart import BarChart, LineChart, Reference
+from openpyxl.chart.label import DataLabelList
+from openpyxl.formatting.rule import CellIsRule, ColorScaleRule, DataBarRule
 from openpyxl.styles import Alignment, Border, Font, PatternFill, Side
 from openpyxl.utils import get_column_letter
-from openpyxl.worksheet.table import Table, TableStyleInfo
 
 ROOT = Path(__file__).resolve().parents[1]
 DATA = json.loads((ROOT / "docs" / "data" / "dataset.json").read_text(encoding="utf-8"))
@@ -22,8 +23,12 @@ LIVE_PATH = ROOT / "docs" / "data" / "live.json"
 OUT = ROOT / "docs" / "descargas" / "Ranking_Cuentas_Ahorro_Peru_Agosto_2026_MEJORADO.xlsx"
 
 AZUL = "0B3D6B"
+AZUL_CLARO = "1668AD"
 BLANCO = "FFFFFF"
 GRIS = "EEF2F7"
+VERDE = "0F7B53"
+AMBAR = "B06F00"
+ROJO = "C8102E"
 
 F_TITULO = Font(size=15, bold=True, color=AZUL)
 F_SUB = Font(size=9, italic=True, color="5A6A7D")
@@ -31,19 +36,33 @@ F_CAB = Font(bold=True, color=BLANCO, size=10)
 R_CAB = PatternFill("solid", fgColor=AZUL)
 BORDE = Border(*[Side(style="thin", color="D8E0EA")] * 4)
 
+# Momento exacto en que se genera el libro: se estampa en cada hoja.
+GENERADO = datetime.now()
+SELLO = GENERADO.strftime("%d/%m/%Y %H:%M")
+
 MONEDA = '"S/"#,##0.00'
 MONEDA0 = '"S/"#,##0'
 PCT = "0.00%"
 
 
 def encabezado(ws, titulo, subtitulo, ancho=8):
+    """Cabecera con banda de color, titulo y sello de generacion."""
+    for c in range(1, ancho + 1):
+        ws.cell(row=1, column=c).fill = PatternFill("solid", fgColor=AZUL)
+        ws.cell(row=2, column=c).fill = PatternFill("solid", fgColor=GRIS)
+
     ws["A1"] = titulo
-    ws["A1"].font = F_TITULO
-    ws["A2"] = subtitulo
-    ws["A2"].font = F_SUB
+    ws["A1"].font = Font(size=14, bold=True, color=BLANCO)
+    ws["A1"].alignment = Alignment(vertical="center", indent=1)
+    ws["A2"] = f"{subtitulo}   ·   Datos generados el {SELLO}"
+    ws["A2"].font = Font(size=9, italic=True, color="3D4B5C")
+    ws["A2"].alignment = Alignment(vertical="center", indent=1, wrap_text=False)
+
     ws.merge_cells(start_row=1, start_column=1, end_row=1, end_column=ancho)
     ws.merge_cells(start_row=2, start_column=1, end_row=2, end_column=ancho)
-    ws.row_dimensions[1].height = 22
+    ws.row_dimensions[1].height = 30
+    ws.row_dimensions[2].height = 18
+    ws.sheet_view.showGridLines = False
 
 
 def escribir_cabecera(ws, fila, columnas):
@@ -94,18 +113,34 @@ def hoja_ranking(wb):
     ws.auto_filter.ref = f"A4:N{ultima}"
     ws.freeze_panes = "C5"
 
-    # Escala de color sobre la TREA: verde = mas alta.
-    ws.conditional_formatting.add(
-        f"D5:D{ultima}",
-        ColorScaleRule(start_type="min", start_color="FFF4E5",
-                       end_type="max", end_color="0F7B53"))
+    # Barras de datos dentro de la celda: la TREA se lee de un vistazo.
+    ws.conditional_formatting.add(f"D5:D{ultima}", DataBarRule(
+        start_type="num", start_value=0, end_type="max", color=VERDE, showValue=True))
     # Semaforo en el estado de verificacion.
     ws.conditional_formatting.add(f"J5:J{ultima}", CellIsRule(
         operator="containsText", formula=['NOT(ISERROR(SEARCH("Verificado",J5)))'],
-        fill=PatternFill("solid", fgColor="DFF3E7")))
+        fill=PatternFill("solid", fgColor="DFF3E7"), font=Font(color="0F7B53", bold=True)))
     ws.conditional_formatting.add(f"J5:J{ultima}", CellIsRule(
         operator="containsText", formula=['NOT(ISERROR(SEARCH("reserva",J5)))'],
-        fill=PatternFill("solid", fgColor="FBE3E6")))
+        fill=PatternFill("solid", fgColor="FBE3E6"), font=Font(color=ROJO, bold=True)))
+    # Resalta las cuentas sin monto minimo.
+    ws.conditional_formatting.add(f"F5:F{ultima}", CellIsRule(
+        operator="equal", formula=["0"], font=Font(color=VERDE, bold=True)))
+    # Filas alternas para leer tablas anchas sin perder la linea.
+    ws.conditional_formatting.add(f"A5:N{ultima}", CellIsRule(
+        operator="equal", formula=["MOD(ROW(),2)=0"], fill=PatternFill("solid", fgColor="F7F9FC")))
+
+    # Grafico de barras del ranking, visible junto a la tabla.
+    ch = BarChart()
+    ch.type = "bar"
+    ch.title = "TREA por entidad"
+    ch.height, ch.width = 12, 16
+    ch.legend = None
+    ch.dLbls = DataLabelList()
+    ch.dLbls.showVal = True
+    ch.add_data(Reference(ws, min_col=4, min_row=4, max_row=ultima), titles_from_data=True)
+    ch.set_categories(Reference(ws, min_col=2, min_row=5, max_row=ultima))
+    ws.add_chart(ch, f"P4")
 
     anchos(ws, {"A": 4, "B": 26, "C": 30, "D": 9, "E": 22, "F": 14, "G": 18,
                 "H": 46, "I": 40, "J": 26, "K": 20, "L": 26, "M": 6, "N": 40})
@@ -172,10 +207,21 @@ def hoja_simulador(wb):
             ws.cell(row=f, column=c).border = BORDE
 
     ultima = 9 + len(DATA["ranking"])
-    ws.conditional_formatting.add(f"F10:F{ultima}", ColorScaleRule(
-        start_type="min", start_color="FFF4E5", end_type="max", end_color="0F7B53"))
+    ws.conditional_formatting.add(f"F10:F{ultima}", DataBarRule(
+        start_type="num", start_value=0, end_type="max", color=VERDE, showValue=True))
+    ws.conditional_formatting.add(f"C10:C{ultima}", ColorScaleRule(
+        start_type="min", start_color="FFF4E5", end_type="max", end_color="C6E6D5"))
     ws.freeze_panes = "A10"
     anchos(ws, {"A": 4, "B": 28, "C": 10, "D": 22, "E": 18, "F": 20, "G": 18})
+
+    ch = BarChart()
+    ch.type = "bar"
+    ch.title = "Interes estimado del periodo por entidad"
+    ch.height, ch.width = 12, 16
+    ch.legend = None
+    ch.add_data(Reference(ws, min_col=6, min_row=9, max_row=ultima), titles_from_data=True)
+    ch.set_categories(Reference(ws, min_col=2, min_row=10, max_row=ultima))
+    ws.add_chart(ch, "I9")
 
     ws.cell(row=ultima + 2, column=1,
             value="Simulacion referencial. No incluye ITF, retenciones, comisiones no informadas, "
@@ -323,6 +369,40 @@ def hoja_portada(wb):
     encabezado(ws, "RANKING DE CUENTAS DE AHORRO EN PERU — VERSION MEJORADA",
                f"Corte de datos: {DATA['corte']}", 6)
 
+    # Panel de indicadores destacados.
+    r = DATA["ranking"]
+    mejor = r[0]
+    promedio = sum(e["trea"] or 0 for e in r) / len(r)
+    sin_min = sum(1 for e in r if not e["monto_minimo"])
+    kpis = [
+        ("Entidades comparadas", len(r), None),
+        ("TREA mas alta", mejor["trea"], PCT),
+        ("TREA promedio", promedio, PCT),
+        ("Sin monto minimo", sin_min, None),
+        ("Tasa de referencia BCRP", DATA["bcrp"]["vigente"], PCT),
+        ("Cobertura FSD", DATA["fsd"]["cobertura"], MONEDA0),
+    ]
+    for i, (etiqueta, valor, fmt) in enumerate(kpis):
+        col = 1 + (i % 3) * 2
+        fila = 4 + (i // 3) * 3
+        et = ws.cell(row=fila, column=col, value=etiqueta.upper())
+        et.font = Font(size=8, bold=True, color="5A6A7D")
+        val = ws.cell(row=fila + 1, column=col, value=valor)
+        val.font = Font(size=18, bold=True, color=AZUL)
+        if fmt:
+            val.number_format = fmt
+        for c in (col, col + 1):
+            for f in (fila, fila + 1):
+                ws.cell(row=f, column=c).fill = PatternFill("solid", fgColor="F2F6FA")
+                ws.cell(row=f, column=c).border = Border(
+                    left=Side(style="thick", color=AZUL_CLARO) if c == col else None,
+                    top=Side(style="thin", color="D8E0EA"),
+                    bottom=Side(style="thin", color="D8E0EA"),
+                )
+    ws.cell(row=9, column=1,
+            value=f"Libro generado el {SELLO}. La fecha de tu descarga va en el nombre del archivo."
+            ).font = Font(size=10, bold=True, color=AZUL_CLARO)
+
     lineas = [
         ("", ""),
         ("Contenido del libro", ""),
@@ -345,11 +425,19 @@ def hoja_portada(wb):
         ("Aviso", "Documento informativo. No es asesoria financiera ni recomendacion de contratacion. "
                   "Verifique el contrato, la cartilla y el tarifario vigentes antes de abrir una cuenta."),
     ]
-    for i, (a, b) in enumerate(lineas, start=4):
-        ws.cell(row=i, column=1, value=a).font = Font(bold=True, size=10, color=AZUL)
-        ws.cell(row=i, column=2, value=b)
-        ws.cell(row=i, column=2).alignment = Alignment(wrap_text=True, vertical="top")
-    anchos(ws, {"A": 26, "B": 88})
+    for i, (a, b) in enumerate(lineas, start=11):
+        ca = ws.cell(row=i, column=1, value=a)
+        ca.font = Font(bold=True, size=10, color=AZUL)
+        ca.alignment = Alignment(vertical="top")
+        cb = ws.cell(row=i, column=2, value=b)
+        cb.alignment = Alignment(wrap_text=True, vertical="top")
+        # Los encabezados de seccion no llevan segunda columna: se realzan.
+        if a and not b:
+            ca.font = Font(bold=True, size=11, color=BLANCO)
+            for c in range(1, 7):
+                ws.cell(row=i, column=c).fill = PatternFill("solid", fgColor=AZUL_CLARO)
+    anchos(ws, {"A": 28, "B": 44, "C": 16, "D": 16, "E": 16, "F": 16})
+    ws.column_dimensions["B"].width = 92
 
 
 def main():

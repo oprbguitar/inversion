@@ -1,6 +1,6 @@
 {
- "actualizado": "2026-08-06T18:55:52+00:00",
- "actualizado_pe": "06/08/2026 13:55",
+ "actualizado": "2026-08-06T19:40:57+00:00",
+ "actualizado_pe": "06/08/2026 14:40",
  "fuentes": {
   "bcrp": {
    "estado": "ok",
@@ -231,6 +231,141 @@
     "detalle": "Sin costo de mantenimiento.",
     "logo": "https://cdn-pe.comparabien.com/chat/logos/logo_bcp.png"
    }
-  ]
+  ],
+  "entidades": [
+   {
+    "entidad": "Banco de Credito del Peru BCP",
+    "logo": "https://cdn-pe.comparabien.com/logos/logo_bcp.png"
+   },
+   {
+    "entidad": "Banco BBVA S.A.",
+    "logo": "https://cdn-pe.comparabien.com/logos/bbva.png"
+   },
+   {
+    "entidad": "Scotiabank Peru",
+    "logo": "https://cdn-pe.comparabien.com/logos/scotiabank.png"
+   },
+   {
+    "entidad": "Interbank",
+    "logo": "https://cdn-pe.comparabien.com/logos/logo_interbank.jpg"
+   },
+   {
+    "entidad": "Banco Pichincha",
+    "logo": "https://cdn-pe.comparabien.com/logos/pichincha.png"
+   },
+   {
+    "entidad": "Banbif",
+    "logo": "https://cdn-pe.comparabien.com/logos/logo_bif.jpg"
+   },
+   {
+    "entidad": "Mibanco",
+    "logo": "https://cdn-pe.comparabien.com/logos/mibanco.png"
+   },
+   {
+    "entidad": "Banco GNB Peru",
+    "logo": "https://cdn-pe.comparabien.com/logos/logo_gnb.png"
+   },
+   {
+    "entidad": "Banco Falabella Peru",
+    "logo": "https://cdn-pe.comparabien.com/logos/logo_falabella.jpg"
+   },
+   {
+    "entidad": "Banco Ripley",
+    "logo": "https://cdn-pe.comparabien.com/logos/banco_ripley.png"
+   },
+   {
+    "entidad": "Alfin Banco",
+    "logo": "https://cdn-pe.comparabien.com/logos/alfin.png"
+   },
+   {
+    "entidad": "Efectibank",
+    "logo": "https://cdn-pe.comparabien.com/logos/efectibank.png"
+   },
+   {
+    "entidad": "Compartamos Banco",
+    "logo": "https://cdn-pe.comparabien.com/logos/compartamos.png"
+   },
+   {
+    "entidad": "Financiera CrediScotia",
+    "logo": "https://cdn-pe.comparabien.com/logos/logo_cresco.png"
+   },
+   {
+    "entidad": "Financiera Confianza",
+    "logo": "https://cdn-pe.comparabien.com/logos/confianza.png"
+   },
+   {
+    "entidad": "Financiera Proempresa",
+    "logo": "https://cdn-pe.comparabien.com/logos/logo_proempresa.png"
+   },
+   {
+    "entidad": "Financiera OH",
+    "logo": "https://cdn-pe.comparabien.com/logos/oh.png"
+   },
+   {
+    "entidad": "Financiera Qapaq S.A.",
+    "logo": "https://cdn-pe.comparabien.com/logos/logo_qapaq.jpg"
+   },
+   {
+    "entidad": "Caja Prymera",
+    "logo": "https://cdn-pe.comparabien.com/logos/prymera.jpg"
+   },
+   {
+    "entidad": "Caja Los Andes",
+    "logo": "https://cdn-pe.comparabien.com/logos/logo_losandes.png"
+   },
+   {
+    "entidad": "Caja Rural de Ahorro y Credito Incas",
+    "logo": "https://cdn-pe.comparabien.com/logos/logo_incasur.png"
+   },
+   {
+    "entidad": "Caja Municipal Cusco",
+    "logo": "https://cdn-pe.comparabien.com/logos/cusco.png"
+   },
+   {
+    "entidad": "Caja Municipal Ica",
+    "logo": "https://cdn-pe.comparabien.com/logos/cajaica.png"
+   },
+   {
+    "entidad": "Caja Piura",
+    "logo": "https://cdn-pe.comparabien.com/logos/logo_piura.png"
+   },
+   {
+    "entidad": "Caja Municipal Tacna",
+    "logo": "https://cdn-pe.comparabien.com/logos/logo_cmtac.jpg"
+   },
+   {
+    "entidad": "Caja Trujillo",
+    "logo": "https://cdn-pe.comparabien.com/logos/logo_trujillo.jpg"
+   },
+   {
+    "entidad": "Caja Huancayo",
+    "logo": "https://cdn-pe.comparabien.com/logos/logo_caja_huancayo.jpg"
+   },
+   {
+    "entidad": "Caja Metropolitana de Lima",
+    "logo": "https://cdn-pe.comparabien.com/logos/logo_cmet.png"
+   },
+   {
+    "entidad": "Caja Paita",
+    "logo": "https://cdn-pe.comparabien.com/logos/logo_paita.gif"
+   },
+   {
+    "entidad": "Caja del Santa",
+    "logo": "https://cdn-pe.comparabien.com/logos/logo_santa.gif"
+   }
+  ],
+  "columnas": [
+   "Producto",
+   "Tasa de interés (TEA)",
+   "Costo de mantenimiento",
+   "Operaciones libres en ventanilla",
+   "Operaciones libres en cajero",
+   "Monto mínimo de apertura"
+  ],
+  "tabla_completa": {
+   "disponible": false,
+   "motivo": "comparabien exige un correo electronico obligatorio para mostrar la tabla completa de resultados. No se automatiza el envio de datos personales.",
+   "url": "https://comparabien.com.pe/ahorros"
+  }
  }
 }

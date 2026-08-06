@@ -1,6 +1,6 @@
 /* Orquestador: pestañas, tema, carga de datos y refresco. */
 const App = (() => {
-  const paneles = ['ranking', 'simulador', 'bcrp', 'seguridad', 'mercado', 'videos', 'descargas'];
+  const paneles = ['ranking', 'simulador', 'bcrp', 'seguridad', 'mercado', 'mercados', 'videos', 'descargas'];
 
   function irA(nombre) {
     if (!paneles.includes(nombre)) nombre = 'ranking';
@@ -43,6 +43,7 @@ const App = (() => {
     Bcrp.render();
     Seguridad.render();
     Mercado.render();
+    Mercados.render();
     Descargas.render();
 
     const e = Datos.estado;
@@ -78,6 +79,10 @@ const App = (() => {
   function iniciar() {
     aplicarTema(temaInicial());
 
+    // La puerta solo oculta la interfaz; el resto del portal se inicia igual
+    // para que al introducir la clave todo este ya listo.
+    Acceso.iniciar();
+
     document.querySelectorAll('.pestana').forEach((b) => {
       b.addEventListener('click', () => irA(b.dataset.panel));
     });
@@ -91,6 +96,7 @@ const App = (() => {
     Ranking.iniciar();
     Simulador.iniciar();
     Seguridad.iniciar();
+    Mercados.iniciar();
     Videos.iniciar();
     Descargas.iniciar();
 
