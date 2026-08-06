@@ -86,7 +86,7 @@ navegador y puede recuperarse leyendo ese archivo — es una limitación de los 
 no de la ofuscación elegida. La protección real es del lado de Google:
 
 1. [Google Cloud Console](https://console.cloud.google.com/apis/credentials) → tu clave.
-2. **Restricciones de aplicación → Sitios web (referrers HTTP)** → añade `https://TU-USUARIO.github.io/*`.
+2. **Restricciones de aplicación → Sitios web (referrers HTTP)** → añade `https://oprbguitar.github.io/inversion/*`.
 3. **Restricciones de API** → deja habilitada **solo** *YouTube Data API v3*.
 
 Con esas dos restricciones, aunque alguien extraiga la clave, no puede usarla desde otro dominio
