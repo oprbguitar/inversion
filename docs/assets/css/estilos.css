@@ -92,6 +92,15 @@ abbr { text-decoration-style: dotted; cursor: help; }
   overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0;
 }
 
+/* ── Aviso sin conexión ───────────────────────────────── */
+.aviso-offline {
+  position: sticky; top: 0; z-index: 150;
+  background: var(--ambar); color: #1a1205;
+  text-align: center; font-size: .82rem; font-weight: 600;
+  padding: .4rem 1rem;
+}
+.aviso-offline[hidden] { display: none; }
+
 /* ── Puerta de acceso ─────────────────────────────────── */
 .puerta {
   position: fixed; inset: 0; z-index: 200;

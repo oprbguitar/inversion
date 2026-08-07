@@ -32,6 +32,37 @@ Además, en todas las pestañas: **cinta de cotizaciones** superior (con botón 
 **relojes en vivo de Perú y Nueva York** con estado del mercado estadounidense, y el
 **tipo de cambio del dólar** en vivo junto al oficial de SUNAT.
 
+## Funciona sin conexión (PWA)
+
+El portal es una **aplicación web progresiva**: un *service worker* ([docs/sw.js](docs/sw.js))
+guarda la aplicación y los datos en el dispositivo, así que tras la primera visita **funciona
+sin conexión**. Puedes incluso instalarlo como app desde el navegador (manifest en
+[docs/manifest.webmanifest](docs/manifest.webmanifest)).
+
+Qué funciona offline: ranking, simulador, tarjetas de crédito, entidades SBS, FSD, la serie del
+BCRP y las descargas — todo se sirve desde la copia guardada. Qué no: las cotizaciones en vivo
+(Twelve Data), los videos de YouTube y el tipo de cambio de mercado necesitan red; sin conexión
+cada módulo muestra su estado de "no disponible" en vez de fallar, y un aviso ámbar indica que se
+están mostrando los últimos datos guardados. Las cotizaciones **no se cachean**: serían datos
+viejos disfrazados de actuales.
+
+## Motor financiero con pruebas
+
+El cálculo vive en un módulo puro y sin dependencias ([docs/assets/js/motor.js](docs/assets/js/motor.js))
+con **14 pruebas automatizadas** ([tests/motor.test.js](tests/motor.test.js)) que corren con
+`node --test` —sin `npm install`— y en CI en cada push
+([.github/workflows/pruebas.yml](.github/workflows/pruebas.yml)).
+
+```bash
+node --test
+```
+
+Corrige un defecto real: el saldo por encima del **tope remunerado** ya no desaparece del cálculo.
+Se separan interés promocional, interés del excedente, interés de aportes, mantenimiento e ITF.
+Cuando la fuente no publica la tasa del excedente, se deja en `null` (no se inventa un número) y ese
+saldo se reporta como "no verificado" en vez de ocultarse. Ver
+[docs/technical/AUDIT_REPORT.md](docs/technical/AUDIT_REPORT.md).
+
 ---
 
 ## Cómo se actualizan los datos (esto es lo importante)

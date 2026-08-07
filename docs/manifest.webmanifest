@@ -1,0 +1,22 @@
+{
+  "name": "Portal de Ahorros Perú",
+  "short_name": "Ahorros PE",
+  "description": "Comparador de cuentas de ahorro, tarjetas de crédito y entidades autorizadas en Perú, con simulador y datos del BCRP. Funciona sin conexión.",
+  "lang": "es-PE",
+  "dir": "ltr",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "background_color": "#0e151f",
+  "theme_color": "#0b3d6b",
+  "categories": ["finance", "education"],
+  "icons": [
+    {
+      "src": "assets/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}
