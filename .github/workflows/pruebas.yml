@@ -1,0 +1,25 @@
+name: Pruebas
+
+# Ejecuta la bateria de pruebas del motor financiero en cada push y PR.
+# Usa el runner de pruebas incorporado de Node (node --test): sin dependencias,
+# sin npm install, sin package.json.
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'docs/assets/js/motor.js'
+      - 'tests/**'
+      - '.github/workflows/pruebas.yml'
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  pruebas:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: Ejecutar pruebas del motor financiero
+        run: node --test

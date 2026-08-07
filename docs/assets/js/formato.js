@@ -35,74 +35,43 @@ const Fmt = (() => {
     return `${nombres[parseInt(m, 10) - 1] || m} ${a}`;
   };
 
-  /* ── Motor financiero ───────────────────────────────── */
+  /* ── Motor financiero ───────────────────────────────────
+   * El calculo vive en motor.js (puro y con pruebas). Aqui solo se arma la
+   * configuracion normalizada del producto a partir de `Datos` y se delega. */
 
-  /**
-   * TREA aplicable a un saldo segun la escala de tramos de la entidad.
-   * Los tramos vienen ordenados por saldo de inicio; se toma el ultimo que aplique.
-   */
-  function treaPorSaldo(entidad, saldo, cumpleCondicion = true) {
-    const ficha = Datos.fichaDe(entidad.entidad);
-    const tramos = (ficha && ficha.tramos) || [];
-    const treaMax = entidad.trea || 0;
-
-    if (!tramos.length) return cumpleCondicion ? treaMax : Math.min(treaMax, 0.005);
-
-    const ordenados = [...tramos].sort((a, b) => a.desde - b.desde);
-    let aplicable = ordenados[0];
-    for (const t of ordenados) if (saldo >= t.desde) aplicable = t;
-
-    // Si no cumple la condicion de campaña, no accede al tramo promocional.
-    if (!cumpleCondicion) {
-      const base = ordenados.filter((t) => t.trea < treaMax).map((t) => t.trea);
-      return base.length ? Math.max(...base) : 0;
-    }
-    return aplicable.trea;
-  }
-
-  /** Saldo que efectivamente gana la tasa (algunas campañas tienen tope remunerado). */
-  function saldoRemunerado(entidad, saldo) {
-    const ficha = Datos.fichaDe(entidad.entidad);
-    const tope = ficha && ficha.simulador && ficha.simulador.tope_remunerado;
-    return (isFinite(tope) && tope > 0) ? Math.min(saldo, tope) : saldo;
-  }
-
-  /**
-   * Proyeccion mes a mes. La TREA es efectiva anual, asi que la tasa mensual
-   * equivalente es (1+TREA)^(1/12)-1. El interes se calcula solo sobre el saldo
-   * remunerado; el excedente sobre el tope no genera intereses promocionales.
-   */
-  function proyectar(entidad, { monto, aporte = 0, meses = 12, cumple = true, itf = false }) {
-    let saldo = monto;
-    if (itf) saldo -= monto * 0.00005; // ITF 0.005%
-
-    const filas = [];
-    let acumulado = 0;
-    let aportado = saldo;
-
-    for (let m = 1; m <= meses; m += 1) {
-      const trea = treaPorSaldo(entidad, saldo, cumple);
-      const remunerado = saldoRemunerado(entidad, saldo);
-      const mensual = Math.pow(1 + trea, 1 / 12) - 1;
-      const interes = remunerado * mensual;
-
-      acumulado += interes;
-      saldo += interes + aporte;
-      aportado += aporte;
-
-      filas.push({ mes: m, trea, remunerado, interes, acumulado, aportado, saldo });
-    }
-
-    const trea = treaPorSaldo(entidad, monto, cumple);
+  /** Construye la config que espera Motor a partir de la entidad y su ficha. */
+  function configDe(entidad) {
+    const ficha = Datos.fichaDe(entidad.entidad) || {};
+    const sim = ficha.simulador || {};
     return {
-      filas,
-      treaAplicada: trea,
-      saldoRemunerado: saldoRemunerado(entidad, monto),
-      interesTotal: acumulado,
-      saldoFinal: saldo,
-      aportadoTotal: aportado,
+      tramos: ficha.tramos || [],
+      treaMax: entidad.trea || 0,
+      topeRemunerado: sim.tope_remunerado,
+      // La tasa del excedente sobre el tope no esta verificada en la fuente;
+      // se deja explicita como null para no inventar un numero (ver auditoria).
+      tasaRegular: (sim.tasa_regular === undefined) ? null : sim.tasa_regular,
+      mantenimientoMensual: sim.mantenimiento_mensual || 0,
     };
   }
 
-  return { money, moneyCorto, pct, pp, esc, urlSegura, mesLargo, treaPorSaldo, saldoRemunerado, proyectar };
+  function treaPorSaldo(entidad, saldo, cumpleCondicion = true) {
+    const c = configDe(entidad);
+    return Motor.treaPorSaldo(c.tramos, c.treaMax, saldo, cumpleCondicion);
+  }
+
+  function saldoRemunerado(entidad, saldo) {
+    return Motor.saldoRemunerado(saldo, configDe(entidad).topeRemunerado);
+  }
+
+  /** Proyeccion mes a mes; delega en el motor puro y conserva las claves usadas. */
+  function proyectar(entidad, opciones) {
+    return Motor.proyectar(configDe(entidad), opciones);
+  }
+
+  const retornoReal = Motor.retornoReal;
+
+  return {
+    money, moneyCorto, pct, pp, esc, urlSegura, mesLargo,
+    treaPorSaldo, saldoRemunerado, proyectar, retornoReal,
+  };
 })();
