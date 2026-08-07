@@ -38,6 +38,12 @@ jobs:
         continue-on-error: true   # si una fuente esta caida, se publica igual con el snapshot previo
         run: python tools/fetch_live.py
 
+      - name: Validar los datasets antes de publicar
+        # Si los datos son invalidos, este paso falla y se detiene el workflow:
+        # no se hace commit, asi que el snapshot verificado anterior se conserva
+        # y GitHub Pages sigue sirviendo la ultima version buena.
+        run: python tools/validar.py
+
       - name: Regenerar el Excel descargable
         run: python tools/build_xlsx.py
 

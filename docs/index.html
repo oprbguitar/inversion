@@ -15,7 +15,7 @@
 <meta property="og:locale" content="es_PE">
 <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
 <link rel="manifest" href="manifest.webmanifest">
-<link rel="stylesheet" href="assets/css/estilos.css?v=20260807b">
+<link rel="stylesheet" href="assets/css/estilos.css?v=20260807c">
 </head>
 <body class="bloqueado">
 <a class="saltar" href="#principal">Saltar al contenido</a>
@@ -84,23 +84,104 @@
 
  <!-- ══════════ RANKING ══════════ -->
  <section id="p-ranking" class="panel activo" role="tabpanel" aria-labelledby="ranking">
-  <div class="intro">
-   <h1>Ranking de cuentas de ahorro en soles</h1>
-   <p>Entidades supervisadas por la <abbr title="Superintendencia de Banca, Seguros y AFP">SBS</abbr> y cubiertas por el
-    <abbr title="Fondo de Seguro de Depósitos">FSD</abbr>. Las tasas mostradas son <strong>TREA</strong>
-    (Tasa de Rendimiento Efectivo Anual), la única cifra comparable entre entidades porque ya descuenta
-    comisiones y gastos del producto.</p>
+  <div class="ranking-hero">
+   <h1>Encuentra una cuenta adecuada para tu dinero</h1>
+   <p>Indica cuánto deseas ahorrar y verás la <strong>tasa que realmente aplica a tu saldo</strong>,
+    la ganancia estimada y las condiciones de cada entidad.</p>
+   <p class="ranking-estado" id="ranking-estado" role="status" aria-live="polite"></p>
   </div>
 
-  <div class="tarjetas-resumen" id="resumen-kpis"></div>
+  <form class="barra-decision" id="barra-decision" novalidate>
+   <div class="decision-campo decision-monto">
+    <label for="dec-monto">¿Cuánto deseas depositar?</label>
+    <div class="monto-fila">
+     <span class="monto-prefijo" aria-hidden="true">S/</span>
+     <input type="number" id="dec-monto" inputmode="numeric" min="0" step="100" value="10000"
+      aria-describedby="dec-monto-rapidos">
+    </div>
+    <div class="montos-rapidos" id="dec-monto-rapidos" role="group" aria-label="Montos rápidos">
+     <button type="button" class="chip" data-monto="1000">S/1,000</button>
+     <button type="button" class="chip" data-monto="5000">S/5,000</button>
+     <button type="button" class="chip" data-monto="10000">S/10,000</button>
+     <button type="button" class="chip" data-monto="25000">S/25,000</button>
+     <button type="button" class="chip" data-monto="50000">S/50,000</button>
+    </div>
+   </div>
 
-  <div class="filtros" role="search">
+   <div class="decision-campo">
+    <span class="decision-etiqueta" id="lbl-plazo">¿Por cuánto tiempo?</span>
+    <div class="segmentado" role="group" aria-labelledby="lbl-plazo" id="dec-plazo">
+     <button type="button" class="seg" data-plazo="3" aria-pressed="false">3 meses</button>
+     <button type="button" class="seg" data-plazo="6" aria-pressed="false">6 meses</button>
+     <button type="button" class="seg activa" data-plazo="12" aria-pressed="true">12 meses</button>
+     <button type="button" class="seg" data-plazo="24" aria-pressed="false">24 meses</button>
+    </div>
+   </div>
+
+   <div class="decision-campo">
+    <span class="decision-etiqueta" id="lbl-cond">¿Puedes cumplir condiciones promocionales?</span>
+    <div class="segmentado" role="group" aria-labelledby="lbl-cond" id="dec-condicion">
+     <button type="button" class="seg activa" data-cond="si" aria-pressed="true">Sí, puedo cumplirlas</button>
+     <button type="button" class="seg" data-cond="no" aria-pressed="false">Prefiero sin condiciones</button>
+     <button type="button" class="seg" data-cond="ambos" aria-pressed="false">Mostrar ambos</button>
+    </div>
+   </div>
+
+   <details class="decision-aporte">
+    <summary>Agregar aporte mensual</summary>
+    <div class="monto-fila">
+     <span class="monto-prefijo" aria-hidden="true">S/</span>
+     <input type="number" id="dec-aporte" inputmode="numeric" min="0" step="50" value="0" aria-label="Aporte mensual">
+     <span class="sutil">cada mes</span>
+    </div>
+   </details>
+
+   <button type="submit" class="btn-primario btn-calcular" id="dec-calcular">Calcular y comparar</button>
+  </form>
+
+  <div class="resumen-personalizado" id="resumen-personalizado" role="status" aria-live="polite"></div>
+
+  <section class="destacados" aria-label="Resultados destacados para tu monto">
+   <h2 class="destacados-titulo">Resultados destacados para tu monto</h2>
+   <div class="destacados-rejilla" id="destacados"></div>
+  </section>
+
+  <div class="filtros-barra" role="search">
    <label class="campo campo-buscar">
-    <span>Buscar</span>
-    <input type="search" id="f-texto" placeholder="Entidad, producto o grupo económico…" autocomplete="off">
+    <span class="sr-solo">Buscar entidad o producto</span>
+    <input type="search" id="f-texto" placeholder="Buscar entidad o producto…" autocomplete="off">
    </label>
+   <label class="campo campo-orden">
+    <span class="sr-solo">Ordenar por</span>
+    <select id="f-orden">
+     <option value="ganancia">Mayor ganancia estimada</option>
+     <option value="treaAplicable">Mayor TREA aplicable</option>
+     <option value="treaMax">Mayor TREA publicada</option>
+     <option value="minimo">Menor monto mínimo</option>
+     <option value="condiciones">Menos condiciones</option>
+     <option value="mantenimiento">Sin mantenimiento</option>
+     <option value="digital">Apertura digital</option>
+     <option value="entidad">Entidad (A-Z)</option>
+    </select>
+   </label>
+   <button type="button" class="btn-secundario" id="btn-filtros" aria-expanded="false" aria-controls="filtros-avanzados">
+    Filtros <span id="f-activos" class="badge-filtros" hidden>0</span>
+   </button>
+  </div>
+
+  <div class="chips-filtro" role="group" aria-label="Filtros rápidos">
+   <button type="button" class="chip-filtro" data-filtro="digital" aria-pressed="false">Digital</button>
+   <button type="button" class="chip-filtro" data-filtro="sinMinimo" aria-pressed="false">Sin monto mínimo</button>
+   <button type="button" class="chip-filtro" data-filtro="sinMantenimiento" aria-pressed="false">Sin mantenimiento</button>
+   <button type="button" class="chip-filtro" data-filtro="verificado" aria-pressed="false">Verificado</button>
+   <button type="button" class="chip-filtro" data-filtro="fsd" aria-pressed="false">Cubierto por FSD</button>
+   <button type="button" class="chip-filtro" data-filtro="sinCondiciones" aria-pressed="false">Sin condiciones</button>
+   <button type="button" class="chip-filtro" data-filtro="vigente" aria-pressed="false">Campaña vigente</button>
+  </div>
+
+  <div class="filtros-avanzados" id="filtros-avanzados" hidden>
    <label class="campo">
-    <span>TREA mínima</span>
+    <span>TREA publicada mínima</span>
     <select id="f-trea">
      <option value="0">Todas</option>
      <option value="0.04">Desde 4.00%</option>
@@ -118,7 +199,7 @@
     </select>
    </label>
    <label class="campo">
-    <span>Monto mínimo</span>
+    <span>Monto máximo de apertura</span>
     <select id="f-minimo">
      <option value="">Cualquiera</option>
      <option value="0">Sin monto mínimo</option>
@@ -127,25 +208,29 @@
     </select>
    </label>
    <label class="campo">
-    <span>Ordenar por</span>
-    <select id="f-orden">
-     <option value="trea">TREA (mayor primero)</option>
-     <option value="minimo">Monto mínimo (menor primero)</option>
-     <option value="entidad">Entidad (A-Z)</option>
+    <span>Verificación</span>
+    <select id="f-verif">
+     <option value="">Todas</option>
+     <option value="verde">Verificado</option>
+     <option value="ambar">Verificación parcial</option>
+     <option value="rojo">Requiere confirmación</option>
     </select>
    </label>
-   <button type="button" id="f-limpiar" class="btn-secundario">Limpiar</button>
+   <button type="button" id="f-limpiar" class="btn-secundario">Limpiar filtros</button>
   </div>
 
   <div class="barra-vista">
    <p class="conteo" id="conteo-resultados" role="status" aria-live="polite"></p>
-   <div class="selector-vista" role="group" aria-label="Cambiar la forma de ver el ranking">
-    <button type="button" class="btn-vista activa" data-vista="cuadricula" aria-pressed="true" title="Ver en cuadrícula">
-     <span aria-hidden="true">▦</span> Cuadrícula
-    </button>
-    <button type="button" class="btn-vista" data-vista="lista" aria-pressed="false" title="Ver en lista detallada">
-     <span aria-hidden="true">☰</span> Lista detallada
-    </button>
+   <div class="barra-vista-controles">
+    <label class="check-inline"><input type="checkbox" id="toggle-incompatibles" checked> Ocultar incompatibles</label>
+    <div class="selector-vista" role="group" aria-label="Cambiar la forma de ver el ranking">
+     <button type="button" class="btn-vista activa" data-vista="cuadricula" aria-pressed="true" title="Ver en cuadrícula">
+      <span aria-hidden="true">▦</span> Cuadrícula
+     </button>
+     <button type="button" class="btn-vista" data-vista="lista" aria-pressed="false" title="Ver en lista detallada">
+      <span aria-hidden="true">☰</span> Detalle
+     </button>
+    </div>
    </div>
   </div>
   <div class="rejilla" id="rejilla-entidades"></div>
@@ -154,6 +239,23 @@
    <summary>Cómo leer este ranking y qué verificar antes de abrir una cuenta</summary>
    <div id="notas-metodologia"></div>
   </details>
+
+  <!-- Bandeja de comparación: aparece al seleccionar productos -->
+  <div class="bandeja-comparacion" id="bandeja-comparacion" hidden>
+   <span id="bandeja-texto">0 productos seleccionados</span>
+   <div class="bandeja-acciones">
+    <button type="button" class="btn-primario" id="bandeja-comparar">Comparar ahora</button>
+    <button type="button" class="btn-secundario" id="bandeja-limpiar">Limpiar</button>
+   </div>
+  </div>
+
+  <dialog class="dialogo-comparacion" id="dialogo-comparacion" aria-label="Comparación de productos">
+   <div class="dialogo-cabecera">
+    <h2>Comparación para tu monto</h2>
+    <button type="button" class="btn-cerrar" id="cerrar-comparacion" aria-label="Cerrar comparación">✕</button>
+   </div>
+   <div id="comparacion-contenido"></div>
+  </dialog>
  </section>
 
  <!-- ══════════ SIMULADOR ══════════ -->
@@ -596,22 +698,22 @@
  </div>
 </footer>
 
-<script src="assets/js/acceso.js?v=20260807b"></script>
-<script src="assets/js/datos.js?v=20260807b"></script>
-<script src="assets/js/motor.js?v=20260807b"></script>
-<script src="assets/js/formato.js?v=20260807b"></script>
-<script src="assets/js/graficos.js?v=20260807b"></script>
-<script src="assets/js/ranking.js?v=20260807b"></script>
-<script src="assets/js/simulador.js?v=20260807b"></script>
-<script src="assets/js/bcrp.js?v=20260807b"></script>
-<script src="assets/js/seguridad.js?v=20260807b"></script>
-<script src="assets/js/mercado.js?v=20260807b"></script>
-<script src="assets/js/mercados.js?v=20260807b"></script>
-<script src="assets/js/tarjetas.js?v=20260807b"></script>
-<script src="assets/js/entidades.js?v=20260807b"></script>
-<script src="assets/js/videos.js?v=20260807b"></script>
-<script src="assets/js/descargas.js?v=20260807b"></script>
-<script src="assets/js/app.js?v=20260807b"></script>
+<script src="assets/js/acceso.js?v=20260807c"></script>
+<script src="assets/js/datos.js?v=20260807c"></script>
+<script src="assets/js/motor.js?v=20260807c"></script>
+<script src="assets/js/formato.js?v=20260807c"></script>
+<script src="assets/js/graficos.js?v=20260807c"></script>
+<script src="assets/js/ranking.js?v=20260807c"></script>
+<script src="assets/js/simulador.js?v=20260807c"></script>
+<script src="assets/js/bcrp.js?v=20260807c"></script>
+<script src="assets/js/seguridad.js?v=20260807c"></script>
+<script src="assets/js/mercado.js?v=20260807c"></script>
+<script src="assets/js/mercados.js?v=20260807c"></script>
+<script src="assets/js/tarjetas.js?v=20260807c"></script>
+<script src="assets/js/entidades.js?v=20260807c"></script>
+<script src="assets/js/videos.js?v=20260807c"></script>
+<script src="assets/js/descargas.js?v=20260807c"></script>
+<script src="assets/js/app.js?v=20260807c"></script>
 
 <script>
 // Registro del service worker: habilita el uso sin conexion. Requiere HTTPS

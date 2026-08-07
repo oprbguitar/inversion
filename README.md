@@ -17,7 +17,7 @@ videos de finanzas en YouTube y descarga del Excel corregido.
 
 | Pestaña | Qué hace |
 |---|---|
-| **Ranking** | 16 entidades ordenadas por TREA, con filtros por tasa, modo de apertura y monto mínimo. **Dos vistas**: cuadrícula (tarjetas compactas) o lista detallada (los 14 campos desplegados, con el enlace a la entidad visible). La preferencia se recuerda. |
+| **Ranking** | **Comparador guiado por tu monto.** Indicas cuánto y por cuánto tiempo, y el ranking calcula la **ganancia estimada** y la **TREA que realmente aplica a tu saldo** (distinta de la TREA máxima publicada), ordenando por ganancia estimada, no por la tasa anunciada. Incluye resumen personalizado, 3 resultados destacados, filtros rápidos, explicación de incompatibilidades (campaña vencida, monto bajo el mínimo…) y comparación de hasta 3 productos. Ver [RANKING_REDESIGN_REPORT.md](docs/technical/RANKING_REDESIGN_REPORT.md). |
 | **Tarjetas de crédito** | 17 tarjetas comparadas por **TCEA** (tasa + comisiones + seguros), donde gana la **más baja**. Simulador de compra en cuotas con sistema francés y escenario de pago mínimo. |
 | **Entidades SBS** | Relación completa de las **41 entidades autorizadas** a captar depósitos (bancos, financieras, cajas municipales y rurales), extraída automáticamente. |
 | **Simulador** | Ingresas monto, aporte mensual y plazo. Aplica la **escala real de tasas por saldo** de cada entidad y sus **topes de saldo remunerado**. Compara el mismo monto en las 16 entidades. |

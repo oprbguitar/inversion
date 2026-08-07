@@ -11,7 +11,7 @@
  *     Va directo a la red y, sin conexion, cada modulo muestra su estado de
  *     "no disponible". No se cachean cotizaciones: serian datos viejos disfrazados.
  */
-const CACHE = 'ahorros-pe-v20260807b';
+const CACHE = 'ahorros-pe-v20260807c';
 
 // Nucleo minimo para el primer arranque offline. El resto de assets se cachea
 // solo a medida que la pagina los pide (runtime caching).

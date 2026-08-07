@@ -1,284 +1,595 @@
-/* Pestaña Ranking: KPIs, filtros y dos vistas (cuadrícula o lista detallada). */
+/* Pestaña Ranking — comparador guiado por el monto del usuario.
+ *
+ * NO calcula finanzas por su cuenta: toda proyeccion sale del motor compartido
+ * (Fmt.proyectar / Fmt.treaPorSaldo / Fmt.retornoReal). Aqui solo se lee la
+ * entrada del usuario, se clasifica la compatibilidad, se ordena y se pinta.
+ */
 const Ranking = (() => {
-  let filtrados = [];
-  let vista = 'cuadricula';
-  try { vista = localStorage.getItem('vista_ranking') || 'cuadricula'; } catch { /* modo privado */ }
+  // Supuesto explicito y etiquetado para el rendimiento real: punto medio de la
+  // meta de inflacion del BCRP. No es una medicion en vivo; se muestra como tal.
+  const INFLACION_SUPUESTO = 0.02;
+  const LS = 'ranking_prefs';
+
+  const estado = {
+    monto: 10000,
+    meses: 12,
+    aporte: 0,
+    condicion: 'si',        // 'si' | 'no' | 'ambos'
+    orden: 'ganancia',
+    vista: 'cuadricula',
+    ocultarIncompat: true,
+    texto: '',
+    chips: {},              // { digital:true, fsd:true, ... }
+    avanzados: { trea: 0, apertura: '', minimo: '', verif: '' },
+    comparacion: [],        // nombres de entidad, máx. 3
+  };
 
   const $ = (s) => document.querySelector(s);
+  const $$ = (s) => Array.from(document.querySelectorAll(s));
+  const HOY = new Date();
 
+  /* ── Preferencias en localStorage ─────────────────────── */
+  function guardarPrefs() {
+    try {
+      localStorage.setItem(LS, JSON.stringify({
+        monto: estado.monto, meses: estado.meses, aporte: estado.aporte,
+        condicion: estado.condicion, orden: estado.orden, vista: estado.vista,
+        ocultarIncompat: estado.ocultarIncompat, chips: estado.chips,
+      }));
+    } catch { /* modo privado */ }
+  }
+  function cargarPrefs() {
+    let p = {};
+    try { p = JSON.parse(localStorage.getItem(LS) || '{}'); } catch { p = {}; }
+    if (typeof p.monto === 'number' && p.monto >= 0) estado.monto = p.monto;
+    if ([3, 6, 12, 24].includes(p.meses)) estado.meses = p.meses;
+    if (typeof p.aporte === 'number' && p.aporte >= 0) estado.aporte = p.aporte;
+    if (['si', 'no', 'ambos'].includes(p.condicion)) estado.condicion = p.condicion;
+    if (typeof p.orden === 'string') estado.orden = p.orden;
+    if (['cuadricula', 'lista'].includes(p.vista)) estado.vista = p.vista;
+    if (typeof p.ocultarIncompat === 'boolean') estado.ocultarIncompat = p.ocultarIncompat;
+    if (p.chips && typeof p.chips === 'object') estado.chips = p.chips;
+  }
+
+  /* ── Utilidades de dominio ────────────────────────────── */
   const esDigital = (e) => /digital|web|app/i.test(e.apertura || '');
   const esPresencial = (e) => /presencial|agencia/i.test(e.apertura || '');
+  const sinMantenimiento = (e) => /(^|[^0-9])0(\.00)?($|[^0-9])|sin costo|gratis/i.test(e.mantenimiento || 'S/0');
 
   function claseVerificacion(txt = '') {
     if (/^verificado/i.test(txt)) return 'verde';
-    if (/reserva|verificar antes/i.test(txt)) return 'rojo';
+    if (/reserva|verificar antes|requiere/i.test(txt)) return 'rojo';
     return 'ambar';
   }
-
-  function pintarKpis() {
-    const r = Datos.ranking();
-    if (!r.length) return;
-    const mejor = r[0];
-    const bcrp = Datos.bcrp();
-    const sinMinimo = r.filter((e) => !e.monto_minimo).length;
-    const promedio = r.reduce((s, e) => s + (e.trea || 0), 0) / r.length;
-
-    $('#resumen-kpis').innerHTML = [
-      ['Entidades comparadas', r.length, 'Todas supervisadas por la SBS y miembros del FSD'],
-      ['TREA más alta', Fmt.pct(mejor.trea), Fmt.esc(mejor.entidad)],
-      ['TREA promedio', Fmt.pct(promedio), `Tasa BCRP: ${Fmt.pct(bcrp.vigente)}`],
-      ['Sin monto mínimo', sinMinimo, 'Cuentas que abren desde S/0'],
-    ].map(([et, val, nota]) => `
-      <div class="kpi">
-       <div class="kpi-etiqueta">${et}</div>
-       <div class="kpi-valor">${val}</div>
-       <div class="kpi-nota">${nota}</div>
-      </div>`).join('');
+  function etiquetaVerificacion(txt = '') {
+    return { verde: 'Verificado', ambar: 'Verificación parcial', rojo: 'Requiere confirmación' }[claseVerificacion(txt)];
   }
 
-  function aplicarFiltros() {
-    const texto = $('#f-texto').value.trim().toLowerCase();
-    const treaMin = parseFloat($('#f-trea').value) || 0;
-    const apertura = $('#f-apertura').value;
-    const minimo = $('#f-minimo').value;
-    const orden = $('#f-orden').value;
+  /** Señales de condición: a más señales, más exigente el producto. */
+  function señalesCondicion(e) {
+    const t = `${e.condicion || ''} ${e.vigencia || ''}`.toLowerCase();
+    let n = 0;
+    if (/nuevo/.test(t)) n += 1;
+    if (/digital|app|100%/.test(t)) n += 1;
+    if (/sueldo|planilla/.test(t)) n += 1;
+    if (/m[ií]nimo|mantener|saldo/.test(t)) n += 1;
+    if (/tope|hasta s\//.test(t)) n += 1;
+    if (e.monto_minimo) n += 1;
+    return n;
+  }
+  const requiereCondicion = (e) => señalesCondicion(e) > 0 && !/sin condici[oó]n|no exige/i.test(e.condicion || '');
 
-    filtrados = Datos.ranking().filter((e) => {
-      if ((e.trea || 0) < treaMin) return false;
-      if (apertura === 'digital' && !esDigital(e)) return false;
-      if (apertura === 'presencial' && !esPresencial(e)) return false;
-      if (minimo !== '' && (e.monto_minimo || 0) > parseFloat(minimo)) return false;
-      if (texto) {
-        const heno = `${e.entidad} ${e.producto} ${e.grupo} ${e.condicion}`.toLowerCase();
-        if (!heno.includes(texto)) return false;
-      }
-      return true;
+  /** Última fecha dd/mm/aaaa hallada en la vigencia = fin de campaña. */
+  function finCampana(e) {
+    const fechas = (e.vigencia || '').match(/(\d{2})\/(\d{2})\/(\d{4})/g) || [];
+    if (!fechas.length) return null;
+    const ult = fechas[fechas.length - 1].split('/');
+    return new Date(+ult[2], +ult[1] - 1, +ult[0]);
+  }
+  function estadoCampana(e) {
+    const fin = finCampana(e);
+    if (!fin) return { clase: '', txt: '', vencida: false };
+    const dias = Math.ceil((fin - HOY) / 86400000);
+    if (dias < 0) return { clase: 'rojo', txt: 'Campaña vencida', vencida: true };
+    if (dias <= 7) return { clase: 'ambar', txt: `Vence en ${dias} día${dias === 1 ? '' : 's'}`, vencida: false };
+    return { clase: 'verde', txt: 'Campaña vigente', vencida: false };
+  }
+  const topeDe = (e) => {
+    const f = Datos.fichaDe(e.entidad);
+    return f && f.simulador && f.simulador.tope_remunerado;
+  };
+
+  /* ── Cálculo por producto (delegado al motor) ─────────── */
+  function calcular(e) {
+    const cumple = estado.condicion !== 'no';
+    const r = Fmt.proyectar(e, { monto: estado.monto, aporte: estado.aporte, meses: estado.meses, cumple });
+    return {
+      r,
+      treaApl: r.treaAplicada,
+      treaMax: e.trea || 0,
+      interes: r.interesNeto,
+      saldoFinal: r.saldoFinal,
+      real: Fmt.retornoReal(r.treaAplicada, INFLACION_SUPUESTO),
+      excedente: r.excedenteInicial,
+      excedenteNoVerif: r.excedenteNoVerificado,
+      señales: señalesCondicion(e),
+      req: requiereCondicion(e),
+    };
+  }
+
+  /** Devuelve { compatible, motivo }. No oculta: explica. */
+  function clasificar(e, c) {
+    const camp = estadoCampana(e);
+    if (estado.monto < (e.monto_minimo || 0)) {
+      return { compatible: false, motivo: `El monto no alcanza el mínimo de ${Fmt.moneyCorto(e.monto_minimo)}.` };
+    }
+    if (camp.vencida) return { compatible: false, motivo: 'La promoción venció; verifica la tasa vigente.' };
+    if (estado.condicion === 'no' && c.req) {
+      return { compatible: false, motivo: 'Requiere condiciones promocionales (cliente nuevo, digital o saldo mínimo).' };
+    }
+    if (estado.avanzados.apertura === 'digital' && !esDigital(e)) {
+      return { compatible: false, motivo: 'La apertura es exclusivamente presencial.' };
+    }
+    return { compatible: true, motivo: null };
+  }
+
+  /* ── Filtro y orden ───────────────────────────────────── */
+  function preparar() {
+    return Datos.ranking().map((e, i) => {
+      const c = calcular(e);
+      const k = clasificar(e, c);
+      return { e, c, k, orig: i };
     });
-
-    const orden_fn = {
-      trea: (a, b) => (b.trea || 0) - (a.trea || 0),
-      minimo: (a, b) => (a.monto_minimo || 0) - (b.monto_minimo || 0),
-      entidad: (a, b) => a.entidad.localeCompare(b.entidad, 'es'),
-    }[orden];
-    filtrados.sort(orden_fn);
-
-    pintarTarjetas();
   }
 
-  function tarjeta(e, i) {
-    const ficha = Datos.fichaDe(e.entidad);
+  function pasaFiltros(x) {
+    const { e, c, k } = x;
+    if (estado.texto) {
+      const heno = `${e.entidad} ${e.producto} ${e.grupo}`.toLowerCase();
+      if (!heno.includes(estado.texto)) return false;
+    }
+    const ch = estado.chips;
+    if (ch.digital && !esDigital(e)) return false;
+    if (ch.sinMinimo && e.monto_minimo) return false;
+    if (ch.sinMantenimiento && !sinMantenimiento(e)) return false;
+    if (ch.verificado && claseVerificacion(e.verificacion) !== 'verde') return false;
+    if (ch.fsd && e.fsd !== 'Sí') return false;
+    if (ch.sinCondiciones && c.req) return false;
+    if (ch.vigente && estadoCampana(e).vencida) return false;
+
+    const a = estado.avanzados;
+    if (a.trea && (e.trea || 0) < a.trea) return false;
+    if (a.minimo !== '' && (e.monto_minimo || 0) > parseFloat(a.minimo)) return false;
+    if (a.apertura === 'digital' && !esDigital(e)) return false;
+    if (a.apertura === 'presencial' && !esPresencial(e)) return false;
+    if (a.verif && claseVerificacion(e.verificacion) !== a.verif) return false;
+
+    if (estado.ocultarIncompat && !k.compatible) return false;
+    return true;
+  }
+
+  function ordenar(lista) {
+    const fns = {
+      ganancia: (a, b) => b.c.interes - a.c.interes,
+      treaAplicable: (a, b) => b.c.treaApl - a.c.treaApl,
+      treaMax: (a, b) => b.c.treaMax - a.c.treaMax,
+      minimo: (a, b) => (a.e.monto_minimo || 0) - (b.e.monto_minimo || 0),
+      condiciones: (a, b) => a.c.señales - b.c.señales || b.c.interes - a.c.interes,
+      mantenimiento: (a, b) => (sinMantenimiento(b.e) - sinMantenimiento(a.e)) || b.c.interes - a.c.interes,
+      digital: (a, b) => (esDigital(b.e) - esDigital(a.e)) || b.c.interes - a.c.interes,
+      entidad: (a, b) => a.e.entidad.localeCompare(b.e.entidad, 'es'),
+    };
+    // Los incompatibles siempre al final cuando se muestran.
+    lista.sort((a, b) => (a.k.compatible === b.k.compatible ? 0 : a.k.compatible ? -1 : 1)
+      || (fns[estado.orden] || fns.ganancia)(a, b));
+    return lista;
+  }
+
+  /* ── Render: estado, resumen, destacados ──────────────── */
+  function pintarEstadoLinea() {
+    const r = Datos.ranking();
+    const live = Datos.estado.live || {};
+    const fsd = (Datos.estado.base && Datos.estado.base.fsd) || (live.fsd);
+    const cobertura = fsd && fsd.cobertura ? Fmt.moneyCorto(fsd.cobertura) : 'S/122,000';
+    const cuando = live.actualizado_pe;
+    const fresco = cuando
+      ? `<span class="frescura ok">Datos actualizados ${Fmt.esc(cuando)}</span>`
+      : `<span class="frescura base">Datos base · corte ${Fmt.esc(Datos.estado.base.corte)}</span>`;
+    $('#ranking-estado').innerHTML =
+      `${r.length} entidades verificadas · Cobertura FSD ${cobertura} por persona y entidad · ${fresco}`;
+  }
+
+  function pintarResumen(compat, todos) {
+    const incompat = todos.length - compat.length;
+    const mejor = compat.reduce((m, x) => (x.c.interes > (m ? m.c.interes : -1) ? x : m), null);
+    const treaMaxPub = todos.reduce((m, x) => Math.max(m, x.c.treaMax), 0);
+    const cond = { si: 'cumpliendo las condiciones', no: 'sin condiciones especiales', ambos: 'en el mejor escenario' }[estado.condicion];
+
+    $('#resumen-personalizado').innerHTML = `
+     <div class="resumen-cabecera">Para <strong>${Fmt.moneyCorto(estado.monto)}</strong> durante
+      <strong>${estado.meses} meses</strong> <span class="sutil">(${cond})</span></div>
+     <div class="resumen-cifras">
+      <div class="resumen-dato"><span class="rd-valor">${todos.length}</span><span class="rd-etq">productos analizados</span></div>
+      <div class="resumen-dato"><span class="rd-valor verde">${compat.length}</span><span class="rd-etq">compatibles con tu monto</span></div>
+      <div class="resumen-dato"><span class="rd-valor ambar">${incompat}</span><span class="rd-etq">requieren verificar condiciones</span></div>
+      <div class="resumen-dato destac"><span class="rd-valor">${mejor ? Fmt.money(mejor.c.interes) : '—'}</span><span class="rd-etq">ganancia máxima estimada${mejor ? ` · ${Fmt.esc(mejor.e.entidad)}` : ''}</span></div>
+     </div>
+     <p class="resumen-nota">La <strong>TREA aplicable</strong> a tu saldo puede ser menor que la
+      TREA máxima publicada (${Fmt.pct(treaMaxPub)}): muchas campañas solo pagan la tasa alta hasta
+      cierto saldo. Rendimiento real estimado con un supuesto de inflación de ${Fmt.pct(INFLACION_SUPUESTO)}
+      anual (meta del BCRP), no una medición en vivo.</p>`;
+  }
+
+  function tarjetaDestacada(titulo, sub, x) {
+    if (!x) return '';
+    return `<article class="destacado">
+      <div class="destacado-etq">${titulo}</div>
+      <div class="destacado-entidad">
+       <img src="${Datos.logoDe(x.e.entidad)}" alt="" width="28" height="28" loading="lazy" onerror="this.style.visibility='hidden'">
+       <span>${Fmt.esc(x.e.entidad)}</span>
+      </div>
+      <div class="destacado-ganancia">${Fmt.money(x.c.interes)}</div>
+      <div class="destacado-sub">${sub} · TREA aplicable ${Fmt.pct(x.c.treaApl)}</div>
+      <button type="button" class="btn-secundario btn-mini" data-simular="${Fmt.esc(x.e.entidad)}">Simular</button>
+     </article>`;
+  }
+
+  function pintarDestacados(compat) {
+    const cont = $('#destacados');
+    if (!compat.length) { cont.innerHTML = '<p class="vacio">Ningún producto es compatible con los datos ingresados.</p>'; return; }
+    const porGanancia = [...compat].sort((a, b) => b.c.interes - a.c.interes);
+    const mayor = porGanancia[0];
+    const menosCond = [...compat].sort((a, b) => a.c.señales - b.c.señales || b.c.interes - a.c.interes)[0];
+    const digital = porGanancia.find((x) => esDigital(x.e));
+
+    const usados = new Set();
+    const piezas = [];
+    const añadir = (t, s, x) => {
+      if (x && !usados.has(x.e.entidad)) { usados.add(x.e.entidad); piezas.push(tarjetaDestacada(t, s, x)); }
+    };
+    añadir('Mayor rendimiento estimado', 'Compatible con tus datos', mayor);
+    añadir('Menos condiciones', 'Entre los compatibles', menosCond);
+    añadir('Alternativa digital destacada', 'Apertura 100% digital', digital);
+    cont.innerHTML = piezas.join('') || tarjetaDestacada('Mayor rendimiento estimado', 'Compatible con tus datos', mayor);
+  }
+
+  /* ── Render: tarjeta de producto ──────────────────────── */
+  function tarjeta(x, puesto) {
+    const { e, c, k } = x;
     const url = Fmt.urlSegura(e.url);
-    const puesto = Datos.ranking().findIndex((x) => x.entidad === e.entidad) + 1;
+    const camp = estadoCampana(e);
+    const vClase = claseVerificacion(e.verificacion);
+    const seleccionado = estado.comparacion.includes(e.entidad);
+    const tope = topeDe(e);
+    const abierta = estado.vista === 'lista';
 
-    const etiquetas = [
-      e.fsd === 'Sí' ? '<span class="etiqueta verde">Cubierto por FSD</span>' : '',
-      esDigital(e) ? '<span class="etiqueta azul">Apertura digital</span>' : '',
-      !e.monto_minimo ? '<span class="etiqueta verde">Sin monto mínimo</span>' : '',
-      e.calificacion && !/no visible/i.test(e.calificacion)
-        ? `<span class="etiqueta">SBS ${Fmt.esc(e.calificacion.replace(/\s*\(.*\)/, ''))}</span>` : '',
-      `<span class="etiqueta ${claseVerificacion(e.verificacion)}">${Fmt.esc(e.verificacion || '')}</span>`,
-    ].filter(Boolean).join('');
-
-    const tramos = (ficha && ficha.tramos || []).length > 1
-      ? `<dt>Escala de tasas por saldo</dt><dd><ul class="tramos">${
-          ficha.tramos.map((t) => `<li><span>${Fmt.esc(t.desc || `Desde ${Fmt.moneyCorto(t.desde)}`)}</span><b>${Fmt.pct(t.trea)}</b></li>`).join('')
-        }</ul></dd>` : '';
+    const condiciones = (e.condicion || '')
+      .split(/[;.]\s+/).map((s) => s.trim()).filter((s) => s.length > 3).slice(0, 4);
 
     const detalle = [
-      ['Condición clave', e.condicion],
       ['Vigencia de la campaña', e.vigencia],
       ['Abono de intereses', e.abono],
       ['Capitalización', e.capitalizacion],
-      ['Mantenimiento', e.mantenimiento],
-      ['Retiros y cajeros', e.retiros],
-      ['Transferencias', e.transferencias],
-      ['Grupo económico', e.grupo],
-    ].filter(([, v]) => v).map(([k, v]) => `<dt>${k}</dt><dd>${Fmt.esc(v)}</dd>`).join('');
-
-    return `
-    <article class="entidad">
-     <div class="entidad-cabecera">
-      <img class="entidad-logo" src="${Datos.logoDe(e.entidad)}" alt="Logotipo de ${Fmt.esc(e.entidad)}" loading="lazy" width="46" height="46">
-      <div class="entidad-id">
-       <div class="entidad-nombre">${Fmt.esc(e.entidad)}</div>
-       <div class="entidad-producto">${Fmt.esc(e.producto)}</div>
-      </div>
-      <div class="entidad-puesto" data-top="${puesto === 1 ? 1 : 0}" title="Puesto ${puesto} por TREA">${puesto}</div>
-     </div>
-
-     <div class="entidad-tasa">
-      <span class="tasa-valor">${Fmt.pct(e.trea)}</span>
-      <span class="tasa-etiqueta">TREA verificada</span>
-     </div>
-
-     <div class="etiquetas">${etiquetas}</div>
-
-     <dl class="entidad-datos">
-      <div class="dato"><dt>Monto mínimo de apertura</dt><dd>${e.monto_minimo ? Fmt.moneyCorto(e.monto_minimo) : 'S/0'}</dd></div>
-      <div class="dato"><dt>Saldo para la tasa máxima</dt><dd>${e.saldo_tasa_max ? Fmt.moneyCorto(e.saldo_tasa_max) : 'Sin condición'}</dd></div>
-      <div class="dato"><dt>Modo de apertura</dt><dd>${Fmt.esc(e.apertura || '—')}</dd></div>
-     </dl>
-
-     ${e.alertas ? `<p class="entidad-alerta">${Fmt.esc(e.alertas)}</p>` : ''}
-
-     <details class="entidad-detalle">
-      <summary>Ver condiciones completas y fuentes</summary>
-      <dl class="detalle-cuerpo">${detalle}${tramos}</dl>
-      <div class="entidad-acciones">
-       ${url ? `<a class="btn-primario" href="${url}" target="_blank" rel="noopener">Página oficial</a>` : ''}
-       <button type="button" class="btn-secundario" data-simular="${Fmt.esc(e.entidad)}">Simular</button>
-      </div>
-     </details>
-    </article>`;
-  }
-
-  /** Fila de la vista lista: muestra todo el detalle desplegado, sin abrir nada. */
-  function fila(e) {
-    const ficha = Datos.fichaDe(e.entidad);
-    const url = Fmt.urlSegura(e.url);
-    const puesto = Datos.ranking().findIndex((x) => x.entidad === e.entidad) + 1;
-
-    const campos = [
-      ['Modo de apertura', e.apertura],
-      ['Monto mínimo de apertura', e.monto_minimo ? Fmt.moneyCorto(e.monto_minimo) : 'S/0 — sin mínimo'],
-      ['Saldo para la tasa máxima', e.saldo_tasa_max ? Fmt.moneyCorto(e.saldo_tasa_max) : 'Sin condición de saldo'],
-      ['Condición clave', e.condicion],
-      ['Vigencia de la campaña', e.vigencia],
-      ['Abono de intereses', e.abono],
-      ['Capitalización', e.capitalizacion],
-      ['Mantenimiento', e.mantenimiento],
       ['Retiros y cajeros', e.retiros],
       ['Transferencias', e.transferencias],
       ['Grupo económico', e.grupo],
       ['Calificación SBS', e.calificacion],
-      ['Fondo de Seguro de Depósitos', e.fsd],
       ['Estado de verificación', e.verificacion],
-    ].filter(([, v]) => v);
-
-    const tramos = (ficha && ficha.tramos || []).length > 1
-      ? `<div class="lista-tramos"><h4>Escala de tasas por saldo</h4>
-         <ul class="tramos">${ficha.tramos.map((t) =>
-           `<li><span>${Fmt.esc(t.desc || `Desde ${Fmt.moneyCorto(t.desde)}`)}</span><b>${Fmt.pct(t.trea)}</b></li>`).join('')}
-         </ul></div>` : '';
+    ].filter(([, v]) => v).map(([kk, v]) => `<dt>${kk}</dt><dd>${Fmt.esc(v)}</dd>`).join('');
 
     return `
-    <article class="fila-entidad">
-     <div class="fila-cabecera">
-      <div class="entidad-puesto" data-top="${puesto === 1 ? 1 : 0}">${puesto}</div>
-      <img class="entidad-logo" src="${Datos.logoDe(e.entidad)}" alt="Logotipo de ${Fmt.esc(e.entidad)}" width="46" height="46" loading="lazy">
-      <div class="entidad-id">
-       <div class="entidad-nombre">${Fmt.esc(e.entidad)}</div>
-       <div class="entidad-producto">${Fmt.esc(e.producto)}</div>
+    <article class="producto ${k.compatible ? '' : 'incompatible'}" data-entidad="${Fmt.esc(e.entidad)}">
+     <div class="producto-cab">
+      <img class="producto-logo" src="${Datos.logoDe(e.entidad)}" alt="Logotipo de ${Fmt.esc(e.entidad)}" width="42" height="42" loading="lazy" onerror="this.style.visibility='hidden'">
+      <div class="producto-id">
+       <div class="producto-nombre">${Fmt.esc(e.entidad)}</div>
+       <div class="producto-sub">${Fmt.esc(e.producto)}</div>
       </div>
-      <div class="fila-tasa">
-       <span class="tasa-valor">${Fmt.pct(e.trea)}</span>
-       <span class="tasa-etiqueta">TREA</span>
-      </div>
+      <div class="producto-puesto" title="Posición por ganancia estimada">#${puesto}</div>
      </div>
 
-     <div class="etiquetas">
-      ${e.fsd === 'Sí' ? '<span class="etiqueta verde">Cubierto por FSD</span>' : ''}
-      ${esDigital(e) ? '<span class="etiqueta azul">Apertura digital</span>' : ''}
-      ${!e.monto_minimo ? '<span class="etiqueta verde">Sin monto mínimo</span>' : ''}
-      <span class="etiqueta ${claseVerificacion(e.verificacion)}">${Fmt.esc(e.verificacion || '')}</span>
-     </div>
+     ${k.compatible ? `
+     <div class="producto-resultado">
+      <div class="pr-ganancia">
+       <span class="pr-valor">${Fmt.money(c.interes)}</span>
+       <span class="pr-cap">Ganancia estimada en ${estado.meses} meses con ${Fmt.moneyCorto(estado.monto)}</span>
+      </div>
+      <div class="pr-tasas">
+       <span><b>${Fmt.pct(c.treaApl)}</b> TREA aplicable</span>
+       ${Math.abs(c.treaApl - c.treaMax) > 0.0001 ? `<span class="pr-max">${Fmt.pct(c.treaMax)} máx. publicada</span>` : ''}
+      </div>
+     </div>` : `
+     <div class="producto-incompat">
+      <span class="incompat-marca">Incompatible con tu selección</span>
+      <span class="incompat-motivo">${Fmt.esc(k.motivo)}</span>
+     </div>`}
 
-     ${e.alertas ? `<p class="entidad-alerta">${Fmt.esc(e.alertas)}</p>` : ''}
-
-     <dl class="fila-detalle">
-      ${campos.map(([k, v]) => `<div><dt>${k}</dt><dd>${Fmt.esc(v)}</dd></div>`).join('')}
+     <dl class="producto-datos">
+      <div><dt>Saldo final estimado</dt><dd>${Fmt.money(c.saldoFinal)}</dd></div>
+      <div><dt>Tope remunerado</dt><dd>${isFinite(tope) && tope > 0 ? Fmt.moneyCorto(tope) : 'Todo el saldo'}</dd></div>
+      <div><dt>Saldo en exceso</dt><dd>${c.excedente > 0 ? `${Fmt.moneyCorto(c.excedente)}${c.excedenteNoVerif ? ' · tasa regular no verificada' : ''}` : 'Ninguno'}</dd></div>
+      <div><dt>Monto mínimo</dt><dd>${e.monto_minimo ? Fmt.moneyCorto(e.monto_minimo) : 'S/0'}</dd></div>
+      <div><dt>Apertura</dt><dd>${esDigital(e) ? 'Digital' : 'Presencial'}</dd></div>
+      <div><dt>Mantenimiento</dt><dd>${Fmt.esc(e.mantenimiento || '—')}</dd></div>
+      <div><dt>Rend. real estimado</dt><dd>${Fmt.pct(c.real)}</dd></div>
+      <div><dt>FSD</dt><dd>${e.fsd === 'Sí' ? 'Cubierto' : Fmt.esc(e.fsd || '—')}</dd></div>
      </dl>
-     ${tramos}
 
-     <div class="fila-acciones">
-      ${url ? `<a class="btn-primario" href="${url}" target="_blank" rel="noopener">Ir a la página oficial de ${Fmt.esc(e.entidad)}</a>` : ''}
-      <button type="button" class="btn-secundario" data-simular="${Fmt.esc(e.entidad)}">Simular con esta entidad</button>
-      ${url ? `<a class="enlace-crudo" href="${url}" target="_blank" rel="noopener">${Fmt.esc(url)}</a>` : ''}
+     ${condiciones.length ? `
+     <div class="producto-condicion">
+      <span class="cond-titulo">Para acceder a esta tasa:</span>
+      <ul>${condiciones.map((cc) => `<li>${Fmt.esc(cc)}</li>`).join('')}</ul>
+     </div>` : ''}
+
+     <div class="producto-estados">
+      <span class="etiqueta ${vClase}">${etiquetaVerificacion(e.verificacion)}</span>
+      ${camp.txt ? `<span class="etiqueta ${camp.clase}">${camp.txt}</span>` : ''}
+      ${e.fsd === 'Sí' ? '<span class="etiqueta verde">FSD</span>' : ''}
+      ${esDigital(e) ? '<span class="etiqueta azul">Digital</span>' : ''}
+     </div>
+
+     <details class="producto-mas" ${abierta ? 'open' : ''}>
+      <summary>Ver todas las condiciones</summary>
+      <dl class="detalle-cuerpo">${detalle}</dl>
+     </details>
+
+     <div class="producto-acciones">
+      <button type="button" class="btn-comparar ${seleccionado ? 'activo' : ''}" data-comparar="${Fmt.esc(e.entidad)}"
+       aria-pressed="${seleccionado}">${seleccionado ? '✓ Comparando' : 'Comparar'}</button>
+      <button type="button" class="btn-secundario" data-simular="${Fmt.esc(e.entidad)}">Simular</button>
+      ${url ? `<a class="btn-fuente" href="${url}" target="_blank" rel="noopener">Ver fuente oficial ↗</a>` : ''}
      </div>
     </article>`;
   }
 
-  function pintarTarjetas() {
-    const cont = document.getElementById('rejilla-entidades');
-    const total = Datos.ranking().length;
+  /* ── Bandeja y vista de comparación ───────────────────── */
+  function pintarBandeja() {
+    const n = estado.comparacion.length;
+    const bandeja = $('#bandeja-comparacion');
+    bandeja.hidden = n === 0;
+    $('#bandeja-texto').textContent = `${n} producto${n === 1 ? '' : 's'} seleccionado${n === 1 ? '' : 's'}`;
+    $('#bandeja-comparar').disabled = n < 2;
+  }
 
-    document.getElementById('conteo-resultados').textContent =
-      filtrados.length === total
-        ? `Mostrando las ${total} entidades del ranking.`
-        : `${filtrados.length} de ${total} entidades coinciden con los filtros.`;
+  function alternarComparacion(nombre) {
+    const i = estado.comparacion.indexOf(nombre);
+    if (i >= 0) estado.comparacion.splice(i, 1);
+    else if (estado.comparacion.length < 3) estado.comparacion.push(nombre);
+    // Actualiza solo los botones afectados, sin re-render: conserva scroll y
+    // los <details> abiertos, y evita recalcular todas las proyecciones.
+    $$('[data-comparar]').forEach((b) => {
+      const on = estado.comparacion.includes(b.dataset.comparar);
+      b.classList.toggle('activo', on);
+      b.setAttribute('aria-pressed', String(on));
+      b.textContent = on ? '✓ Comparando' : 'Comparar';
+    });
+    pintarBandeja();
+  }
 
-    cont.className = vista === 'lista' ? 'lista-entidades' : 'rejilla';
+  function abrirComparacion() {
+    const items = estado.comparacion
+      .map((n) => Datos.ranking().find((e) => e.entidad === n))
+      .filter(Boolean)
+      .map((e) => ({ e, c: calcular(e), k: clasificar(e, calcular(e)) }));
+    if (items.length < 2) return;
+
+    const filas = [
+      ['TREA aplicable', (x) => Fmt.pct(x.c.treaApl)],
+      ['TREA máxima publicada', (x) => Fmt.pct(x.c.treaMax)],
+      ['Ganancia estimada', (x) => Fmt.money(x.c.interes)],
+      ['Saldo final', (x) => Fmt.money(x.c.saldoFinal)],
+      ['Tope remunerado', (x) => { const t = topeDe(x.e); return isFinite(t) && t > 0 ? Fmt.moneyCorto(t) : 'Todo el saldo'; }],
+      ['Saldo en exceso', (x) => (x.c.excedente > 0 ? Fmt.moneyCorto(x.c.excedente) : 'Ninguno')],
+      ['Monto mínimo', (x) => (x.e.monto_minimo ? Fmt.moneyCorto(x.e.monto_minimo) : 'S/0')],
+      ['Mantenimiento', (x) => Fmt.esc(x.e.mantenimiento || '—')],
+      ['Apertura', (x) => (esDigital(x.e) ? 'Digital' : 'Presencial')],
+      ['Condición principal', (x) => Fmt.esc((x.e.condicion || '—').split(/[;.]/)[0])],
+      ['FSD', (x) => (x.e.fsd === 'Sí' ? 'Cubierto' : Fmt.esc(x.e.fsd || '—'))],
+      ['Verificación', (x) => etiquetaVerificacion(x.e.verificacion)],
+      ['Campaña', (x) => estadoCampana(x.e).txt || '—'],
+    ];
+
+    const cabeceras = items.map((x) => `<th scope="col">
+      <div class="comp-cab"><img src="${Datos.logoDe(x.e.entidad)}" alt="" width="24" height="24" onerror="this.style.visibility='hidden'">
+      ${Fmt.esc(x.e.entidad)}</div><div class="sutil">${Fmt.esc(x.e.producto)}</div></th>`).join('');
+
+    // Tabla (escritorio) + tarjetas apiladas (móvil), misma información.
+    const tabla = `<div class="tabla-envoltura comp-tabla"><table class="tabla">
+      <thead><tr><th scope="col">Criterio</th>${cabeceras}</tr></thead>
+      <tbody>${filas.map(([lbl, fn]) => `<tr><th scope="row">${lbl}</th>${items.map((x) => `<td>${fn(x)}</td>`).join('')}</tr>`).join('')}</tbody>
+     </table></div>`;
+
+    const apiladas = `<div class="comp-apiladas">${items.map((x) => `
+      <div class="comp-card">
+       <div class="comp-card-tit"><img src="${Datos.logoDe(x.e.entidad)}" alt="" width="24" height="24" onerror="this.style.visibility='hidden'"> ${Fmt.esc(x.e.entidad)}</div>
+       <dl>${filas.map(([lbl, fn]) => `<div><dt>${lbl}</dt><dd>${fn(x)}</dd></div>`).join('')}</dl>
+      </div>`).join('')}</div>`;
+
+    $('#comparacion-contenido').innerHTML = tabla + apiladas;
+    const dlg = $('#dialogo-comparacion');
+    if (typeof dlg.showModal === 'function') dlg.showModal();
+    else dlg.setAttribute('open', '');
+  }
+
+  /* ── Pintado principal ────────────────────────────────── */
+  function pintar() {
+    const todos = preparar();
+    const compat = todos.filter((x) => x.k.compatible);
+
+    pintarResumen(compat, todos);
+    pintarDestacados(compat);
+
+    const filtrados = ordenar(todos.filter(pasaFiltros));
+    const cont = $('#rejilla-entidades');
+    cont.className = estado.vista === 'lista' ? 'lista-entidades' : 'rejilla';
     cont.innerHTML = filtrados.length
-      ? filtrados.map(vista === 'lista' ? fila : tarjeta).join('')
-      : '<p class="vacio">Ninguna entidad coincide con esos filtros. Prueba a limpiarlos.</p>';
+      ? filtrados.map((x, i) => tarjeta(x, i + 1)).join('')
+      : '<p class="vacio">Ningún producto coincide con tu selección. Prueba a quitar filtros o mostrar los incompatibles.</p>';
 
-    cont.querySelectorAll('[data-simular]').forEach((b) => {
-      b.addEventListener('click', () => {
-        App.irA('simulador');
-        Simulador.seleccionar(b.dataset.simular);
-      });
-    });
+    $('#conteo-resultados').textContent =
+      `${filtrados.length} de ${todos.length} productos${estado.ocultarIncompat ? ' (incompatibles ocultos)' : ''}.`;
+
+    pintarBandeja();
   }
 
-  function cambiarVista(nueva) {
-    vista = nueva;
-    try { localStorage.setItem('vista_ranking', nueva); } catch { /* modo privado */ }
-    document.querySelectorAll('[data-vista]').forEach((b) => {
-      const activo = b.dataset.vista === nueva;
-      b.classList.toggle('activa', activo);
-      b.setAttribute('aria-pressed', String(activo));
-    });
-    // Recalcula la seleccion antes de pintar: al cargar la pagina `filtrados`
-    // aun esta vacio y pintar directamente dejaria el listado en blanco.
-    aplicarFiltros();
-  }
+  const debounce = (fn, ms = 300) => {
+    let t; return (...a) => { clearTimeout(t); t = setTimeout(() => fn(...a), ms); };
+  };
+  const pintarDebounced = debounce(pintar, 280);
 
+  /* ── Metodología (se conserva) ────────────────────────── */
   function pintarMetodologia() {
     const notas = (Datos.estado.base && Datos.estado.base.notas) || [];
     const cab = notas.findIndex((f) => f[0] === 'Entidad/tema');
     let html = `
-     <p><strong>TREA, no TEA.</strong> La TREA (Tasa de Rendimiento Efectivo Anual) ya incluye comisiones y
-      gastos del producto, así que es la única cifra realmente comparable entre entidades. Una TEA alta con
-      mantenimiento mensual puede rendir menos que una TREA menor sin comisiones.</p>
-     <p><strong>Casi todas las tasas altas tienen condiciones.</strong> Suelen exigir cliente nuevo, apertura
-      100% digital, abono de sueldo o un saldo mínimo, y muchas limitan el saldo remunerado
-      (por ejemplo, pagan la tasa promocional solo hasta S/3,000 y el exceso a tasa regular).</p>
-     <p><strong>Las campañas caducan.</strong> Cada tarjeta indica la vigencia declarada. Verifica el tarifario
-      el día que abras la cuenta: la tasa vigente es la del contrato que firmas, no la de este portal.</p>
-     <p><strong>Estado de verificación.</strong> Verde = confirmado en fuente oficial. Ámbar = tasa confirmada
-      con algún dato pendiente. Rojo = requiere verificación directa antes de contratar.</p>`;
-
+     <p><strong>TREA, no TEA.</strong> La TREA ya incluye comisiones y gastos, así que es la única cifra
+      comparable entre entidades.</p>
+     <p><strong>La ganancia estimada usa tu monto.</strong> Se aplica la escala de tasas real de cada
+      entidad y su tope remunerado: el saldo por encima del tope no gana la tasa promocional.</p>
+     <p><strong>Las campañas caducan.</strong> Verifica el tarifario el día que abras la cuenta: la tasa
+      vigente es la del contrato, no la de este portal.</p>
+     <p><strong>Rendimiento real.</strong> Se estima con un supuesto de inflación de ${Fmt.pct(INFLACION_SUPUESTO)}
+      anual (meta del BCRP). Es un supuesto, no una medición en vivo.</p>`;
     if (cab >= 0) {
       const filas = notas.slice(cab + 1).filter((f) => f[0] && f[2]);
       html += `<div class="tabla-envoltura"><table class="tabla">
         <caption>Registro de fuentes consultadas</caption>
-        <thead><tr><th scope="col">Entidad / tema</th><th scope="col">Tipo</th><th scope="col">Nivel de confianza</th><th scope="col">Fuente</th></tr></thead>
+        <thead><tr><th scope="col">Entidad / tema</th><th scope="col">Tipo</th><th scope="col">Confianza</th><th scope="col">Fuente</th></tr></thead>
         <tbody>${filas.map((f) => {
           const u = Fmt.urlSegura(f[2]);
           return `<tr><td>${Fmt.esc(f[0])}</td><td>${Fmt.esc(f[1] || '')}</td><td>${Fmt.esc(f[4] || '')}</td>
             <td>${u ? `<a href="${u}" target="_blank" rel="noopener">Abrir</a>` : '—'}</td></tr>`;
         }).join('')}</tbody></table></div>`;
     }
-    document.getElementById('notas-metodologia').innerHTML = html;
+    $('#notas-metodologia').innerHTML = html;
+  }
+
+  /* ── Sincronización UI ↔ estado ───────────────────────── */
+  function reflejarEntradas() {
+    $('#dec-monto').value = estado.monto;
+    $('#dec-aporte').value = estado.aporte;
+    $$('#dec-plazo .seg').forEach((b) => {
+      const on = +b.dataset.plazo === estado.meses;
+      b.classList.toggle('activa', on); b.setAttribute('aria-pressed', String(on));
+    });
+    $$('#dec-condicion .seg').forEach((b) => {
+      const on = b.dataset.cond === estado.condicion;
+      b.classList.toggle('activa', on); b.setAttribute('aria-pressed', String(on));
+    });
+    $('#f-orden').value = estado.orden;
+    $('#toggle-incompatibles').checked = estado.ocultarIncompat;
+    $$('.chip-filtro').forEach((b) => {
+      const on = !!estado.chips[b.dataset.filtro];
+      b.classList.toggle('activo', on); b.setAttribute('aria-pressed', String(on));
+    });
+    $$('[data-vista]').forEach((b) => {
+      const on = b.dataset.vista === estado.vista;
+      b.classList.toggle('activa', on); b.setAttribute('aria-pressed', String(on));
+    });
+    actualizarContadorFiltros();
+  }
+
+  function actualizarContadorFiltros() {
+    const n = Object.values(estado.chips).filter(Boolean).length
+      + (estado.avanzados.trea ? 1 : 0) + (estado.avanzados.apertura ? 1 : 0)
+      + (estado.avanzados.minimo !== '' ? 1 : 0) + (estado.avanzados.verif ? 1 : 0);
+    const badge = $('#f-activos');
+    badge.hidden = n === 0; badge.textContent = n;
+  }
+
+  function bindEventos() {
+    // Monto: input con debounce + botones rápidos.
+    $('#dec-monto').addEventListener('input', () => {
+      estado.monto = Math.max(0, parseFloat($('#dec-monto').value) || 0);
+      guardarPrefs(); pintarDebounced();
+    });
+    $$('#dec-monto-rapidos .chip').forEach((b) => b.addEventListener('click', () => {
+      estado.monto = +b.dataset.monto; reflejarEntradas(); guardarPrefs(); pintar();
+    }));
+    $('#dec-aporte').addEventListener('input', () => {
+      estado.aporte = Math.max(0, parseFloat($('#dec-aporte').value) || 0);
+      guardarPrefs(); pintarDebounced();
+    });
+    $('#dec-plazo').addEventListener('click', (ev) => {
+      const b = ev.target.closest('[data-plazo]'); if (!b) return;
+      estado.meses = +b.dataset.plazo; reflejarEntradas(); guardarPrefs(); pintar();
+    });
+    $('#dec-condicion').addEventListener('click', (ev) => {
+      const b = ev.target.closest('[data-cond]'); if (!b) return;
+      estado.condicion = b.dataset.cond; reflejarEntradas(); guardarPrefs(); pintar();
+    });
+    $('#barra-decision').addEventListener('submit', (ev) => { ev.preventDefault(); pintar(); });
+
+    // Filtros
+    $('#f-texto').addEventListener('input', () => { estado.texto = $('#f-texto').value.trim().toLowerCase(); pintarDebounced(); });
+    $('#f-orden').addEventListener('change', () => { estado.orden = $('#f-orden').value; guardarPrefs(); pintar(); });
+    $('#btn-filtros').addEventListener('click', () => {
+      const drawer = $('#filtros-avanzados');
+      const abrir = drawer.hidden;
+      drawer.hidden = !abrir;
+      $('#btn-filtros').setAttribute('aria-expanded', String(abrir));
+    });
+    $$('.chip-filtro').forEach((b) => b.addEventListener('click', () => {
+      estado.chips[b.dataset.filtro] = !estado.chips[b.dataset.filtro];
+      reflejarEntradas(); guardarPrefs(); pintar();
+    }));
+    ['#f-trea', '#f-apertura', '#f-minimo', '#f-verif'].forEach((s) => {
+      const el = $(s); if (!el) return;
+      el.addEventListener('change', () => {
+        estado.avanzados = {
+          trea: parseFloat($('#f-trea').value) || 0,
+          apertura: $('#f-apertura').value,
+          minimo: $('#f-minimo').value,
+          verif: $('#f-verif').value,
+        };
+        actualizarContadorFiltros(); pintar();
+      });
+    });
+    $('#f-limpiar').addEventListener('click', () => {
+      estado.chips = {}; estado.avanzados = { trea: 0, apertura: '', minimo: '', verif: '' };
+      $('#f-trea').value = '0'; $('#f-apertura').value = ''; $('#f-minimo').value = ''; $('#f-verif').value = '';
+      reflejarEntradas(); guardarPrefs(); pintar();
+    });
+    $('#toggle-incompatibles').addEventListener('change', () => {
+      estado.ocultarIncompat = $('#toggle-incompatibles').checked; guardarPrefs(); pintar();
+    });
+    $$('[data-vista]').forEach((b) => b.addEventListener('click', () => {
+      estado.vista = b.dataset.vista; reflejarEntradas(); guardarPrefs(); pintar();
+    }));
+
+    // Delegación en la rejilla: comparar / simular.
+    $('#rejilla-entidades').addEventListener('click', (ev) => {
+      const cmp = ev.target.closest('[data-comparar]');
+      if (cmp) { alternarComparacion(cmp.dataset.comparar); return; }
+      const sim = ev.target.closest('[data-simular]');
+      if (sim) { App.irA('simulador'); Simulador.seleccionar(sim.dataset.simular); }
+    });
+    // Destacados también permiten simular.
+    $('#destacados').addEventListener('click', (ev) => {
+      const sim = ev.target.closest('[data-simular]');
+      if (sim) { App.irA('simulador'); Simulador.seleccionar(sim.dataset.simular); }
+    });
+
+    // Bandeja de comparación.
+    $('#bandeja-comparar').addEventListener('click', abrirComparacion);
+    $('#bandeja-limpiar').addEventListener('click', () => { estado.comparacion = []; pintar(); });
+    $('#cerrar-comparacion').addEventListener('click', () => {
+      const d = $('#dialogo-comparacion');
+      if (typeof d.close === 'function') d.close(); else d.removeAttribute('open');
+    });
   }
 
   function iniciar() {
-    ['#f-texto', '#f-trea', '#f-apertura', '#f-minimo', '#f-orden'].forEach((s) => {
-      const el = $(s);
-      el.addEventListener('input', aplicarFiltros);
-      el.addEventListener('change', aplicarFiltros);
-    });
-    $('#f-limpiar').addEventListener('click', () => {
-      $('#f-texto').value = ''; $('#f-trea').value = '0';
-      $('#f-apertura').value = ''; $('#f-minimo').value = ''; $('#f-orden').value = 'trea';
-      aplicarFiltros();
-    });
-    document.querySelectorAll('[data-vista]').forEach((b) => {
-      b.addEventListener('click', () => cambiarVista(b.dataset.vista));
-    });
+    cargarPrefs();
+    bindEventos();
   }
 
-  const render = () => { pintarKpis(); cambiarVista(vista); pintarMetodologia(); };
+  function render() {
+    reflejarEntradas();
+    pintarEstadoLinea();
+    pintarMetodologia();
+    pintar();
+  }
 
-  return { iniciar, render, cambiarVista, get filtrados() { return filtrados; } };
+  return { iniciar, render };
 })();
