@@ -1,6 +1,6 @@
 {
- "actualizado": "2026-08-17T23:20:15+00:00",
- "actualizado_pe": "17/08/2026 23:20",
+ "actualizado": "2026-08-18T11:22:01+00:00",
+ "actualizado_pe": "18/08/2026 11:22",
  "fuentes": {
   "bcrp": {
    "estado": "ok",
@@ -231,7 +231,7 @@
     "logo": "https://cdn-pe.comparabien.com/chat/logos/confianza.png"
    },
    {
-    "entidad": "Banco de Credito del Peru BCP",
+    "entidad": "Banco de Credito del Peru",
     "producto": "Cuenta Premio Soles",
     "tasa_texto": "hasta 1.00% TEA",
     "tasa": 0.01,
@@ -242,7 +242,7 @@
   ],
   "entidades": [
    {
-    "entidad": "Banco de Credito del Peru BCP",
+    "entidad": "Banco de Credito del Peru",
     "logo": "https://cdn-pe.comparabien.com/logos/logo_bcp.png"
    },
    {
@@ -446,9 +446,9 @@
  },
  "tipo_cambio": {
   "compra": 3.358,
-  "venta": 3.368,
-  "promedio": 3.363,
-  "fecha": "2026-08-17",
+  "venta": 3.37,
+  "promedio": 3.364,
+  "fecha": "2026-08-18",
   "origen": "SUNAT",
   "fuente": "https://api.apis.net.pe/v1/tipo-cambio-sunat"
  }
