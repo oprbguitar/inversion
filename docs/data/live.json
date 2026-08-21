@@ -1,6 +1,6 @@
 {
- "actualizado": "2026-08-20T23:21:59+00:00",
- "actualizado_pe": "20/08/2026 23:21",
+ "actualizado": "2026-08-21T11:22:14+00:00",
+ "actualizado_pe": "21/08/2026 11:22",
  "fuentes": {
   "bcrp": {
    "estado": "ok",
@@ -227,15 +227,6 @@
     "logo": "https://cdn-pe.comparabien.com/chat/logos/compartamos.png"
    },
    {
-    "entidad": "Financiera Confianza",
-    "producto": "Cuenta Ahorro Confianza Soles",
-    "tasa_texto": "hasta 5.00% TEA",
-    "tasa": 0.05,
-    "hasta": true,
-    "detalle": "¡GANA HASTA S/100! Ábrela 100% digital desde nuestra App. Sin monto mínimo de apertura y SIN COSTO de mantenimiento sin importar tu saldo.",
-    "logo": "https://cdn-pe.comparabien.com/chat/logos/confianza.png"
-   },
-   {
     "entidad": "Banco de Credito del Peru",
     "producto": "Cuenta Premio Soles",
     "tasa_texto": "hasta 1.00% TEA",
@@ -303,10 +294,6 @@
     "logo": "https://cdn-pe.comparabien.com/logos/logo_cresco.png"
    },
    {
-    "entidad": "Financiera Confianza",
-    "logo": "https://cdn-pe.comparabien.com/logos/confianza.png"
-   },
-   {
     "entidad": "Financiera Proempresa",
     "logo": "https://cdn-pe.comparabien.com/logos/logo_proempresa.png"
    },
@@ -365,6 +352,10 @@
    {
     "entidad": "Caja del Santa",
     "logo": "https://cdn-pe.comparabien.com/logos/logo_santa.gif"
+   },
+   {
+    "entidad": "Global66",
+    "logo": "https://cdn-pe.comparabien.com/logos/global66.png"
    }
   ],
   "columnas": [
@@ -450,10 +441,10 @@
   "nota": "Miembros del Fondo de Seguro de Depositos, administrado por la SBS. Equivale a las empresas autorizadas a captar depositos del publico. Las cooperativas (COOPAC) no son miembros del FSD: cuentan con un fondo propio."
  },
  "tipo_cambio": {
-  "compra": 3.355,
+  "compra": 3.351,
   "venta": 3.361,
-  "promedio": 3.358,
-  "fecha": "2026-08-20",
+  "promedio": 3.356,
+  "fecha": "2026-08-21",
   "origen": "SUNAT",
   "fuente": "https://api.apis.net.pe/v1/tipo-cambio-sunat"
  }
