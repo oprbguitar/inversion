@@ -1,6 +1,6 @@
 {
- "actualizado": "2026-09-01T01:36:43+00:00",
- "actualizado_pe": "01/09/2026 01:36",
+ "actualizado": "2026-09-01T15:22:43+00:00",
+ "actualizado_pe": "01/09/2026 15:22",
  "fuentes": {
   "bcrp": {
    "estado": "ok",
@@ -436,10 +436,10 @@
   "nota": "Miembros del Fondo de Seguro de Depositos, administrado por la SBS. Equivale a las empresas autorizadas a captar depositos del publico. Las cooperativas (COOPAC) no son miembros del FSD: cuentan con un fondo propio."
  },
  "tipo_cambio": {
-  "compra": 3.348,
-  "venta": 3.356,
-  "promedio": 3.352,
-  "fecha": "2026-08-31",
+  "compra": 3.357,
+  "venta": 3.367,
+  "promedio": 3.362,
+  "fecha": "2026-09-01",
   "origen": "SUNAT",
   "fuente": "https://api.apis.net.pe/v1/tipo-cambio-sunat"
  }
