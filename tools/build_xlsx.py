@@ -20,7 +20,7 @@ from openpyxl.utils import get_column_letter
 ROOT = Path(__file__).resolve().parents[1]
 DATA = json.loads((ROOT / "docs" / "data" / "dataset.json").read_text(encoding="utf-8"))
 LIVE_PATH = ROOT / "docs" / "data" / "live.json"
-OUT = ROOT / "docs" / "descargas" / "Ranking_Cuentas_Ahorro_Peru_Agosto_2026_MEJORADO.xlsx"
+OUT = ROOT / "docs" / "descargas" / "Ranking_Cuentas_Ahorro_Peru_MEJORADO.xlsx"
 
 AZUL = "0B3D6B"
 AZUL_CLARO = "1668AD"

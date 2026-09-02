@@ -78,5 +78,25 @@
   "slug": "financiera-oh-sip",
   "color": "#FF6900",
   "monograma": "OH"
+ },
+ "Financiera SURGIR (Santander Financiamientos)": {
+  "slug": "financiera-surgir",
+  "color": "#EC0000",
+  "monograma": "SG"
+ },
+ "Compartamos Banco": {
+  "slug": "compartamos-financiera",
+  "color": "#00A0DF",
+  "monograma": "CB"
+ },
+ "Bancom (Banco de Comercio)": {
+  "slug": "banco-de-comercio",
+  "color": "#003DA5",
+  "monograma": "BC"
+ },
+ "Efectibank (Banco Efectiva)": {
+  "slug": "financiera-efectiva-efectibank",
+  "color": "#E4002B",
+  "monograma": "EB"
  }
 }

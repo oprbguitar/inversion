@@ -297,9 +297,22 @@ y el plazo y recalcula las 16 entidades, respetando los topes de saldo remunerad
 - **Tasa mensual equivalente**: `(1 + TREA)^(1/12) − 1`, con capitalización mensual.
 - **Estado de verificación**: verde = confirmado en fuente oficial; ámbar = tasa confirmada con
   algún dato pendiente; rojo = requiere verificación directa antes de contratar.
-- Los datos base tienen corte al **06/08/2026**. Tres entidades (Caja Cusco, Compartamos y Banco
-  de Comercio) provienen de una reconstrucción del video de referencia y están marcadas
-  explícitamente: verifícalas en la entidad antes de decidir.
+- Los datos base tienen corte al **02/09/2026**, con las tasas revisadas una a una en la web y los
+  tarifarios oficiales de cada entidad ese día. Dos productos no se pudieron revalidar y quedan
+  marcados como tales en su ficha: **Caja Cusco** (no se localizó un tarifario de campaña vigente en
+  setiembre; el último publicado caducó el 31/03/2026) y **Financiera Oh! / SIP** (la página del
+  producto no entregó contenido legible). Verifícalos en la entidad antes de decidir.
+- Cambios de tasa en este corte: **SURGIR** baja de 5.60% a 5.25%; **Banco Falabella** se corrige a
+  3.75% —el 5.00% anterior correspondía a la condición de cuenta sueldo, no a la cuenta clásica—;
+  y **Financiera Confianza** publica la escala completa de su campaña de setiembre (0.75% a 5.00%
+  según saldo promedio mensual).
+- Campañas vencidas o por vencer: la de **Scotiabank** (9.70%) cerró el 31/08/2026 y no tiene
+  reemplazo publicado, así que el ranking la marca como vencida; **Bancom** y **Banco Ripley**
+  también cerraron su ventana de aperturas; **Caja Arequipa** la cierra el 03/09/2026 y la tasa
+  promocional de **Banco Alfin** baja a 4.00% el 16/09/2026.
+- Renombres de entidades reflejados en el FSD y en sus propias webs: Financiera Efectiva es ahora
+  **Efectibank (Banco Efectiva)**, Compartamos Financiera es **Compartamos Banco**, Banco de
+  Comercio opera como **Bancom** y SURGIR como **Santander Financiamientos**.
 
 ## Logotipos
 
