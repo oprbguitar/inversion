@@ -1,6 +1,6 @@
 {
- "actualizado": "2026-09-04T14:45:23+00:00",
- "actualizado_pe": "04/09/2026 14:45",
+ "actualizado": "2026-09-05T00:35:29+00:00",
+ "actualizado_pe": "05/09/2026 00:35",
  "fuentes": {
   "bcrp": {
    "estado": "ok",
@@ -229,6 +229,15 @@
     "hasta": true,
     "detalle": "Sin costo de mantenimiento.",
     "logo": "https://cdn-pe.comparabien.com/chat/logos/logo_bcp.png"
+   },
+   {
+    "entidad": "Interbank",
+    "producto": "Cuenta de Ahorros Súper Tasa Soles",
+    "tasa_texto": "hasta 4.50% TEA",
+    "tasa": 0.045,
+    "hasta": true,
+    "detalle": "Sin costo de mantenimiento.",
+    "logo": "https://cdn-pe.comparabien.com/chat/logos/logo_interbank.jpg"
    }
   ],
   "entidades": [
@@ -283,10 +292,6 @@
    {
     "entidad": "Compartamos Banco",
     "logo": "https://cdn-pe.comparabien.com/logos/compartamos.png"
-   },
-   {
-    "entidad": "Financiera CrediScotia",
-    "logo": "https://cdn-pe.comparabien.com/logos/logo_cresco.png"
    },
    {
     "entidad": "Financiera Confianza",
@@ -351,6 +356,10 @@
    {
     "entidad": "Caja del Santa",
     "logo": "https://cdn-pe.comparabien.com/logos/logo_santa.gif"
+   },
+   {
+    "entidad": "Global66",
+    "logo": "https://cdn-pe.comparabien.com/logos/global66.png"
    }
   ],
   "columnas": [
