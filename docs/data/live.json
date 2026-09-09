@@ -1,6 +1,6 @@
 {
- "actualizado": "2026-09-09T01:01:36+00:00",
- "actualizado_pe": "09/09/2026 01:01",
+ "actualizado": "2026-09-09T15:00:00+00:00",
+ "actualizado_pe": "09/09/2026 15:00",
  "fuentes": {
   "bcrp": {
    "estado": "ok",
@@ -446,9 +446,9 @@
  },
  "tipo_cambio": {
   "compra": 3.351,
-  "venta": 3.372,
-  "promedio": 3.3615,
-  "fecha": "2026-09-08",
+  "venta": 3.36,
+  "promedio": 3.3555,
+  "fecha": "2026-09-09",
   "origen": "SUNAT",
   "fuente": "https://api.apis.net.pe/v1/tipo-cambio-sunat"
  }
