@@ -1,6 +1,6 @@
 {
- "actualizado": "2026-09-16T01:03:36+00:00",
- "actualizado_pe": "16/09/2026 01:03",
+ "actualizado": "2026-09-16T15:19:04+00:00",
+ "actualizado_pe": "16/09/2026 15:19",
  "fuentes": {
   "bcrp": {
    "estado": "ok",
@@ -11,8 +11,8 @@
    "error": null
   },
   "fsd_miembros": {
-   "estado": "ok",
-   "error": null
+   "estado": "error",
+   "error": "URLError: <urlopen error timed out>"
   },
   "tipo_cambio": {
    "estado": "ok",
@@ -376,79 +376,12 @@
    "url": "https://comparabien.com.pe/ahorros"
   }
  },
- "fsd_miembros": {
-  "fuente": "https://fsd.org.pe/miembros/",
-  "grupos": {
-   "bancos": {
-    "titulo": "Bancos",
-    "entidades": [
-     "Banco de Crédito del Perú",
-     "Interbank",
-     "Citibank del Perú",
-     "Scotiabank Perú",
-     "BBVA",
-     "Bancom",
-     "Banco Pichincha",
-     "BANBIF",
-     "Mibanco",
-     "Banco Falabella",
-     "Banco Ripley",
-     "Alfin Banco",
-     "Banco Santander",
-     "Banco GNB",
-     "ICBC Peru bank",
-     "Bank of China(Perú)",
-     "Banco BCI",
-     "Santander Consumer Bank",
-     "Compartamos Banco",
-     "Banco Efectiva"
-    ]
-   },
-   "financieras": {
-    "titulo": "Financieras",
-    "entidades": [
-     "Financiera Confianza",
-     "Financiera QAPAQ",
-     "Financiera Proempresa",
-     "InFinance XP",
-     "Financiera Surgir"
-    ]
-   },
-   "cajas_municipales": {
-    "titulo": "Cajas municipales de ahorro y crédito",
-    "entidades": [
-     "CMAC Arequipa",
-     "CMAC Cuzco",
-     "CMAC Huancayo",
-     "CMAC Ica",
-     "CMAC Maynas",
-     "CMAC Del Santa",
-     "CMAC Paita",
-     "CMAC Piura",
-     "CMAC Tacna",
-     "CMAC Trujillo",
-     "Caja Metropolitana"
-    ]
-   },
-   "cajas_rurales": {
-    "titulo": "Cajas rurales de ahorro y crédito",
-    "entidades": [
-     "CRAC Los Andes",
-     "CRAC Prymera",
-     "CRAC Incasur",
-     "CRAC Del Centro",
-     "CRAC Cencosud Scotia"
-    ]
-   }
-  },
-  "total": 41,
-  "nota": "Miembros del Fondo de Seguro de Depositos, administrado por la SBS. Equivale a las empresas autorizadas a captar depositos del publico. Las cooperativas (COOPAC) no son miembros del FSD: cuentan con un fondo propio."
- },
+ "fsd_miembros": null,
  "tipo_cambio": {
-  "compra": 3.373,
-  "venta": 3.383,
-  "promedio": 3.378,
-  "fecha": "2026-09-15",
+  "compra": 3.372,
+  "venta": 3.379,
+  "promedio": 3.3755,
+  "fecha": "2026-09-16",
   "origen": "SUNAT",
   "fuente": "https://api.apis.net.pe/v1/tipo-cambio-sunat"
  }
