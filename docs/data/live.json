@@ -1,14 +1,14 @@
 {
- "actualizado": "2026-09-21T00:49:02+00:00",
- "actualizado_pe": "21/09/2026 00:49",
+ "actualizado": "2026-09-21T16:46:16+00:00",
+ "actualizado_pe": "21/09/2026 16:46",
  "fuentes": {
   "bcrp": {
    "estado": "ok",
    "error": null
   },
   "comparabien": {
-   "estado": "error",
-   "error": "TimeoutError: The read operation timed out"
+   "estado": "ok",
+   "error": null
   },
   "fsd_miembros": {
    "estado": "ok",
@@ -209,7 +209,173 @@
   "fuente": "https://estadisticas.bcrp.gob.pe/estadisticas/series/mensuales/resultados/PD04722MM/html",
   "api": "https://estadisticas.bcrp.gob.pe/estadisticas/series/api/PD04722MM/json/2023-09/2026-09/esp"
  },
- "comparabien": null,
+ "comparabien": {
+  "fuente": "https://comparabien.com.pe/ahorros",
+  "productos": [
+   {
+    "entidad": "Compartamos Banco",
+    "producto": "Campaña Cuenta WOW Digital Soles",
+    "tasa_texto": "4.60% TEA",
+    "tasa": 0.046,
+    "hasta": false,
+    "detalle": "Gana intereses por cualquier monto de ahorro, sin monto mínimo de apertura.",
+    "logo": "https://cdn-pe.comparabien.com/chat/logos/compartamos.png"
+   },
+   {
+    "entidad": "Banco de Credito del Peru",
+    "producto": "Cuenta Premio Soles",
+    "tasa_texto": "hasta 1.00% TEA",
+    "tasa": 0.01,
+    "hasta": true,
+    "detalle": "Sin costo de mantenimiento.",
+    "logo": "https://cdn-pe.comparabien.com/chat/logos/logo_bcp.png"
+   },
+   {
+    "entidad": "Interbank",
+    "producto": "Cuenta de Ahorros Súper Tasa Soles",
+    "tasa_texto": "hasta 4.50% TEA",
+    "tasa": 0.045,
+    "hasta": true,
+    "detalle": "Sin costo de mantenimiento.",
+    "logo": "https://cdn-pe.comparabien.com/chat/logos/logo_interbank.jpg"
+   }
+  ],
+  "entidades": [
+   {
+    "entidad": "Banco de Credito del Peru",
+    "logo": "https://cdn-pe.comparabien.com/logos/logo_bcp.png"
+   },
+   {
+    "entidad": "Banco BBVA S.A.",
+    "logo": "https://cdn-pe.comparabien.com/logos/bbva.png"
+   },
+   {
+    "entidad": "Scotiabank Peru",
+    "logo": "https://cdn-pe.comparabien.com/logos/scotiabank.png"
+   },
+   {
+    "entidad": "Interbank",
+    "logo": "https://cdn-pe.comparabien.com/logos/logo_interbank.jpg"
+   },
+   {
+    "entidad": "Banco Pichincha",
+    "logo": "https://cdn-pe.comparabien.com/logos/pichincha.png"
+   },
+   {
+    "entidad": "Banbif",
+    "logo": "https://cdn-pe.comparabien.com/logos/logo_bif.jpg"
+   },
+   {
+    "entidad": "Mibanco",
+    "logo": "https://cdn-pe.comparabien.com/logos/mibanco.png"
+   },
+   {
+    "entidad": "Banco GNB Peru",
+    "logo": "https://cdn-pe.comparabien.com/logos/logo_gnb.png"
+   },
+   {
+    "entidad": "Banco Falabella Peru",
+    "logo": "https://cdn-pe.comparabien.com/logos/logo_falabella.jpg"
+   },
+   {
+    "entidad": "Banco Ripley",
+    "logo": "https://cdn-pe.comparabien.com/logos/banco_ripley.png"
+   },
+   {
+    "entidad": "Alfin Banco",
+    "logo": "https://cdn-pe.comparabien.com/logos/alfin.png"
+   },
+   {
+    "entidad": "Efectibank",
+    "logo": "https://cdn-pe.comparabien.com/logos/efectibank.png"
+   },
+   {
+    "entidad": "Compartamos Banco",
+    "logo": "https://cdn-pe.comparabien.com/logos/compartamos.png"
+   },
+   {
+    "entidad": "Financiera Confianza",
+    "logo": "https://cdn-pe.comparabien.com/logos/confianza.png"
+   },
+   {
+    "entidad": "Financiera Proempresa",
+    "logo": "https://cdn-pe.comparabien.com/logos/logo_proempresa.png"
+   },
+   {
+    "entidad": "Financiera OH",
+    "logo": "https://cdn-pe.comparabien.com/logos/oh.png"
+   },
+   {
+    "entidad": "Financiera Qapaq S.A.",
+    "logo": "https://cdn-pe.comparabien.com/logos/logo_qapaq.jpg"
+   },
+   {
+    "entidad": "Caja Prymera",
+    "logo": "https://cdn-pe.comparabien.com/logos/prymera.jpg"
+   },
+   {
+    "entidad": "Caja Los Andes",
+    "logo": "https://cdn-pe.comparabien.com/logos/logo_losandes.png"
+   },
+   {
+    "entidad": "Caja Rural de Ahorro y Credito Incas",
+    "logo": "https://cdn-pe.comparabien.com/logos/logo_incasur.png"
+   },
+   {
+    "entidad": "Caja Municipal Cusco",
+    "logo": "https://cdn-pe.comparabien.com/logos/cusco.png"
+   },
+   {
+    "entidad": "Caja Municipal Ica",
+    "logo": "https://cdn-pe.comparabien.com/logos/cajaica.png"
+   },
+   {
+    "entidad": "Caja Piura",
+    "logo": "https://cdn-pe.comparabien.com/logos/logo_piura.png"
+   },
+   {
+    "entidad": "Caja Municipal Tacna",
+    "logo": "https://cdn-pe.comparabien.com/logos/logo_cmtac.jpg"
+   },
+   {
+    "entidad": "Caja Trujillo",
+    "logo": "https://cdn-pe.comparabien.com/logos/logo_trujillo.jpg"
+   },
+   {
+    "entidad": "Caja Huancayo",
+    "logo": "https://cdn-pe.comparabien.com/logos/logo_caja_huancayo.jpg"
+   },
+   {
+    "entidad": "Caja Metropolitana de Lima",
+    "logo": "https://cdn-pe.comparabien.com/logos/logo_cmet.png"
+   },
+   {
+    "entidad": "Caja Paita",
+    "logo": "https://cdn-pe.comparabien.com/logos/logo_paita.gif"
+   },
+   {
+    "entidad": "Caja del Santa",
+    "logo": "https://cdn-pe.comparabien.com/logos/logo_santa.gif"
+   },
+   {
+    "entidad": "Global66",
+    "logo": "https://cdn-pe.comparabien.com/logos/global66.png"
+   }
+  ],
+  "columnas": [
+   "Producto",
+   "Tasa de interés (TEA)",
+   "Costo de mantenimiento",
+   "Operaciones libres en ventanilla",
+   "Operaciones libres en cajero",
+   "Monto mínimo de apertura"
+  ],
+  "tabla_completa": {
+   "disponible": false,
+   "motivo": "comparabien exige un correo electronico obligatorio para mostrar la tabla completa de resultados. No se automatiza el envio de datos personales.",
+   "url": "https://comparabien.com.pe/ahorros"
+  }
+ },
  "fsd_miembros": {
   "fuente": "https://fsd.org.pe/miembros/",
   "grupos": {
@@ -282,7 +448,7 @@
   "compra": 3.354,
   "venta": 3.362,
   "promedio": 3.358,
-  "fecha": "2026-09-20",
+  "fecha": "2026-09-21",
   "origen": "SUNAT",
   "fuente": "https://api.apis.net.pe/v1/tipo-cambio-sunat"
  }
