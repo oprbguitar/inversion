@@ -1,6 +1,6 @@
 {
- "actualizado": "2026-09-21T16:46:16+00:00",
- "actualizado_pe": "21/09/2026 16:46",
+ "actualizado": "2026-09-22T01:24:57+00:00",
+ "actualizado_pe": "22/09/2026 01:24",
  "fuentes": {
   "bcrp": {
    "estado": "ok",
@@ -248,10 +248,6 @@
    {
     "entidad": "Banco BBVA S.A.",
     "logo": "https://cdn-pe.comparabien.com/logos/bbva.png"
-   },
-   {
-    "entidad": "Scotiabank Peru",
-    "logo": "https://cdn-pe.comparabien.com/logos/scotiabank.png"
    },
    {
     "entidad": "Interbank",
