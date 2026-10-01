@@ -1,6 +1,6 @@
 {
- "actualizado": "2026-09-30T16:38:38+00:00",
- "actualizado_pe": "30/09/2026 16:38",
+ "actualizado": "2026-10-01T01:47:21+00:00",
+ "actualizado_pe": "01/10/2026 01:47",
  "fuentes": {
   "bcrp": {
    "estado": "ok",
@@ -24,11 +24,6 @@
   "mes_vigente": "2026-08",
   "etiqueta_vigente": "Ago.2026",
   "serie": [
-   {
-    "mes": "2023-09",
-    "tasa": 0.075,
-    "etiqueta": "Sep.2023"
-   },
    {
     "mes": "2023-10",
     "tasa": 0.0725,
@@ -207,7 +202,7 @@
   ],
   "serie_id": "PD04722MM",
   "fuente": "https://estadisticas.bcrp.gob.pe/estadisticas/series/mensuales/resultados/PD04722MM/html",
-  "api": "https://estadisticas.bcrp.gob.pe/estadisticas/series/api/PD04722MM/json/2023-09/2026-09/esp"
+  "api": "https://estadisticas.bcrp.gob.pe/estadisticas/series/api/PD04722MM/json/2023-10/2026-10/esp"
  },
  "comparabien": {
   "fuente": "https://comparabien.com.pe/ahorros",
