@@ -1,6 +1,6 @@
 {
- "actualizado": "2026-10-02T16:28:25+00:00",
- "actualizado_pe": "02/10/2026 16:28",
+ "actualizado": "2026-10-03T01:42:17+00:00",
+ "actualizado_pe": "03/10/2026 01:42",
  "fuentes": {
   "bcrp": {
    "estado": "ok",
@@ -21,8 +21,8 @@
  },
  "bcrp": {
   "vigente": 0.0425,
-  "mes_vigente": "2026-08",
-  "etiqueta_vigente": "Ago.2026",
+  "mes_vigente": "2026-09",
+  "etiqueta_vigente": "Sep.2026",
   "serie": [
    {
     "mes": "2023-10",
@@ -198,6 +198,11 @@
     "mes": "2026-08",
     "tasa": 0.0425,
     "etiqueta": "Ago.2026"
+   },
+   {
+    "mes": "2026-09",
+    "tasa": 0.0425,
+    "etiqueta": "Sep.2026"
    }
   ],
   "serie_id": "PD04722MM",
