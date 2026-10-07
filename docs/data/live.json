@@ -1,6 +1,6 @@
 {
- "actualizado": "2026-10-07T02:03:23+00:00",
- "actualizado_pe": "07/10/2026 02:03",
+ "actualizado": "2026-10-07T17:39:33+00:00",
+ "actualizado_pe": "07/10/2026 17:39",
  "fuentes": {
   "bcrp": {
    "estado": "ok",
@@ -212,6 +212,15 @@
  "comparabien": {
   "fuente": "https://comparabien.com.pe/ahorros",
   "productos": [
+   {
+    "entidad": "Banco Falabella Peru",
+    "producto": "Cuenta Ahorro Clásico Soles",
+    "tasa_texto": "5.00% TEA",
+    "tasa": 0.05,
+    "hasta": false,
+    "detalle": "Sin costo de mantenimiento.",
+    "logo": "https://cdn-pe.comparabien.com/chat/logos/logo_falabella.jpg"
+   },
    {
     "entidad": "Compartamos Banco",
     "producto": "Campaña Cuenta WOW Digital Soles",
@@ -441,10 +450,10 @@
   "nota": "Miembros del Fondo de Seguro de Depositos, administrado por la SBS. Equivale a las empresas autorizadas a captar depositos del publico. Las cooperativas (COOPAC) no son miembros del FSD: cuentan con un fondo propio."
  },
  "tipo_cambio": {
-  "compra": 3.423,
-  "venta": 3.435,
-  "promedio": 3.429,
-  "fecha": "2026-10-06",
+  "compra": 3.431,
+  "venta": 3.437,
+  "promedio": 3.434,
+  "fecha": "2026-10-07",
   "origen": "SUNAT",
   "fuente": "https://api.apis.net.pe/v1/tipo-cambio-sunat"
  }
