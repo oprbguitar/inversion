@@ -1,6 +1,6 @@
 {
- "actualizado": "2026-10-09T17:17:08+00:00",
- "actualizado_pe": "09/10/2026 17:17",
+ "actualizado": "2026-10-10T02:02:47+00:00",
+ "actualizado_pe": "10/10/2026 02:02",
  "fuentes": {
   "bcrp": {
    "estado": "ok",
@@ -218,7 +218,7 @@
     "tasa_texto": "5.00% TEA",
     "tasa": 0.05,
     "hasta": false,
-    "detalle": "Sin costo de mantenimiento.",
+    "detalle": "La tasa se activa recibiendo un abono de S/2500 mensual en la cuenta Banco Falabella",
     "logo": "https://cdn-pe.comparabien.com/chat/logos/logo_falabella.jpg"
    },
    {
