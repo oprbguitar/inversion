@@ -1,6 +1,6 @@
 {
- "actualizado": "2026-10-19T00:46:42+00:00",
- "actualizado_pe": "19/10/2026 00:46",
+ "actualizado": "2026-10-19T17:18:59+00:00",
+ "actualizado_pe": "19/10/2026 17:18",
  "fuentes": {
   "bcrp": {
    "estado": "ok",
@@ -224,7 +224,7 @@
     "tasa": 0.05,
     "hasta": false,
     "detalle": "La tasa se activa recibiendo un abono de S/2500 mensual en la cuenta Banco Falabella",
-    "logo": "https://cdn-pe.comparabien.com/chat/logos/logo_falabella.jpg"
+    "logo": "https://cdn-pe.comparabien.com/chat/logos/logo_falabella.png"
    },
    {
     "entidad": "Compartamos Banco",
@@ -285,7 +285,7 @@
    },
    {
     "entidad": "Banco Falabella Peru",
-    "logo": "https://cdn-pe.comparabien.com/logos/logo_falabella.jpg"
+    "logo": "https://cdn-pe.comparabien.com/logos/logo_falabella.png"
    },
    {
     "entidad": "Banco Ripley",
@@ -458,7 +458,7 @@
   "compra": 3.423,
   "venta": 3.431,
   "promedio": 3.427,
-  "fecha": "2026-10-18",
+  "fecha": "2026-10-19",
   "origen": "SUNAT",
   "fuente": "https://api.apis.net.pe/v1/tipo-cambio-sunat"
  }
