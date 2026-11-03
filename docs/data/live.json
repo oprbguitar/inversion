@@ -1,6 +1,6 @@
 {
- "actualizado": "2026-11-02T20:37:15+00:00",
- "actualizado_pe": "02/11/2026 20:37",
+ "actualizado": "2026-11-03T03:49:35+00:00",
+ "actualizado_pe": "03/11/2026 03:49",
  "fuentes": {
   "bcrp": {
    "estado": "ok",
@@ -231,13 +231,13 @@
     "logo": "https://cdn-pe.comparabien.com/chat/logos/compartamos.png"
    },
    {
-    "entidad": "Banco de Credito del Peru",
-    "producto": "Cuenta Premio Soles",
-    "tasa_texto": "hasta 1.00% TEA",
-    "tasa": 0.01,
-    "hasta": true,
-    "detalle": "Sin costo de mantenimiento.",
-    "logo": "https://cdn-pe.comparabien.com/chat/logos/logo_bcp.png"
+    "entidad": "Alfin Banco",
+    "producto": "AhorroMeta Digital Soles",
+    "tasa_texto": "4.80% TEA",
+    "tasa": 0.048,
+    "hasta": false,
+    "detalle": "Costo de mantenimiento: S/ 1",
+    "logo": "https://cdn-pe.comparabien.com/chat/logos/alfin.png"
    },
    {
     "entidad": "Interbank",
