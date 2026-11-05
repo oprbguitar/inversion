@@ -1,6 +1,6 @@
 {
- "actualizado": "2026-11-05T03:06:33+00:00",
- "actualizado_pe": "05/11/2026 03:06",
+ "actualizado": "2026-11-05T18:29:39+00:00",
+ "actualizado_pe": "05/11/2026 18:29",
  "fuentes": {
   "bcrp": {
    "estado": "ok",
@@ -232,11 +232,11 @@
    },
    {
     "entidad": "Alfin Banco",
-    "producto": "AhorroMeta Digital Soles",
+    "producto": "Ahorro Meta Digital Soles",
     "tasa_texto": "4.80% TEA",
     "tasa": 0.048,
     "hasta": false,
-    "detalle": "Costo de mantenimiento: S/ 1",
+    "detalle": "Sin costo de mantenimiento.",
     "logo": "https://cdn-pe.comparabien.com/chat/logos/alfin.png"
    },
    {
@@ -454,10 +454,10 @@
   "nota": "Miembros del Fondo de Seguro de Depositos, administrado por la SBS. Equivale a las empresas autorizadas a captar depositos del publico. Las cooperativas (COOPAC) no son miembros del FSD: cuentan con un fondo propio."
  },
  "tipo_cambio": {
-  "compra": 3.459,
-  "venta": 3.466,
-  "promedio": 3.4625,
-  "fecha": "2026-11-04",
+  "compra": 3.447,
+  "venta": 3.452,
+  "promedio": 3.4495,
+  "fecha": "2026-11-05",
   "origen": "SUNAT",
   "fuente": "https://api.apis.net.pe/v1/tipo-cambio-sunat"
  }
