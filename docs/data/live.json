@@ -1,6 +1,6 @@
 {
- "actualizado": "2026-11-13T18:21:12+00:00",
- "actualizado_pe": "13/11/2026 18:21",
+ "actualizado": "2026-11-14T02:53:36+00:00",
+ "actualizado_pe": "14/11/2026 02:53",
  "fuentes": {
   "bcrp": {
    "estado": "ok",
@@ -233,8 +233,8 @@
    {
     "entidad": "Alfin Banco",
     "producto": "Ahorro Meta Digital Soles",
-    "tasa_texto": "4.80% TEA",
-    "tasa": 0.048,
+    "tasa_texto": "5.25% TEA",
+    "tasa": 0.0525,
     "hasta": false,
     "detalle": "Sin costo de mantenimiento.",
     "logo": "https://cdn-pe.comparabien.com/chat/logos/alfin.png"
